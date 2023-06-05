@@ -1,0 +1,31 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Make Build",
+			"type": "shell",
+			"command": "make -s -j 10 all",
+			"options": {
+				"cwd": "${workspaceRoot}",
+				
+            }, 
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"label": "Make Clean",
+			"type": "shell",
+			"command": "make -s clean",
+			"options": {
+				"cwd": "${workspaceRoot}",
+            }, 
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+            "problemMatcher": []
+		}
+	]
+}

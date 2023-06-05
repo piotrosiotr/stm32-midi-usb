@@ -1,0 +1,21 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "OpenOCD",
+			"cwd": "${workspaceRoot}",
+			"executable": "./build/usb_midi.elf",
+			"svdFile": "CMSIS/STM32F103xx.svd",
+			"request": "launch",
+			"showDevDebugOutput":"parsed",
+			"type": "cortex-debug",
+			"servertype": "openocd",
+			"device": "Cortex-M3",
+			"interface": "swd",
+			"configFiles": [
+				"/usr/local/Cellar/open-ocd/0.11.0/share/openocd/scripts/interface/stlink-v2.cfg",
+				"/usr/local/Cellar/open-ocd/0.11.0/share/openocd/scripts/target/stm32f1x.cfg"
+			]
+		}
+	]
+}

@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "name": "arm_c_cpp_properties",
+            "compilerPath": "/usr/local/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-gcc",
+            "includePath": [
+				"${workspaceRoot}/CMSIS/**"
+            ],
+            "defines": [
+				"STM32F103xB",
+				"M3",
+				"GCC_ARMCM3",
+                "DEBUG"
+            ],
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+			"intelliSenseMode": "gcc-x64"
+        }
+    ],
+    "version": 4
+}
