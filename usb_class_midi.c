@@ -1,10 +1,12 @@
 #include "usb_lib.h"
 #include <wchar.h>
 #include "hardware.h"
+#include "midi_message_buffer.h"
+#include "sysex.h"
 
 #define ENDP_DATA_IN 1
 #define ENDP_DATA_OUT 2
-#define ENDP_DATA_SIZE 8
+#define ENDP_DATA_SIZE 16
 
 #define ENDP_CTL_NUM  3
 #define ENDP_CTL_SIZE 8
@@ -185,11 +187,8 @@ void usb_class_get_std_descr(uint16_t descr, const void **data, uint16_t *size){
   }
 }
 
-static void sleep(uint32_t time){
-  while(time--)asm volatile("nop");
-}
-
-
+uint8_t out_buf_data[4*4];
+midi_msg_buffer_t out_buf;
 
 char usb_class_ep0_in(config_pack_t *req, void **data, uint16_t *size){
   if( (req->bmRequestType & 0x7F) == (USB_REQ_CLASS | USB_REQ_INTERFACE) ){
@@ -213,6 +212,9 @@ void data_out_callback(uint8_t epnum){
   USB_ALIGN uint8_t buf[ ENDP_DATA_SIZE ];
   int len = usb_ep_read_double( ENDP_DATA_OUT, (uint16_t*)buf);
   if(len == 0)return;
+  if(buf[0]!= SYSEX_HEADER) return;
+  if(buf[1]!= SYSEX_MY_ID) return;
+  if(buf[ENDP_DATA_SIZE-1]!= SYSEX_EOM) return;
 }
 
 void data_in_callback(uint8_t epnum){
@@ -225,16 +227,13 @@ void usb_class_init(){
   
   usb_ep_init_double( ENDP_DATA_IN | 0x80, USB_ENDP_BULK, ENDP_DATA_SIZE, data_in_callback );
   usb_ep_init_double( ENDP_DATA_OUT, USB_ENDP_BULK, ENDP_DATA_SIZE, data_out_callback );
-  
+  init_message_buff(&out_buf, out_buf_data, 16);
 }
 
 void usb_class_poll(){
-
-  USB_ALIGN uint8_t b_on_cmd[] = {0x08, 0x80, 60, 127};
-  usb_ep_write_double( ENDP_DATA_IN | 0x80, (uint16_t*)b_on_cmd, sizeof(b_on_cmd));
-  sleep(7200000);
-  b_on_cmd[0] = 0x09;
-  b_on_cmd[1] = 0x90;
-  usb_ep_write_double( ENDP_DATA_IN | 0x80, (uint16_t*)b_on_cmd, sizeof(b_on_cmd));
-  sleep(7200000);
+    while(out_buf.bytes_avail>0) {
+        USB_ALIGN uint8_t msg[4];
+        get_next_message(&out_buf, msg, 4);
+        if(msg[0] != 0x00) usb_ep_write_double( ENDP_DATA_IN | 0x80, (uint16_t*)msg, sizeof(msg));
+    }
 }

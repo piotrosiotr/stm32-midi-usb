@@ -200,4 +200,8 @@ static inline int usb_ep_read_double(uint8_t epnum, uint16_t *buf){
   return res;
 }
 
+//USB MIDI constants
+#define MIDI_MSG_DEFAULT_LEN 4
+
+
 #endif // __USB_LIB_H__

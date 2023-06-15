@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
   17:clock.h       ****   RCC->CR &=~RCC_CR_HSEBYP;
   40              		.loc 1 17 3 is_stmt 1 view .LVU5
   41              		.loc 1 17 11 is_stmt 0 view .LVU6
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 2
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 2
 
 
   42 000a 1A68     		ldr	r2, [r3]
@@ -118,7 +118,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
   87 0040 1168     		ldr	r1, [r2]
   88 0042 21F01001 		bic	r1, r1, #16
   89 0046 1160     		str	r1, [r2]
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 3
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 3
 
 
   24:clock.h       ****   FLASH->ACR |= FLASH_ACR_PRFTBE;
@@ -178,7 +178,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  126              	.LVL7:
   42:clock.h       ****   //APB1 prescaler = 2 --> PCLK1 = HCLK/PPRE1 = 36 MHz
   43:clock.h       ****   RCC->CFGR = tmp;
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 4
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 4
 
 
  127              		.loc 1 43 3 is_stmt 1 view .LVU42
@@ -238,7 +238,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
   50:clock.h       ****   tmp = RCC->CFGR;
  171              		.loc 1 50 3 is_stmt 1 view .LVU60
  172              		.loc 1 50 7 is_stmt 0 view .LVU61
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 5
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 5
 
 
  173 009c 1049     		ldr	r1, .L18
@@ -298,7 +298,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  218 00c4 0B46     		mov	r3, r1
  219              	.L10:
  220              	.LVL21:
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 6
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 6
 
 
   56:clock.h       ****   }
@@ -350,27 +350,32 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  260              		.thumb
  261              		.thumb_func
  263              	_init:
- 264              	.LFB34:
+ 264              	.LFB35:
  265              		.file 2 "main.c"
-   1:main.c        **** #include <stm32f1xx.h>
+   1:main.c        **** #include "stm32f1xx.h"
    2:main.c        **** #include "pinmacro.h"
    3:main.c        **** #include "hardware.h"
    4:main.c        **** #include "usb_lib.h"
    5:main.c        **** #include "clock.h"
-   6:main.c        **** 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 7
+   6:main.c        **** #include "midi_button_hw.h"
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 7
 
 
-   7:main.c        **** void __attribute__((weak)) _init(void){}
- 266              		.loc 2 7 39 is_stmt 1 view -0
+   7:main.c        **** #include "midi_led.h"
+   8:main.c        **** #include "midi_button.h"
+   9:main.c        **** #include "stm32f1xx_it.h"
+  10:main.c        **** #include "midi_controller_config.h"
+  11:main.c        **** 
+  12:main.c        **** void __attribute__((weak)) _init(void){}
+ 266              		.loc 2 12 39 is_stmt 1 view -0
  267              		.cfi_startproc
  268              		@ args = 0, pretend = 0, frame = 0
  269              		@ frame_needed = 0, uses_anonymous_args = 0
  270              		@ link register save eliminated.
- 271              		.loc 2 7 40 view .LVU90
+ 271              		.loc 2 12 40 view .LVU90
  272 0000 7047     		bx	lr
  273              		.cfi_endproc
- 274              	.LFE34:
+ 274              	.LFE35:
  276              		.section	.text.SystemInit,"ax",%progbits
  277              		.align	1
  278              		.weak	SystemInit
@@ -378,17 +383,17 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  280              		.thumb
  281              		.thumb_func
  283              	SystemInit:
- 284              	.LFB35:
-   8:main.c        **** void __attribute__((weak)) SystemInit(void){}
- 285              		.loc 2 8 44 view -0
+ 284              	.LFB36:
+  13:main.c        **** void __attribute__((weak)) SystemInit(void){}
+ 285              		.loc 2 13 44 view -0
  286              		.cfi_startproc
  287              		@ args = 0, pretend = 0, frame = 0
  288              		@ frame_needed = 0, uses_anonymous_args = 0
  289              		@ link register save eliminated.
- 290              		.loc 2 8 45 view .LVU92
+ 290              		.loc 2 13 45 view .LVU92
  291 0000 7047     		bx	lr
  292              		.cfi_endproc
- 293              	.LFE35:
+ 293              	.LFE36:
  295              		.section	.text.sleep,"ax",%progbits
  296              		.align	1
  297              		.global	sleep
@@ -397,46 +402,46 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  300              		.thumb_func
  302              	sleep:
  303              	.LVL26:
- 304              	.LFB36:
-   9:main.c        **** 
-  10:main.c        **** void sleep(uint32_t time){
- 305              		.loc 2 10 26 view -0
+ 304              	.LFB37:
+  14:main.c        **** 
+  15:main.c        **** void sleep(uint32_t time){
+ 305              		.loc 2 15 26 view -0
  306              		.cfi_startproc
  307              		@ args = 0, pretend = 0, frame = 0
  308              		@ frame_needed = 0, uses_anonymous_args = 0
  309              		@ link register save eliminated.
-  11:main.c        ****   while(time--)asm volatile("nop");
- 310              		.loc 2 11 3 view .LVU94
- 311              		.loc 2 11 8 is_stmt 0 view .LVU95
+  16:main.c        ****     while(time--)asm volatile("nop");
+ 310              		.loc 2 16 5 view .LVU94
+ 311              		.loc 2 16 10 is_stmt 0 view .LVU95
  312 0000 01E0     		b	.L23
  313              	.LVL27:
  314              	.L24:
- 315              		.loc 2 11 16 is_stmt 1 discriminator 2 view .LVU96
+ 315              		.loc 2 16 18 is_stmt 1 discriminator 2 view .LVU96
  316              		.syntax unified
- 317              	@ 11 "main.c" 1
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 8
+
+
+ 317              	@ 16 "main.c" 1
  318 0002 00BF     		nop
  319              	@ 0 "" 2
- 320              		.loc 2 11 13 is_stmt 0 discriminator 2 view .LVU97
+ 320              		.loc 2 16 15 is_stmt 0 discriminator 2 view .LVU97
  321              		.thumb
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 8
-
-
  322              		.syntax unified
  323 0004 1846     		mov	r0, r3
  324              	.LVL28:
  325              	.L23:
- 326              		.loc 2 11 8 is_stmt 1 discriminator 1 view .LVU98
- 327              		.loc 2 11 13 is_stmt 0 discriminator 1 view .LVU99
+ 326              		.loc 2 16 10 is_stmt 1 discriminator 1 view .LVU98
+ 327              		.loc 2 16 15 is_stmt 0 discriminator 1 view .LVU99
  328 0006 431E     		subs	r3, r0, #1
  329              	.LVL29:
- 330              		.loc 2 11 8 discriminator 1 view .LVU100
+ 330              		.loc 2 16 10 discriminator 1 view .LVU100
  331 0008 0028     		cmp	r0, #0
  332 000a FAD1     		bne	.L24
-  12:main.c        **** }
- 333              		.loc 2 12 1 view .LVU101
+  17:main.c        **** }
+ 333              		.loc 2 17 1 view .LVU101
  334 000c 7047     		bx	lr
  335              		.cfi_endproc
- 336              	.LFE36:
+ 336              	.LFE37:
  338              		.section	.text.main,"ax",%progbits
  339              		.align	1
  340              		.global	main
@@ -444,46 +449,181 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  342              		.thumb
  343              		.thumb_func
  345              	main:
- 346              	.LFB37:
-  13:main.c        **** 
-  14:main.c        **** int main(void){
- 347              		.loc 2 14 15 is_stmt 1 view -0
+ 346              	.LFB38:
+  18:main.c        **** //Declare leds here
+  19:main.c        **** midi_led_t led0;
+  20:main.c        **** midi_led_t led1;
+  21:main.c        **** 
+  22:main.c        **** //Declare buttons here
+  23:main.c        **** midi_button_t button0;
+  24:main.c        **** midi_button_t button1;
+  25:main.c        **** 
+  26:main.c        **** //Declare msg buffers for buttons here
+  27:main.c        **** uint8_t prs_msg_buf0[MIDI_MSG_DEFAULT_LEN];
+  28:main.c        **** uint8_t rls_msg_buf0[MIDI_MSG_DEFAULT_LEN];
+  29:main.c        **** uint8_t lprs_msg_buf0[MIDI_MSG_DEFAULT_LEN];
+  30:main.c        **** uint8_t lrls_msg_buf0[MIDI_MSG_DEFAULT_LEN];
+  31:main.c        **** 
+  32:main.c        **** uint8_t prs_msg_buf1[MIDI_MSG_DEFAULT_LEN];
+  33:main.c        **** uint8_t rls_msg_buf1[MIDI_MSG_DEFAULT_LEN];
+  34:main.c        **** uint8_t lprs_msg_buf1[MIDI_MSG_DEFAULT_LEN];
+  35:main.c        **** uint8_t lrls_msg_buf1[MIDI_MSG_DEFAULT_LEN];
+  36:main.c        **** 
+  37:main.c        **** midi_button_t *buttons[BUTTONS_NUM];
+  38:main.c        **** 
+  39:main.c        **** int main(void){
+ 347              		.loc 2 39 15 is_stmt 1 view -0
  348              		.cfi_startproc
- 349              		@ Volatile: function does not return.
- 350              		@ args = 0, pretend = 0, frame = 0
- 351              		@ frame_needed = 0, uses_anonymous_args = 0
- 352 0000 08B5     		push	{r3, lr}
- 353              	.LCFI0:
- 354              		.cfi_def_cfa_offset 8
- 355              		.cfi_offset 3, -8
- 356              		.cfi_offset 14, -4
-  15:main.c        ****   SysClockMax();
- 357              		.loc 2 15 3 view .LVU103
- 358 0002 FFF7FEFF 		bl	SysClockMax
- 359              	.LVL30:
-  16:main.c        ****   RCC->APB2ENR |= RCC_APB2ENR_IOPBEN | RCC_APB2ENR_IOPAEN;
- 360              		.loc 2 16 3 view .LVU104
- 361              		.loc 2 16 16 is_stmt 0 view .LVU105
- 362 0006 054A     		ldr	r2, .L28
- 363 0008 9369     		ldr	r3, [r2, #24]
- 364 000a 43F00C03 		orr	r3, r3, #12
- 365 000e 9361     		str	r3, [r2, #24]
-  17:main.c        **** 
-  18:main.c        ****   //GPIO_config(RLED); GPIO_config(GLED); GPIO_config(YLED);
-  19:main.c        ****   //GPIO_config(BTN1); GPIO_config(BTN2);
-  20:main.c        ****   
-  21:main.c        ****   USB_setup();
- 366              		.loc 2 21 3 is_stmt 1 view .LVU106
- 367 0010 FFF7FEFF 		bl	USB_setup
- 368              	.LVL31:
-  22:main.c        ****   __enable_irq();
- 369              		.loc 2 22 3 view .LVU107
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 9
+ 349              		@ args = 0, pretend = 0, frame = 0
+ 350              		@ frame_needed = 0, uses_anonymous_args = 0
+ 351 0000 70B5     		push	{r4, r5, r6, lr}
+ 352              	.LCFI0:
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 9
 
 
- 370              	.LBB4:
- 371              	.LBI4:
- 372              		.file 3 "CMSIS/Inc/core_cm3.h"
+ 353              		.cfi_def_cfa_offset 16
+ 354              		.cfi_offset 4, -16
+ 355              		.cfi_offset 5, -12
+ 356              		.cfi_offset 6, -8
+ 357              		.cfi_offset 14, -4
+ 358 0002 82B0     		sub	sp, sp, #8
+ 359              	.LCFI1:
+ 360              		.cfi_def_cfa_offset 24
+  40:main.c        ****     SysClockMax();
+ 361              		.loc 2 40 5 view .LVU103
+ 362 0004 FFF7FEFF 		bl	SysClockMax
+ 363              	.LVL30:
+  41:main.c        ****     RCC->APB2ENR |= RCC_APB2ENR_IOPBEN | RCC_APB2ENR_IOPAEN;
+ 364              		.loc 2 41 5 view .LVU104
+ 365              		.loc 2 41 18 is_stmt 0 view .LVU105
+ 366 0008 414A     		ldr	r2, .L37
+ 367 000a 9369     		ldr	r3, [r2, #24]
+ 368 000c 43F00C03 		orr	r3, r3, #12
+ 369 0010 9361     		str	r3, [r2, #24]
+  42:main.c        ****     //Init leds here
+  43:main.c        ****     midi_led_init(&led1, &init_button_0_led);
+ 370              		.loc 2 43 5 is_stmt 1 view .LVU106
+ 371 0012 404E     		ldr	r6, .L37+4
+ 372 0014 4049     		ldr	r1, .L37+8
+ 373 0016 3046     		mov	r0, r6
+ 374 0018 FFF7FEFF 		bl	midi_led_init
+ 375              	.LVL31:
+  44:main.c        ****     midi_let_set_color_cb(&led1, &set_button_0_led_clrs);
+ 376              		.loc 2 44 5 view .LVU107
+ 377 001c 3F49     		ldr	r1, .L37+12
+ 378 001e 3046     		mov	r0, r6
+ 379 0020 FFF7FEFF 		bl	midi_let_set_color_cb
+ 380              	.LVL32:
+  45:main.c        ****     midi_led_init(&led0, &init_button_1_led);
+ 381              		.loc 2 45 5 view .LVU108
+ 382 0024 3E4C     		ldr	r4, .L37+16
+ 383 0026 3F49     		ldr	r1, .L37+20
+ 384 0028 2046     		mov	r0, r4
+ 385 002a FFF7FEFF 		bl	midi_led_init
+ 386              	.LVL33:
+  46:main.c        ****     midi_let_set_color_cb(&led0, &set_button_1_led_clrs);
+ 387              		.loc 2 46 5 view .LVU109
+ 388 002e 3E49     		ldr	r1, .L37+24
+ 389 0030 2046     		mov	r0, r4
+ 390 0032 FFF7FEFF 		bl	midi_let_set_color_cb
+ 391              	.LVL34:
+  47:main.c        ****     //Init buttons here
+  48:main.c        ****     midi_button_init(&button0, &led0, &init_button_0);
+ 392              		.loc 2 48 5 view .LVU110
+ 393 0036 3D4D     		ldr	r5, .L37+28
+ 394 0038 3D4A     		ldr	r2, .L37+32
+ 395 003a 2146     		mov	r1, r4
+ 396 003c 2846     		mov	r0, r5
+ 397 003e FFF7FEFF 		bl	midi_button_init
+ 398              	.LVL35:
+  49:main.c        ****     midi_button_init(&button1, &led1, &init_button_1);
+ 399              		.loc 2 49 5 view .LVU111
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 10
+
+
+ 400 0042 3C4C     		ldr	r4, .L37+36
+ 401 0044 3C4A     		ldr	r2, .L37+40
+ 402 0046 3146     		mov	r1, r6
+ 403 0048 2046     		mov	r0, r4
+ 404 004a FFF7FEFF 		bl	midi_button_init
+ 405              	.LVL36:
+  50:main.c        ****     midi_button_set_poll_cb(&button0, &get_button_0_data);
+ 406              		.loc 2 50 5 view .LVU112
+ 407 004e 3B49     		ldr	r1, .L37+44
+ 408 0050 2846     		mov	r0, r5
+ 409 0052 FFF7FEFF 		bl	midi_button_set_poll_cb
+ 410              	.LVL37:
+  51:main.c        ****     midi_button_set_poll_cb(&button1, &get_button_1_data);
+ 411              		.loc 2 51 5 view .LVU113
+ 412 0056 3A49     		ldr	r1, .L37+48
+ 413 0058 2046     		mov	r0, r4
+ 414 005a FFF7FEFF 		bl	midi_button_set_poll_cb
+ 415              	.LVL38:
+  52:main.c        ****     midi_button_init_buffers(&button0, prs_msg_buf0, rls_msg_buf0, lprs_msg_buf0, lrls_msg_buf0);
+ 416              		.loc 2 52 5 view .LVU114
+ 417 005e 394B     		ldr	r3, .L37+52
+ 418 0060 0093     		str	r3, [sp]
+ 419 0062 394B     		ldr	r3, .L37+56
+ 420 0064 394A     		ldr	r2, .L37+60
+ 421 0066 3A49     		ldr	r1, .L37+64
+ 422 0068 2846     		mov	r0, r5
+ 423 006a FFF7FEFF 		bl	midi_button_init_buffers
+ 424              	.LVL39:
+  53:main.c        ****     midi_button_init_buffers(&button1, prs_msg_buf1, rls_msg_buf1, lprs_msg_buf1, lrls_msg_buf1);
+ 425              		.loc 2 53 5 view .LVU115
+ 426 006e 394B     		ldr	r3, .L37+68
+ 427 0070 0093     		str	r3, [sp]
+ 428 0072 394B     		ldr	r3, .L37+72
+ 429 0074 394A     		ldr	r2, .L37+76
+ 430 0076 3A49     		ldr	r1, .L37+80
+ 431 0078 2046     		mov	r0, r4
+ 432 007a FFF7FEFF 		bl	midi_button_init_buffers
+ 433              	.LVL40:
+  54:main.c        ****     //Init button task handler
+  55:main.c        ****     buttons[0] = &button0;
+ 434              		.loc 2 55 5 view .LVU116
+ 435              		.loc 2 55 16 is_stmt 0 view .LVU117
+ 436 007e 394B     		ldr	r3, .L37+84
+ 437 0080 1D60     		str	r5, [r3]
+  56:main.c        ****     buttons[1] = &button1;
+ 438              		.loc 2 56 5 is_stmt 1 view .LVU118
+ 439              		.loc 2 56 16 is_stmt 0 view .LVU119
+ 440 0082 5C60     		str	r4, [r3, #4]
+  57:main.c        ****     
+  58:main.c        ****     SysTick->LOAD=72000-1;
+ 441              		.loc 2 58 5 is_stmt 1 view .LVU120
+ 442              		.loc 2 58 18 is_stmt 0 view .LVU121
+ 443 0084 4FF0E023 		mov	r3, #-536813568
+ 444 0088 374A     		ldr	r2, .L37+88
+ 445 008a 5A61     		str	r2, [r3, #20]
+  59:main.c        ****     SysTick->VAL=72000-1;
+ 446              		.loc 2 59 5 is_stmt 1 view .LVU122
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 11
+
+
+ 447              		.loc 2 59 17 is_stmt 0 view .LVU123
+ 448 008c 9A61     		str	r2, [r3, #24]
+  60:main.c        ****     
+  61:main.c        ****     SysTick->CTRL=	SysTick_CTRL_CLKSOURCE_Msk |
+ 449              		.loc 2 61 5 is_stmt 1 view .LVU124
+ 450              		.loc 2 61 18 is_stmt 0 view .LVU125
+ 451 008e 0722     		movs	r2, #7
+ 452 0090 1A61     		str	r2, [r3, #16]
+  62:main.c        ****                     SysTick_CTRL_TICKINT_Msk   |
+  63:main.c        ****                     SysTick_CTRL_ENABLE_Msk;
+  64:main.c        ****     USB_setup();
+ 453              		.loc 2 64 5 is_stmt 1 view .LVU126
+ 454 0092 FFF7FEFF 		bl	USB_setup
+ 455              	.LVL41:
+  65:main.c        ****     usb_class_init();
+ 456              		.loc 2 65 5 view .LVU127
+ 457 0096 FFF7FEFF 		bl	usb_class_init
+ 458              	.LVL42:
+  66:main.c        ****     __enable_irq();
+ 459              		.loc 2 66 5 view .LVU128
+ 460              	.LBB5:
+ 461              	.LBI5:
+ 462              		.file 3 "CMSIS/Inc/core_cm3.h"
    1:CMSIS/Inc/core_cm3.h **** /**************************************************************************//**
    2:CMSIS/Inc/core_cm3.h ****  * @file     core_cm3.h
    3:CMSIS/Inc/core_cm3.h ****  * @brief    CMSIS Cortex-M3 Core Peripheral Access Layer Header File
@@ -518,6 +658,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
   32:CMSIS/Inc/core_cm3.h ****  *     Error 10: Expecting ';'
   33:CMSIS/Inc/core_cm3.h ****  * .
   34:CMSIS/Inc/core_cm3.h ****  *   - Error 530: \n
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 12
+
+
   35:CMSIS/Inc/core_cm3.h ****  *     return(__regBasePri); \n
   36:CMSIS/Inc/core_cm3.h ****  *     Warning 530: Symbol '__regBasePri' (line 264) not initialized
   37:CMSIS/Inc/core_cm3.h ****  * . 
@@ -538,9 +681,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
   52:CMSIS/Inc/core_cm3.h ****  *     Warning 528: Symbol 'NVIC_DisableIRQ(unsigned int)' (line 419, file ./cm3_core.h) not refere
   53:CMSIS/Inc/core_cm3.h ****  * .
   54:CMSIS/Inc/core_cm3.h ****  *   - Error 751: \n
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 10
-
-
   55:CMSIS/Inc/core_cm3.h ****  *     } InterruptType_Type; \n
   56:CMSIS/Inc/core_cm3.h ****  *     Info 751: local typedef 'InterruptType_Type' (line 170, file ./cm3_core.h) not referenced
   57:CMSIS/Inc/core_cm3.h ****  * .
@@ -578,6 +718,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
   89:CMSIS/Inc/core_cm3.h **** 
   90:CMSIS/Inc/core_cm3.h **** #include <stdint.h>                           /* Include standard types */
   91:CMSIS/Inc/core_cm3.h **** 
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 13
+
+
   92:CMSIS/Inc/core_cm3.h **** #if defined (__ICCARM__)
   93:CMSIS/Inc/core_cm3.h ****   #include <intrinsics.h>                     /* IAR Intrinsics   */
   94:CMSIS/Inc/core_cm3.h **** #endif
@@ -598,9 +741,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  109:CMSIS/Inc/core_cm3.h **** 
  110:CMSIS/Inc/core_cm3.h **** #ifdef __cplusplus
  111:CMSIS/Inc/core_cm3.h ****   #define     __I     volatile                /*!< defines 'read only' permissions      */
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 11
-
-
  112:CMSIS/Inc/core_cm3.h **** #else
  113:CMSIS/Inc/core_cm3.h ****   #define     __I     volatile const          /*!< defines 'read only' permissions      */
  114:CMSIS/Inc/core_cm3.h **** #endif
@@ -638,6 +778,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  146:CMSIS/Inc/core_cm3.h ****   __O  uint32_t STIR;                         /*!< Offset: 0xE00  Software Trigger Interrupt Regist
  147:CMSIS/Inc/core_cm3.h **** }  NVIC_Type;                                               
  148:CMSIS/Inc/core_cm3.h **** /*@}*/ /* end of group CMSIS_CM3_NVIC */
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 14
+
+
  149:CMSIS/Inc/core_cm3.h **** 
  150:CMSIS/Inc/core_cm3.h **** 
  151:CMSIS/Inc/core_cm3.h **** /** @addtogroup CMSIS_CM3_SCB CMSIS CM3 SCB
@@ -658,9 +801,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  166:CMSIS/Inc/core_cm3.h ****   __IO uint32_t HFSR;                         /*!< Offset: 0x2C  Hard Fault Status Register        
  167:CMSIS/Inc/core_cm3.h ****   __IO uint32_t DFSR;                         /*!< Offset: 0x30  Debug Fault Status Register       
  168:CMSIS/Inc/core_cm3.h ****   __IO uint32_t MMFAR;                        /*!< Offset: 0x34  Mem Manage Address Register       
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 12
-
-
  169:CMSIS/Inc/core_cm3.h ****   __IO uint32_t BFAR;                         /*!< Offset: 0x38  Bus Fault Address Register        
  170:CMSIS/Inc/core_cm3.h ****   __IO uint32_t AFSR;                         /*!< Offset: 0x3C  Auxiliary Fault Status Register   
  171:CMSIS/Inc/core_cm3.h ****   __I  uint32_t PFR[2];                       /*!< Offset: 0x40  Processor Feature Register        
@@ -698,6 +838,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  203:CMSIS/Inc/core_cm3.h **** 
  204:CMSIS/Inc/core_cm3.h **** #define SCB_ICSR_PENDSTCLR_Pos             25                                             /*!< SCB 
  205:CMSIS/Inc/core_cm3.h **** #define SCB_ICSR_PENDSTCLR_Msk             (1ul << SCB_ICSR_PENDSTCLR_Pos)                /*!< SCB 
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 15
+
+
  206:CMSIS/Inc/core_cm3.h **** 
  207:CMSIS/Inc/core_cm3.h **** #define SCB_ICSR_ISRPREEMPT_Pos            23                                             /*!< SCB 
  208:CMSIS/Inc/core_cm3.h **** #define SCB_ICSR_ISRPREEMPT_Msk            (1ul << SCB_ICSR_ISRPREEMPT_Pos)               /*!< SCB 
@@ -718,9 +861,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  223:CMSIS/Inc/core_cm3.h **** #define SCB_VTOR_TBLBASE_Pos               29                                             /*!< SCB 
  224:CMSIS/Inc/core_cm3.h **** #define SCB_VTOR_TBLBASE_Msk               (0x1FFul << SCB_VTOR_TBLBASE_Pos)              /*!< SCB 
  225:CMSIS/Inc/core_cm3.h **** 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 13
-
-
  226:CMSIS/Inc/core_cm3.h **** #define SCB_VTOR_TBLOFF_Pos                 7                                             /*!< SCB 
  227:CMSIS/Inc/core_cm3.h **** #define SCB_VTOR_TBLOFF_Msk                (0x3FFFFFul << SCB_VTOR_TBLOFF_Pos)            /*!< SCB 
  228:CMSIS/Inc/core_cm3.h **** 
@@ -758,6 +898,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  260:CMSIS/Inc/core_cm3.h **** 
  261:CMSIS/Inc/core_cm3.h **** /* SCB Configuration Control Register Definitions */
  262:CMSIS/Inc/core_cm3.h **** #define SCB_CCR_STKALIGN_Pos                9                                             /*!< SCB 
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 16
+
+
  263:CMSIS/Inc/core_cm3.h **** #define SCB_CCR_STKALIGN_Msk               (1ul << SCB_CCR_STKALIGN_Pos)                  /*!< SCB 
  264:CMSIS/Inc/core_cm3.h **** 
  265:CMSIS/Inc/core_cm3.h **** #define SCB_CCR_BFHFNMIGN_Pos               8                                             /*!< SCB 
@@ -778,9 +921,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  280:CMSIS/Inc/core_cm3.h **** /* SCB System Handler Control and State Register Definitions */
  281:CMSIS/Inc/core_cm3.h **** #define SCB_SHCSR_USGFAULTENA_Pos          18                                             /*!< SCB 
  282:CMSIS/Inc/core_cm3.h **** #define SCB_SHCSR_USGFAULTENA_Msk          (1ul << SCB_SHCSR_USGFAULTENA_Pos)             /*!< SCB 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 14
-
-
  283:CMSIS/Inc/core_cm3.h **** 
  284:CMSIS/Inc/core_cm3.h **** #define SCB_SHCSR_BUSFAULTENA_Pos          17                                             /*!< SCB 
  285:CMSIS/Inc/core_cm3.h **** #define SCB_SHCSR_BUSFAULTENA_Msk          (1ul << SCB_SHCSR_BUSFAULTENA_Pos)             /*!< SCB 
@@ -818,6 +958,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  317:CMSIS/Inc/core_cm3.h **** #define SCB_SHCSR_BUSFAULTACT_Pos           1                                             /*!< SCB 
  318:CMSIS/Inc/core_cm3.h **** #define SCB_SHCSR_BUSFAULTACT_Msk          (1ul << SCB_SHCSR_BUSFAULTACT_Pos)             /*!< SCB 
  319:CMSIS/Inc/core_cm3.h **** 
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 17
+
+
  320:CMSIS/Inc/core_cm3.h **** #define SCB_SHCSR_MEMFAULTACT_Pos           0                                             /*!< SCB 
  321:CMSIS/Inc/core_cm3.h **** #define SCB_SHCSR_MEMFAULTACT_Msk          (1ul << SCB_SHCSR_MEMFAULTACT_Pos)             /*!< SCB 
  322:CMSIS/Inc/core_cm3.h **** 
@@ -838,9 +981,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  337:CMSIS/Inc/core_cm3.h **** #define SCB_HFSR_FORCED_Pos                30                                             /*!< SCB 
  338:CMSIS/Inc/core_cm3.h **** #define SCB_HFSR_FORCED_Msk                (1ul << SCB_HFSR_FORCED_Pos)                   /*!< SCB 
  339:CMSIS/Inc/core_cm3.h **** 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 15
-
-
  340:CMSIS/Inc/core_cm3.h **** #define SCB_HFSR_VECTTBL_Pos                1                                             /*!< SCB 
  341:CMSIS/Inc/core_cm3.h **** #define SCB_HFSR_VECTTBL_Msk               (1ul << SCB_HFSR_VECTTBL_Pos)                  /*!< SCB 
  342:CMSIS/Inc/core_cm3.h **** 
@@ -878,6 +1018,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  374:CMSIS/Inc/core_cm3.h **** #define SysTick_CTRL_COUNTFLAG_Pos         16                                             /*!< SysT
  375:CMSIS/Inc/core_cm3.h **** #define SysTick_CTRL_COUNTFLAG_Msk         (1ul << SysTick_CTRL_COUNTFLAG_Pos)            /*!< SysT
  376:CMSIS/Inc/core_cm3.h **** 
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 18
+
+
  377:CMSIS/Inc/core_cm3.h **** #define SysTick_CTRL_CLKSOURCE_Pos          2                                             /*!< SysT
  378:CMSIS/Inc/core_cm3.h **** #define SysTick_CTRL_CLKSOURCE_Msk         (1ul << SysTick_CTRL_CLKSOURCE_Pos)            /*!< SysT
  379:CMSIS/Inc/core_cm3.h **** 
@@ -898,9 +1041,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  394:CMSIS/Inc/core_cm3.h **** /* SysTick Calibration Register Definitions */
  395:CMSIS/Inc/core_cm3.h **** #define SysTick_CALIB_NOREF_Pos            31                                             /*!< SysT
  396:CMSIS/Inc/core_cm3.h **** #define SysTick_CALIB_NOREF_Msk            (1ul << SysTick_CALIB_NOREF_Pos)               /*!< SysT
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 16
-
-
  397:CMSIS/Inc/core_cm3.h **** 
  398:CMSIS/Inc/core_cm3.h **** #define SysTick_CALIB_SKEW_Pos             30                                             /*!< SysT
  399:CMSIS/Inc/core_cm3.h **** #define SysTick_CALIB_SKEW_Msk             (1ul << SysTick_CALIB_SKEW_Pos)                /*!< SysT
@@ -938,6 +1078,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  431:CMSIS/Inc/core_cm3.h ****        uint32_t RESERVED5[6];                                   
  432:CMSIS/Inc/core_cm3.h ****   __I  uint32_t PID4;                         /*!< Offset:       ITM Peripheral Identification Regi
  433:CMSIS/Inc/core_cm3.h ****   __I  uint32_t PID5;                         /*!< Offset:       ITM Peripheral Identification Regi
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 19
+
+
  434:CMSIS/Inc/core_cm3.h ****   __I  uint32_t PID6;                         /*!< Offset:       ITM Peripheral Identification Regi
  435:CMSIS/Inc/core_cm3.h ****   __I  uint32_t PID7;                         /*!< Offset:       ITM Peripheral Identification Regi
  436:CMSIS/Inc/core_cm3.h ****   __I  uint32_t PID0;                         /*!< Offset:       ITM Peripheral Identification Regi
@@ -958,9 +1101,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  451:CMSIS/Inc/core_cm3.h **** #define ITM_TCR_BUSY_Pos                   23                                             /*!< ITM 
  452:CMSIS/Inc/core_cm3.h **** #define ITM_TCR_BUSY_Msk                   (1ul << ITM_TCR_BUSY_Pos)                      /*!< ITM 
  453:CMSIS/Inc/core_cm3.h **** 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 17
-
-
  454:CMSIS/Inc/core_cm3.h **** #define ITM_TCR_ATBID_Pos                  16                                             /*!< ITM 
  455:CMSIS/Inc/core_cm3.h **** #define ITM_TCR_ATBID_Msk                  (0x7Ful << ITM_TCR_ATBID_Pos)                  /*!< ITM 
  456:CMSIS/Inc/core_cm3.h **** 
@@ -998,6 +1138,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  488:CMSIS/Inc/core_cm3.h **** #define ITM_LSR_ByteAcc_Pos                 2                                             /*!< ITM 
  489:CMSIS/Inc/core_cm3.h **** #define ITM_LSR_ByteAcc_Msk                (1ul << ITM_LSR_ByteAcc_Pos)                   /*!< ITM 
  490:CMSIS/Inc/core_cm3.h **** 
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 20
+
+
  491:CMSIS/Inc/core_cm3.h **** #define ITM_LSR_Access_Pos                  1                                             /*!< ITM 
  492:CMSIS/Inc/core_cm3.h **** #define ITM_LSR_Access_Msk                 (1ul << ITM_LSR_Access_Pos)                    /*!< ITM 
  493:CMSIS/Inc/core_cm3.h **** 
@@ -1018,9 +1161,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  508:CMSIS/Inc/core_cm3.h ****   __IO uint32_t ACTLR;                        /*!< Offset: 0x08  Auxiliary Control Register      */
  509:CMSIS/Inc/core_cm3.h **** #else
  510:CMSIS/Inc/core_cm3.h ****        uint32_t RESERVED1;
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 18
-
-
  511:CMSIS/Inc/core_cm3.h **** #endif
  512:CMSIS/Inc/core_cm3.h **** } InterruptType_Type;
  513:CMSIS/Inc/core_cm3.h **** 
@@ -1058,6 +1198,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  545:CMSIS/Inc/core_cm3.h ****   __IO uint32_t RASR_A2;                      /*!< Offset: 0x20  MPU Alias 2 Region Attribute and S
  546:CMSIS/Inc/core_cm3.h ****   __IO uint32_t RBAR_A3;                      /*!< Offset: 0x24  MPU Alias 3 Region Base Address Re
  547:CMSIS/Inc/core_cm3.h ****   __IO uint32_t RASR_A3;                      /*!< Offset: 0x28  MPU Alias 3 Region Attribute and S
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 21
+
+
  548:CMSIS/Inc/core_cm3.h **** } MPU_Type;                                                
  549:CMSIS/Inc/core_cm3.h **** 
  550:CMSIS/Inc/core_cm3.h **** /* MPU Type Register */
@@ -1078,9 +1221,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  565:CMSIS/Inc/core_cm3.h **** #define MPU_CTRL_HFNMIENA_Msk              (1ul << MPU_CTRL_HFNMIENA_Pos)                 /*!< MPU 
  566:CMSIS/Inc/core_cm3.h **** 
  567:CMSIS/Inc/core_cm3.h **** #define MPU_CTRL_ENABLE_Pos                 0                                             /*!< MPU 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 19
-
-
  568:CMSIS/Inc/core_cm3.h **** #define MPU_CTRL_ENABLE_Msk                (1ul << MPU_CTRL_ENABLE_Pos)                   /*!< MPU 
  569:CMSIS/Inc/core_cm3.h **** 
  570:CMSIS/Inc/core_cm3.h **** /* MPU Region Number Register */
@@ -1118,6 +1258,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  602:CMSIS/Inc/core_cm3.h **** 
  603:CMSIS/Inc/core_cm3.h **** #define MPU_RASR_SRD_Pos                    8                                             /*!< MPU 
  604:CMSIS/Inc/core_cm3.h **** #define MPU_RASR_SRD_Msk                   (0xFFul << MPU_RASR_SRD_Pos)                   /*!< MPU 
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 22
+
+
  605:CMSIS/Inc/core_cm3.h **** 
  606:CMSIS/Inc/core_cm3.h **** #define MPU_RASR_SIZE_Pos                   1                                             /*!< MPU 
  607:CMSIS/Inc/core_cm3.h **** #define MPU_RASR_SIZE_Msk                  (0x1Ful << MPU_RASR_SIZE_Pos)                  /*!< MPU 
@@ -1138,9 +1281,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  622:CMSIS/Inc/core_cm3.h ****   __IO uint32_t DHCSR;                        /*!< Offset: 0x00  Debug Halting Control and Status R
  623:CMSIS/Inc/core_cm3.h ****   __O  uint32_t DCRSR;                        /*!< Offset: 0x04  Debug Core Register Selector Regis
  624:CMSIS/Inc/core_cm3.h ****   __IO uint32_t DCRDR;                        /*!< Offset: 0x08  Debug Core Register Data Register 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 20
-
-
  625:CMSIS/Inc/core_cm3.h ****   __IO uint32_t DEMCR;                        /*!< Offset: 0x0C  Debug Exception and Monitor Contro
  626:CMSIS/Inc/core_cm3.h **** } CoreDebug_Type;
  627:CMSIS/Inc/core_cm3.h **** 
@@ -1178,6 +1318,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  659:CMSIS/Inc/core_cm3.h **** #define CoreDebug_DHCSR_C_HALT_Pos          1                                             /*!< Core
  660:CMSIS/Inc/core_cm3.h **** #define CoreDebug_DHCSR_C_HALT_Msk         (1ul << CoreDebug_DHCSR_C_HALT_Pos)            /*!< Core
  661:CMSIS/Inc/core_cm3.h **** 
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 23
+
+
  662:CMSIS/Inc/core_cm3.h **** #define CoreDebug_DHCSR_C_DEBUGEN_Pos       0                                             /*!< Core
  663:CMSIS/Inc/core_cm3.h **** #define CoreDebug_DHCSR_C_DEBUGEN_Msk      (1ul << CoreDebug_DHCSR_C_DEBUGEN_Pos)         /*!< Core
  664:CMSIS/Inc/core_cm3.h **** 
@@ -1198,9 +1341,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  679:CMSIS/Inc/core_cm3.h **** #define CoreDebug_DEMCR_MON_STEP_Pos       18                                             /*!< Core
  680:CMSIS/Inc/core_cm3.h **** #define CoreDebug_DEMCR_MON_STEP_Msk       (1ul << CoreDebug_DEMCR_MON_STEP_Pos)          /*!< Core
  681:CMSIS/Inc/core_cm3.h **** 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 21
-
-
  682:CMSIS/Inc/core_cm3.h **** #define CoreDebug_DEMCR_MON_PEND_Pos       17                                             /*!< Core
  683:CMSIS/Inc/core_cm3.h **** #define CoreDebug_DEMCR_MON_PEND_Msk       (1ul << CoreDebug_DEMCR_MON_PEND_Pos)          /*!< Core
  684:CMSIS/Inc/core_cm3.h **** 
@@ -1238,6 +1378,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  716:CMSIS/Inc/core_cm3.h **** #define ITM_BASE            (0xE0000000)                              /*!< ITM Base Address        
  717:CMSIS/Inc/core_cm3.h **** #define CoreDebug_BASE      (0xE000EDF0)                              /*!< Core Debug Base Address 
  718:CMSIS/Inc/core_cm3.h **** #define SysTick_BASE        (SCS_BASE +  0x0010)                      /*!< SysTick Base Address    
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 24
+
+
  719:CMSIS/Inc/core_cm3.h **** #define NVIC_BASE           (SCS_BASE +  0x0100)                      /*!< NVIC Base Address       
  720:CMSIS/Inc/core_cm3.h **** #define SCB_BASE            (SCS_BASE +  0x0D00)                      /*!< System Control Block Bas
  721:CMSIS/Inc/core_cm3.h **** 
@@ -1258,9 +1401,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  736:CMSIS/Inc/core_cm3.h **** 
  737:CMSIS/Inc/core_cm3.h **** /*******************************************************************************
  738:CMSIS/Inc/core_cm3.h ****  *                Hardware Abstraction Layer
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 22
-
-
  739:CMSIS/Inc/core_cm3.h ****  ******************************************************************************/
  740:CMSIS/Inc/core_cm3.h **** 
  741:CMSIS/Inc/core_cm3.h **** #if defined ( __CC_ARM   )
@@ -1298,6 +1438,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  773:CMSIS/Inc/core_cm3.h **** #define __DSB()                           __dsb(0)
  774:CMSIS/Inc/core_cm3.h **** #define __DMB()                           __dmb(0)
  775:CMSIS/Inc/core_cm3.h **** #define __REV                             __rev
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 25
+
+
  776:CMSIS/Inc/core_cm3.h **** #define __RBIT                            __rbit
  777:CMSIS/Inc/core_cm3.h **** #define __LDREXB(ptr)                     ((unsigned char ) __ldrex(ptr))
  778:CMSIS/Inc/core_cm3.h **** #define __LDREXH(ptr)                     ((unsigned short) __ldrex(ptr))
@@ -1318,9 +1461,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  793:CMSIS/Inc/core_cm3.h ****  *
  794:CMSIS/Inc/core_cm3.h ****  * @return ProcessStackPointer
  795:CMSIS/Inc/core_cm3.h ****  *
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 23
-
-
  796:CMSIS/Inc/core_cm3.h ****  * Return the actual process stack pointer
  797:CMSIS/Inc/core_cm3.h ****  */
  798:CMSIS/Inc/core_cm3.h **** extern uint32_t __get_PSP(void);
@@ -1358,6 +1498,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  830:CMSIS/Inc/core_cm3.h **** /**
  831:CMSIS/Inc/core_cm3.h ****  * @brief  Reverse byte order in unsigned short value
  832:CMSIS/Inc/core_cm3.h ****  *
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 26
+
+
  833:CMSIS/Inc/core_cm3.h ****  * @param   value  value to reverse
  834:CMSIS/Inc/core_cm3.h ****  * @return         reversed value
  835:CMSIS/Inc/core_cm3.h ****  *
@@ -1378,9 +1521,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  850:CMSIS/Inc/core_cm3.h **** 
  851:CMSIS/Inc/core_cm3.h **** #if (__ARMCC_VERSION < 400000)
  852:CMSIS/Inc/core_cm3.h **** 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 24
-
-
  853:CMSIS/Inc/core_cm3.h **** /**
  854:CMSIS/Inc/core_cm3.h ****  * @brief  Remove the exclusive lock created by ldrex
  855:CMSIS/Inc/core_cm3.h ****  *
@@ -1418,6 +1558,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  887:CMSIS/Inc/core_cm3.h **** /**
  888:CMSIS/Inc/core_cm3.h ****  * @brief  Set the Priority Mask value
  889:CMSIS/Inc/core_cm3.h ****  *
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 27
+
+
  890:CMSIS/Inc/core_cm3.h ****  * @param   priMask  PriMask
  891:CMSIS/Inc/core_cm3.h ****  *
  892:CMSIS/Inc/core_cm3.h ****  * Set the priority mask bit in the priority mask register
@@ -1438,9 +1581,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  907:CMSIS/Inc/core_cm3.h ****  *
  908:CMSIS/Inc/core_cm3.h ****  * @param  faultMask faultMask value
  909:CMSIS/Inc/core_cm3.h ****  *
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 25
-
-
  910:CMSIS/Inc/core_cm3.h ****  * Set the fault mask register
  911:CMSIS/Inc/core_cm3.h ****  */
  912:CMSIS/Inc/core_cm3.h **** extern void __set_FAULTMASK(uint32_t faultMask);
@@ -1478,6 +1618,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  944:CMSIS/Inc/core_cm3.h ****  * @return BasePriority
  945:CMSIS/Inc/core_cm3.h ****  *
  946:CMSIS/Inc/core_cm3.h ****  * Return the content of the base priority register
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 28
+
+
  947:CMSIS/Inc/core_cm3.h ****  */
  948:CMSIS/Inc/core_cm3.h **** static __INLINE uint32_t  __get_BASEPRI(void)
  949:CMSIS/Inc/core_cm3.h **** {
@@ -1498,9 +1641,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
  964:CMSIS/Inc/core_cm3.h ****   __regBasePri = (basePri & 0xff);
  965:CMSIS/Inc/core_cm3.h **** }
  966:CMSIS/Inc/core_cm3.h **** 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 26
-
-
  967:CMSIS/Inc/core_cm3.h **** /**
  968:CMSIS/Inc/core_cm3.h ****  * @brief  Return the Priority Mask value
  969:CMSIS/Inc/core_cm3.h ****  *
@@ -1538,6 +1678,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
 1001:CMSIS/Inc/core_cm3.h **** {
 1002:CMSIS/Inc/core_cm3.h ****   register uint32_t __regFaultMask       __ASM("faultmask");
 1003:CMSIS/Inc/core_cm3.h ****   return(__regFaultMask);
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 29
+
+
 1004:CMSIS/Inc/core_cm3.h **** }
 1005:CMSIS/Inc/core_cm3.h **** 
 1006:CMSIS/Inc/core_cm3.h **** /**
@@ -1558,9 +1701,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
 1021:CMSIS/Inc/core_cm3.h ****  * 
 1022:CMSIS/Inc/core_cm3.h ****  * @return Control value
 1023:CMSIS/Inc/core_cm3.h ****  *
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 27
-
-
 1024:CMSIS/Inc/core_cm3.h ****  * Return the content of the control register
 1025:CMSIS/Inc/core_cm3.h ****  */
 1026:CMSIS/Inc/core_cm3.h **** static __INLINE uint32_t __get_CONTROL(void)
@@ -1598,6 +1738,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
 1058:CMSIS/Inc/core_cm3.h **** #define __NOP                                     __no_operation            /*!< no operation intri
 1059:CMSIS/Inc/core_cm3.h **** static __INLINE  void __WFI()                     { __ASM ("wfi"); }
 1060:CMSIS/Inc/core_cm3.h **** static __INLINE  void __WFE()                     { __ASM ("wfe"); }
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 30
+
+
 1061:CMSIS/Inc/core_cm3.h **** static __INLINE  void __SEV()                     { __ASM ("sev"); }
 1062:CMSIS/Inc/core_cm3.h **** static __INLINE  void __CLREX()                   { __ASM ("clrex"); }
 1063:CMSIS/Inc/core_cm3.h **** 
@@ -1618,9 +1761,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
 1078:CMSIS/Inc/core_cm3.h ****  * @brief  Return the Process Stack Pointer
 1079:CMSIS/Inc/core_cm3.h ****  *
 1080:CMSIS/Inc/core_cm3.h ****  * @return ProcessStackPointer
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 28
-
-
 1081:CMSIS/Inc/core_cm3.h ****  *
 1082:CMSIS/Inc/core_cm3.h ****  * Return the actual process stack pointer
 1083:CMSIS/Inc/core_cm3.h ****  */
@@ -1658,6 +1798,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
 1115:CMSIS/Inc/core_cm3.h **** 
 1116:CMSIS/Inc/core_cm3.h **** /**
 1117:CMSIS/Inc/core_cm3.h ****  * @brief  Reverse byte order in unsigned short value
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 31
+
+
 1118:CMSIS/Inc/core_cm3.h ****  *
 1119:CMSIS/Inc/core_cm3.h ****  * @param  value  value to reverse
 1120:CMSIS/Inc/core_cm3.h ****  * @return        reversed value
@@ -1678,9 +1821,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
 1135:CMSIS/Inc/core_cm3.h **** 
 1136:CMSIS/Inc/core_cm3.h **** /**
 1137:CMSIS/Inc/core_cm3.h ****  * @brief  LDR Exclusive (8 bit)
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 29
-
-
 1138:CMSIS/Inc/core_cm3.h ****  *
 1139:CMSIS/Inc/core_cm3.h ****  * @param  *addr  address pointer
 1140:CMSIS/Inc/core_cm3.h ****  * @return        value of (*address)
@@ -1718,6 +1858,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
 1172:CMSIS/Inc/core_cm3.h ****  *
 1173:CMSIS/Inc/core_cm3.h ****  * Exclusive STR command for 8 bit values
 1174:CMSIS/Inc/core_cm3.h ****  */
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 32
+
+
 1175:CMSIS/Inc/core_cm3.h **** extern uint32_t __STREXB(uint8_t value, uint8_t *addr);
 1176:CMSIS/Inc/core_cm3.h **** 
 1177:CMSIS/Inc/core_cm3.h **** /**
@@ -1738,9 +1881,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
 1192:CMSIS/Inc/core_cm3.h ****  * @param  *addr  address pointer
 1193:CMSIS/Inc/core_cm3.h ****  * @return        successful / failed
 1194:CMSIS/Inc/core_cm3.h ****  *
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 30
-
-
 1195:CMSIS/Inc/core_cm3.h ****  * Exclusive STR command for 32 bit values
 1196:CMSIS/Inc/core_cm3.h ****  */
 1197:CMSIS/Inc/core_cm3.h **** extern uint32_t __STREXW(uint32_t value, uint32_t *addr);
@@ -1751,58 +1891,466 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 1
 1202:CMSIS/Inc/core_cm3.h **** /* GNU gcc specific functions */
 1203:CMSIS/Inc/core_cm3.h **** 
 1204:CMSIS/Inc/core_cm3.h **** static __INLINE void __enable_irq()               { __ASM volatile ("cpsie i"); }
- 373              		.loc 3 1204 22 view .LVU108
- 374              	.LBB5:
- 375              		.loc 3 1204 53 view .LVU109
- 376              		.syntax unified
- 377              	@ 1204 "CMSIS/Inc/core_cm3.h" 1
- 378 0014 62B6     		cpsie i
- 379              	@ 0 "" 2
- 380              		.thumb
- 381              		.syntax unified
- 382              	.L26:
- 383              	.LBE5:
- 384              	.LBE4:
-  23:main.c        **** 
-  24:main.c        ****   while(1){
- 385              		.loc 2 24 3 discriminator 1 view .LVU110
-  25:main.c        ****     usb_class_poll();
- 386              		.loc 2 25 5 discriminator 1 view .LVU111
- 387 0016 FFF7FEFF 		bl	usb_class_poll
- 388              	.LVL32:
-  24:main.c        ****     usb_class_poll();
- 389              		.loc 2 24 8 discriminator 1 view .LVU112
- 390 001a FCE7     		b	.L26
- 391              	.L29:
- 392              		.align	2
- 393              	.L28:
- 394 001c 00100240 		.word	1073876992
- 395              		.cfi_endproc
- 396              	.LFE37:
- 398              		.text
- 399              	.Letext0:
- 400              		.file 4 "/usr/local/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_default_
- 401              		.file 5 "/usr/local/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint.h"
- 402              		.file 6 "CMSIS/Inc/stm32f103xb.h"
- 403              		.file 7 "usb_lib.h"
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s 			page 31
+ 463              		.loc 3 1204 22 view .LVU129
+ 464              	.LBB6:
+ 465              		.loc 3 1204 53 view .LVU130
+ 466              		.syntax unified
+ 467              	@ 1204 "CMSIS/Inc/core_cm3.h" 1
+ 468 009a 62B6     		cpsie i
+ 469              	@ 0 "" 2
+ 470              		.loc 3 1204 81 is_stmt 0 view .LVU131
+ 471              		.thumb
+ 472              		.syntax unified
+ 473 009c 36E0     		b	.L32
+ 474              	.LVL43:
+ 475              	.L27:
+ 476              		.loc 3 1204 81 view .LVU132
+ 477              	.LBE6:
+ 478              	.LBE5:
+ 479              	.LBB7:
+  67:main.c        ****     
+  68:main.c        **** 
+  69:main.c        ****     while(1){
+  70:main.c        ****         for(uint8_t i=0; i<BUTTONS_NUM; i++) {
+  71:main.c        **** 
+  72:main.c        ****             if(buttons[i]->poll() == 0) apply_event(buttons[i], BUTTON_EVENT_DEBOUNCE);
+  73:main.c        ****             else apply_event(buttons[i], BUTTON_EVENT_RELEASE);
+ 480              		.loc 2 73 18 is_stmt 1 view .LVU133
+ 481 009e 0421     		movs	r1, #4
+ 482 00a0 304B     		ldr	r3, .L37+84
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 33
+
+
+ 483 00a2 53F82400 		ldr	r0, [r3, r4, lsl #2]
+ 484 00a6 FFF7FEFF 		bl	apply_event
+ 485              	.LVL44:
+ 486              	.L28:
+  74:main.c        **** 
+  75:main.c        ****             //Handle debounce
+  76:main.c        ****             if(buttons[i]->button_timer == BUTTON_TIMER_DEBOUNCE_MS && buttons[i]->poll() == 0) {
+ 487              		.loc 2 76 13 view .LVU134
+ 488              		.loc 2 76 23 is_stmt 0 view .LVU135
+ 489 00aa 2E4B     		ldr	r3, .L37+84
+ 490 00ac 53F82530 		ldr	r3, [r3, r5, lsl #2]
+ 491              		.loc 2 76 26 view .LVU136
+ 492 00b0 5A88     		ldrh	r2, [r3, #2]
+ 493              		.loc 2 76 15 view .LVU137
+ 494 00b2 142A     		cmp	r2, #20
+ 495 00b4 19D0     		beq	.L34
+ 496              	.L29:
+  77:main.c        ****                 apply_event(buttons[i], BUTTON_EVENT_PRESS);
+  78:main.c        ****             }
+  79:main.c        ****             //Handle long press 
+  80:main.c        ****             if(buttons[i]->button_timer >= BUTTON_TIMER_LONG_PRESS_MS) apply_event(buttons[i], BUTT
+ 497              		.loc 2 80 13 is_stmt 1 view .LVU138
+ 498              		.loc 2 80 23 is_stmt 0 view .LVU139
+ 499 00b6 2B4B     		ldr	r3, .L37+84
+ 500 00b8 53F82500 		ldr	r0, [r3, r5, lsl #2]
+ 501              		.loc 2 80 26 view .LVU140
+ 502 00bc 4388     		ldrh	r3, [r0, #2]
+ 503              		.loc 2 80 15 view .LVU141
+ 504 00be B3F57A7F 		cmp	r3, #1000
+ 505 00c2 1DD2     		bcs	.L35
+ 506              	.L30:
+  70:main.c        **** 
+ 507              		.loc 2 70 41 is_stmt 1 discriminator 2 view .LVU142
+  70:main.c        **** 
+ 508              		.loc 2 70 42 is_stmt 0 discriminator 2 view .LVU143
+ 509 00c4 0134     		adds	r4, r4, #1
+ 510              	.LVL45:
+  70:main.c        **** 
+ 511              		.loc 2 70 42 discriminator 2 view .LVU144
+ 512 00c6 E4B2     		uxtb	r4, r4
+ 513              	.LVL46:
+ 514              	.L26:
+  70:main.c        **** 
+ 515              		.loc 2 70 26 is_stmt 1 discriminator 1 view .LVU145
+  70:main.c        **** 
+ 516              		.loc 2 70 9 is_stmt 0 discriminator 1 view .LVU146
+ 517 00c8 012C     		cmp	r4, #1
+ 518 00ca 1DD8     		bhi	.L36
+  72:main.c        ****             else apply_event(buttons[i], BUTTON_EVENT_RELEASE);
+ 519              		.loc 2 72 13 is_stmt 1 view .LVU147
+  72:main.c        ****             else apply_event(buttons[i], BUTTON_EVENT_RELEASE);
+ 520              		.loc 2 72 23 is_stmt 0 view .LVU148
+ 521 00cc 2546     		mov	r5, r4
+ 522 00ce 254B     		ldr	r3, .L37+84
+ 523 00d0 53F82430 		ldr	r3, [r3, r4, lsl #2]
+  72:main.c        ****             else apply_event(buttons[i], BUTTON_EVENT_RELEASE);
+ 524              		.loc 2 72 26 view .LVU149
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 34
+
+
+ 525 00d4 9B68     		ldr	r3, [r3, #8]
+  72:main.c        ****             else apply_event(buttons[i], BUTTON_EVENT_RELEASE);
+ 526              		.loc 2 72 16 view .LVU150
+ 527 00d6 9847     		blx	r3
+ 528              	.LVL47:
+  72:main.c        ****             else apply_event(buttons[i], BUTTON_EVENT_RELEASE);
+ 529              		.loc 2 72 15 view .LVU151
+ 530 00d8 0028     		cmp	r0, #0
+ 531 00da E0D1     		bne	.L27
+  72:main.c        ****             else apply_event(buttons[i], BUTTON_EVENT_RELEASE);
+ 532              		.loc 2 72 41 is_stmt 1 discriminator 1 view .LVU152
+ 533 00dc 0121     		movs	r1, #1
+ 534 00de 214B     		ldr	r3, .L37+84
+ 535 00e0 53F82400 		ldr	r0, [r3, r4, lsl #2]
+ 536 00e4 FFF7FEFF 		bl	apply_event
+ 537              	.LVL48:
+ 538 00e8 DFE7     		b	.L28
+ 539              	.L34:
+  76:main.c        ****                 apply_event(buttons[i], BUTTON_EVENT_PRESS);
+ 540              		.loc 2 76 82 is_stmt 0 discriminator 1 view .LVU153
+ 541 00ea 9B68     		ldr	r3, [r3, #8]
+  76:main.c        ****                 apply_event(buttons[i], BUTTON_EVENT_PRESS);
+ 542              		.loc 2 76 72 discriminator 1 view .LVU154
+ 543 00ec 9847     		blx	r3
+ 544              	.LVL49:
+  76:main.c        ****                 apply_event(buttons[i], BUTTON_EVENT_PRESS);
+ 545              		.loc 2 76 69 discriminator 1 view .LVU155
+ 546 00ee 0028     		cmp	r0, #0
+ 547 00f0 E1D1     		bne	.L29
+  77:main.c        ****             }
+ 548              		.loc 2 77 17 is_stmt 1 view .LVU156
+ 549 00f2 0221     		movs	r1, #2
+ 550 00f4 1B4B     		ldr	r3, .L37+84
+ 551 00f6 53F82500 		ldr	r0, [r3, r5, lsl #2]
+ 552 00fa FFF7FEFF 		bl	apply_event
+ 553              	.LVL50:
+ 554 00fe DAE7     		b	.L29
+ 555              	.L35:
+ 556              		.loc 2 80 72 discriminator 1 view .LVU157
+ 557 0100 0321     		movs	r1, #3
+ 558 0102 FFF7FEFF 		bl	apply_event
+ 559              	.LVL51:
+ 560 0106 DDE7     		b	.L30
+ 561              	.L36:
+ 562              	.LBE7:
+  81:main.c        ****         }
+  82:main.c        ****         usb_class_poll();
+ 563              		.loc 2 82 9 view .LVU158
+ 564 0108 FFF7FEFF 		bl	usb_class_poll
+ 565              	.LVL52:
+  69:main.c        ****         for(uint8_t i=0; i<BUTTONS_NUM; i++) {
+ 566              		.loc 2 69 10 view .LVU159
+ 567              	.L32:
+  69:main.c        ****         for(uint8_t i=0; i<BUTTONS_NUM; i++) {
+ 568              		.loc 2 69 5 view .LVU160
+  70:main.c        **** 
+ 569              		.loc 2 70 9 view .LVU161
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 35
+
+
+ 570              	.LBB8:
+  70:main.c        **** 
+ 571              		.loc 2 70 13 view .LVU162
+  70:main.c        **** 
+ 572              		.loc 2 70 21 is_stmt 0 view .LVU163
+ 573 010c 0024     		movs	r4, #0
+  70:main.c        **** 
+ 574              		.loc 2 70 9 view .LVU164
+ 575 010e DBE7     		b	.L26
+ 576              	.L38:
+ 577              		.align	2
+ 578              	.L37:
+ 579 0110 00100240 		.word	1073876992
+ 580 0114 00000000 		.word	.LANCHOR0
+ 581 0118 00000000 		.word	init_button_0_led
+ 582 011c 00000000 		.word	set_button_0_led_clrs
+ 583 0120 00000000 		.word	.LANCHOR1
+ 584 0124 00000000 		.word	init_button_1_led
+ 585 0128 00000000 		.word	set_button_1_led_clrs
+ 586 012c 00000000 		.word	.LANCHOR2
+ 587 0130 00000000 		.word	init_button_0
+ 588 0134 00000000 		.word	.LANCHOR3
+ 589 0138 00000000 		.word	init_button_1
+ 590 013c 00000000 		.word	get_button_0_data
+ 591 0140 00000000 		.word	get_button_1_data
+ 592 0144 00000000 		.word	.LANCHOR7
+ 593 0148 00000000 		.word	.LANCHOR4
+ 594 014c 00000000 		.word	.LANCHOR5
+ 595 0150 00000000 		.word	.LANCHOR6
+ 596 0154 00000000 		.word	.LANCHOR11
+ 597 0158 00000000 		.word	.LANCHOR8
+ 598 015c 00000000 		.word	.LANCHOR9
+ 599 0160 00000000 		.word	.LANCHOR10
+ 600 0164 00000000 		.word	.LANCHOR12
+ 601 0168 3F190100 		.word	71999
+ 602              	.LBE8:
+ 603              		.cfi_endproc
+ 604              	.LFE38:
+ 606              		.section	.text.SysTick_Handler,"ax",%progbits
+ 607              		.align	1
+ 608              		.global	SysTick_Handler
+ 609              		.syntax unified
+ 610              		.thumb
+ 611              		.thumb_func
+ 613              	SysTick_Handler:
+ 614              	.LFB39:
+  83:main.c        ****     }
+  84:main.c        **** }
+  85:main.c        **** 
+  86:main.c        **** void SysTick_Handler(void) {
+ 615              		.loc 2 86 28 is_stmt 1 view -0
+ 616              		.cfi_startproc
+ 617              		@ args = 0, pretend = 0, frame = 0
+ 618              		@ frame_needed = 0, uses_anonymous_args = 0
+ 619              		@ link register save eliminated.
+  87:main.c        **** 
+  88:main.c        ****     for(uint8_t i=0; i<BUTTONS_NUM; i++) {
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 36
+
+
+ 620              		.loc 2 88 5 view .LVU166
+ 621              	.LBB9:
+ 622              		.loc 2 88 9 view .LVU167
+ 623              	.LVL53:
+ 624              		.loc 2 88 17 is_stmt 0 view .LVU168
+ 625 0000 0023     		movs	r3, #0
+ 626              		.loc 2 88 5 view .LVU169
+ 627 0002 04E0     		b	.L40
+ 628              	.LVL54:
+ 629              	.L45:
+  89:main.c        ****         //Handle button timer increase
+  90:main.c        ****         if(buttons[i]->state == BUTTON_STATE_PRESSED || buttons[i]->state == BUTTON_STATE_DEBOUNCE)
+  91:main.c        ****             buttons[i]->button_timer++;
+ 630              		.loc 2 91 13 is_stmt 1 view .LVU170
+ 631              		.loc 2 91 23 is_stmt 0 view .LVU171
+ 632 0004 4A88     		ldrh	r2, [r1, #2]
+ 633              		.loc 2 91 37 view .LVU172
+ 634 0006 0132     		adds	r2, r2, #1
+ 635 0008 4A80     		strh	r2, [r1, #2]	@ movhi
+ 636              	.L42:
+  88:main.c        ****         //Handle button timer increase
+ 637              		.loc 2 88 37 is_stmt 1 discriminator 2 view .LVU173
+  88:main.c        ****         //Handle button timer increase
+ 638              		.loc 2 88 38 is_stmt 0 discriminator 2 view .LVU174
+ 639 000a 0133     		adds	r3, r3, #1
+ 640              	.LVL55:
+  88:main.c        ****         //Handle button timer increase
+ 641              		.loc 2 88 38 discriminator 2 view .LVU175
+ 642 000c DBB2     		uxtb	r3, r3
+ 643              	.LVL56:
+ 644              	.L40:
+  88:main.c        ****         //Handle button timer increase
+ 645              		.loc 2 88 22 is_stmt 1 discriminator 1 view .LVU176
+  88:main.c        ****         //Handle button timer increase
+ 646              		.loc 2 88 5 is_stmt 0 discriminator 1 view .LVU177
+ 647 000e 012B     		cmp	r3, #1
+ 648 0010 0AD8     		bhi	.L44
+  90:main.c        ****             buttons[i]->button_timer++;
+ 649              		.loc 2 90 9 is_stmt 1 view .LVU178
+  90:main.c        ****             buttons[i]->button_timer++;
+ 650              		.loc 2 90 19 is_stmt 0 view .LVU179
+ 651 0012 064A     		ldr	r2, .L46
+ 652 0014 52F82310 		ldr	r1, [r2, r3, lsl #2]
+  90:main.c        ****             buttons[i]->button_timer++;
+ 653              		.loc 2 90 22 view .LVU180
+ 654 0018 4A78     		ldrb	r2, [r1, #1]	@ zero_extendqisi2
+  90:main.c        ****             buttons[i]->button_timer++;
+ 655              		.loc 2 90 54 view .LVU181
+ 656 001a 013A     		subs	r2, r2, #1
+ 657 001c D2B2     		uxtb	r2, r2
+  90:main.c        ****             buttons[i]->button_timer++;
+ 658              		.loc 2 90 11 view .LVU182
+ 659 001e 012A     		cmp	r2, #1
+ 660 0020 F0D9     		bls	.L45
+  92:main.c        ****         }
+  93:main.c        ****         else buttons[i]->button_timer = 0;
+ 661              		.loc 2 93 14 is_stmt 1 view .LVU183
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 37
+
+
+ 662              		.loc 2 93 39 is_stmt 0 view .LVU184
+ 663 0022 0022     		movs	r2, #0
+ 664 0024 4A80     		strh	r2, [r1, #2]	@ movhi
+ 665 0026 F0E7     		b	.L42
+ 666              	.L44:
+ 667              	.LBE9:
+  94:main.c        ****     }
+  95:main.c        **** }...
+ 668              		.loc 2 95 1 view .LVU185
+ 669 0028 7047     		bx	lr
+ 670              	.L47:
+ 671 002a 00BF     		.align	2
+ 672              	.L46:
+ 673 002c 00000000 		.word	.LANCHOR12
+ 674              		.cfi_endproc
+ 675              	.LFE39:
+ 677              		.global	buttons
+ 678              		.global	lrls_msg_buf1
+ 679              		.global	lprs_msg_buf1
+ 680              		.global	rls_msg_buf1
+ 681              		.global	prs_msg_buf1
+ 682              		.global	lrls_msg_buf0
+ 683              		.global	lprs_msg_buf0
+ 684              		.global	rls_msg_buf0
+ 685              		.global	prs_msg_buf0
+ 686              		.global	button1
+ 687              		.global	button0
+ 688              		.global	led1
+ 689              		.global	led0
+ 690              		.section	.bss.button0,"aw",%nobits
+ 691              		.align	2
+ 692              		.set	.LANCHOR2,. + 0
+ 695              	button0:
+ 696 0000 00000000 		.space	44
+ 696      00000000 
+ 696      00000000 
+ 696      00000000 
+ 696      00000000 
+ 697              		.section	.bss.button1,"aw",%nobits
+ 698              		.align	2
+ 699              		.set	.LANCHOR3,. + 0
+ 702              	button1:
+ 703 0000 00000000 		.space	44
+ 703      00000000 
+ 703      00000000 
+ 703      00000000 
+ 703      00000000 
+ 704              		.section	.bss.buttons,"aw",%nobits
+ 705              		.align	2
+ 706              		.set	.LANCHOR12,. + 0
+ 709              	buttons:
+ 710 0000 00000000 		.space	8
+ 710      00000000 
+ 711              		.section	.bss.led0,"aw",%nobits
+ 712              		.align	2
+ 713              		.set	.LANCHOR1,. + 0
+ 716              	led0:
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 38
+
+
+ 717 0000 00000000 		.space	24
+ 717      00000000 
+ 717      00000000 
+ 717      00000000 
+ 717      00000000 
+ 718              		.section	.bss.led1,"aw",%nobits
+ 719              		.align	2
+ 720              		.set	.LANCHOR0,. + 0
+ 723              	led1:
+ 724 0000 00000000 		.space	24
+ 724      00000000 
+ 724      00000000 
+ 724      00000000 
+ 724      00000000 
+ 725              		.section	.bss.lprs_msg_buf0,"aw",%nobits
+ 726              		.align	2
+ 727              		.set	.LANCHOR4,. + 0
+ 730              	lprs_msg_buf0:
+ 731 0000 00000000 		.space	4
+ 732              		.section	.bss.lprs_msg_buf1,"aw",%nobits
+ 733              		.align	2
+ 734              		.set	.LANCHOR8,. + 0
+ 737              	lprs_msg_buf1:
+ 738 0000 00000000 		.space	4
+ 739              		.section	.bss.lrls_msg_buf0,"aw",%nobits
+ 740              		.align	2
+ 741              		.set	.LANCHOR7,. + 0
+ 744              	lrls_msg_buf0:
+ 745 0000 00000000 		.space	4
+ 746              		.section	.bss.lrls_msg_buf1,"aw",%nobits
+ 747              		.align	2
+ 748              		.set	.LANCHOR11,. + 0
+ 751              	lrls_msg_buf1:
+ 752 0000 00000000 		.space	4
+ 753              		.section	.bss.prs_msg_buf0,"aw",%nobits
+ 754              		.align	2
+ 755              		.set	.LANCHOR6,. + 0
+ 758              	prs_msg_buf0:
+ 759 0000 00000000 		.space	4
+ 760              		.section	.bss.prs_msg_buf1,"aw",%nobits
+ 761              		.align	2
+ 762              		.set	.LANCHOR10,. + 0
+ 765              	prs_msg_buf1:
+ 766 0000 00000000 		.space	4
+ 767              		.section	.bss.rls_msg_buf0,"aw",%nobits
+ 768              		.align	2
+ 769              		.set	.LANCHOR5,. + 0
+ 772              	rls_msg_buf0:
+ 773 0000 00000000 		.space	4
+ 774              		.section	.bss.rls_msg_buf1,"aw",%nobits
+ 775              		.align	2
+ 776              		.set	.LANCHOR9,. + 0
+ 779              	rls_msg_buf1:
+ 780 0000 00000000 		.space	4
+ 781              		.text
+ 782              	.Letext0:
+ 783              		.file 4 "/usr/local/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_default_
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 39
+
+
+ 784              		.file 5 "/usr/local/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint.h"
+ 785              		.file 6 "CMSIS/Inc/stm32f103xb.h"
+ 786              		.file 7 "midi_button/midi_led.h"
+ 787              		.file 8 "midi_button/midi_button.h"
+ 788              		.file 9 "usb_lib.h"
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 40
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.c
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s:18     .text.SysClockMax:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s:24     .text.SysClockMax:0000000000000000 SysClockMax
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s:250    .text.SysClockMax:00000000000000e0 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s:257    .text._init:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s:263    .text._init:0000000000000000 _init
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s:277    .text.SystemInit:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s:283    .text.SystemInit:0000000000000000 SystemInit
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s:296    .text.sleep:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s:302    .text.sleep:0000000000000000 sleep
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s:339    .text.main:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s:345    .text.main:0000000000000000 main
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc0dwg4E.s:394    .text.main:000000000000001c $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:18     .text.SysClockMax:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:24     .text.SysClockMax:0000000000000000 SysClockMax
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:250    .text.SysClockMax:00000000000000e0 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:257    .text._init:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:263    .text._init:0000000000000000 _init
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:277    .text.SystemInit:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:283    .text.SystemInit:0000000000000000 SystemInit
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:296    .text.sleep:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:302    .text.sleep:0000000000000000 sleep
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:339    .text.main:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:345    .text.main:0000000000000000 main
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:579    .text.main:0000000000000110 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:607    .text.SysTick_Handler:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:613    .text.SysTick_Handler:0000000000000000 SysTick_Handler
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:673    .text.SysTick_Handler:000000000000002c $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:709    .bss.buttons:0000000000000000 buttons
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:751    .bss.lrls_msg_buf1:0000000000000000 lrls_msg_buf1
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:737    .bss.lprs_msg_buf1:0000000000000000 lprs_msg_buf1
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:779    .bss.rls_msg_buf1:0000000000000000 rls_msg_buf1
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:765    .bss.prs_msg_buf1:0000000000000000 prs_msg_buf1
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:744    .bss.lrls_msg_buf0:0000000000000000 lrls_msg_buf0
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:730    .bss.lprs_msg_buf0:0000000000000000 lprs_msg_buf0
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:772    .bss.rls_msg_buf0:0000000000000000 rls_msg_buf0
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:758    .bss.prs_msg_buf0:0000000000000000 prs_msg_buf0
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:702    .bss.button1:0000000000000000 button1
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:695    .bss.button0:0000000000000000 button0
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:723    .bss.led1:0000000000000000 led1
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:716    .bss.led0:0000000000000000 led0
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:691    .bss.button0:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:698    .bss.button1:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:705    .bss.buttons:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:712    .bss.led0:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:719    .bss.led1:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:726    .bss.lprs_msg_buf0:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:733    .bss.lprs_msg_buf1:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:740    .bss.lrls_msg_buf0:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:747    .bss.lrls_msg_buf1:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:754    .bss.prs_msg_buf0:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:761    .bss.prs_msg_buf1:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:768    .bss.rls_msg_buf0:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s:775    .bss.rls_msg_buf1:0000000000000000 $d
 
 UNDEFINED SYMBOLS
+midi_led_init
+midi_let_set_color_cb
+midi_button_init
+midi_button_set_poll_cb
+midi_button_init_buffers
 USB_setup
+usb_class_init
+apply_event
 usb_class_poll
+init_button_0_led
+set_button_0_led_clrs
+init_button_1_led
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc27VR3x.s 			page 41
+
+
+set_button_1_led_clrs
+init_button_0
+init_button_1
+get_button_0_data
+get_button_1_data

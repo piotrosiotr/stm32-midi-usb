@@ -40,8 +40,11 @@ main.c \
 usb_class_midi.c \
 usb_lib.c\
 stm32f1xx_it.c \
-#CMSIS/Src/system_stm32f10x.c  \
-#CMSIS/Src/core_cm3.c
+midi_button/midi_button.c \
+midi_button/midi_led.c \
+midi_button/midi_button_hw.c \
+midi/midi_message_buffer.c \
+
 
 # ASM sources
 ASM_SOURCES =  \
@@ -98,7 +101,8 @@ AS_INCLUDES =
 # C includes
 C_INCLUDES =  \
 -I CMSIS/Inc \
-
+-I midi_button \
+-I midi \
 
 # compile gcc flags
 ASFLAGS = $(MCU) $(AS_DEFS) $(AS_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections

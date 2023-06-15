@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s 			page 1
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -17,354 +17,313 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s 			page 1
   14              		.text
   15              	.Ltext0:
   16              		.cfi_sections	.debug_frame
-  17              		.section	.text.sleep,"ax",%progbits
+  17              		.section	.text.ctl_callback,"ax",%progbits
   18              		.align	1
-  19              		.syntax unified
-  20              		.thumb
-  21              		.thumb_func
-  23              	sleep:
-  24              	.LVL0:
-  25              	.LFB34:
-  26              		.file 1 "usb_class_midi.c"
+  19              		.global	ctl_callback
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	ctl_callback:
+  25              	.LVL0:
+  26              	.LFB36:
+  27              		.file 1 "usb_class_midi.c"
    1:usb_class_midi.c **** #include "usb_lib.h"
    2:usb_class_midi.c **** #include <wchar.h>
    3:usb_class_midi.c **** #include "hardware.h"
-   4:usb_class_midi.c **** 
-   5:usb_class_midi.c **** #define ENDP_DATA_IN 1
-   6:usb_class_midi.c **** #define ENDP_DATA_OUT 2
-   7:usb_class_midi.c **** #define ENDP_DATA_SIZE 8
-   8:usb_class_midi.c **** 
-   9:usb_class_midi.c **** #define ENDP_CTL_NUM  3
-  10:usb_class_midi.c **** #define ENDP_CTL_SIZE 8
-  11:usb_class_midi.c **** 
-  12:usb_class_midi.c **** #define STD_DESCR_LANG 0
-  13:usb_class_midi.c **** #define STD_DESCR_VEND 1
-  14:usb_class_midi.c **** #define STD_DESCR_PROD 2
-  15:usb_class_midi.c **** #define STD_DESCR_SN   3
-  16:usb_class_midi.c **** 
-  17:usb_class_midi.c **** #define USB_VID 0x16C0
-  18:usb_class_midi.c **** #define USB_PID 0x05DF
-  19:usb_class_midi.c **** 
-  20:usb_class_midi.c **** #define DEVCLASS_AUDIO        0x01
-  21:usb_class_midi.c **** #define DEVSUBCLASS_MIDI      0x03
-  22:usb_class_midi.c **** #define CDCCLASS_DATA         0x0A
-  23:usb_class_midi.c **** #define CDCPROTOCOL_UNDEF     0x00
-  24:usb_class_midi.c **** #define CDCPROTOCOL_VENDOR    0xFF
-  25:usb_class_midi.c **** 
-  26:usb_class_midi.c **** USB_ALIGN static const uint8_t USB_DeviceDescriptor[] = {
-  27:usb_class_midi.c ****   ARRLEN1(
-  28:usb_class_midi.c ****   bLENGTH,     // bLength
-  29:usb_class_midi.c ****   USB_DESCR_DEVICE,   // bDescriptorType - Device descriptor
-  30:usb_class_midi.c ****   USB_U16(0x0110), // bcdUSB
-  31:usb_class_midi.c ****   0,   // bDevice Class
-  32:usb_class_midi.c ****   0,   // bDevice SubClass
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s 			page 2
+   4:usb_class_midi.c **** #include "midi_message_buffer.h"
+   5:usb_class_midi.c **** #include "sysex.h"
+   6:usb_class_midi.c **** 
+   7:usb_class_midi.c **** #define ENDP_DATA_IN 1
+   8:usb_class_midi.c **** #define ENDP_DATA_OUT 2
+   9:usb_class_midi.c **** #define ENDP_DATA_SIZE 16
+  10:usb_class_midi.c **** 
+  11:usb_class_midi.c **** #define ENDP_CTL_NUM  3
+  12:usb_class_midi.c **** #define ENDP_CTL_SIZE 8
+  13:usb_class_midi.c **** 
+  14:usb_class_midi.c **** #define STD_DESCR_LANG 0
+  15:usb_class_midi.c **** #define STD_DESCR_VEND 1
+  16:usb_class_midi.c **** #define STD_DESCR_PROD 2
+  17:usb_class_midi.c **** #define STD_DESCR_SN   3
+  18:usb_class_midi.c **** 
+  19:usb_class_midi.c **** #define USB_VID 0x16C0
+  20:usb_class_midi.c **** #define USB_PID 0x05DF
+  21:usb_class_midi.c **** 
+  22:usb_class_midi.c **** #define DEVCLASS_AUDIO        0x01
+  23:usb_class_midi.c **** #define DEVSUBCLASS_MIDI      0x03
+  24:usb_class_midi.c **** #define CDCCLASS_DATA         0x0A
+  25:usb_class_midi.c **** #define CDCPROTOCOL_UNDEF     0x00
+  26:usb_class_midi.c **** #define CDCPROTOCOL_VENDOR    0xFF
+  27:usb_class_midi.c **** 
+  28:usb_class_midi.c **** USB_ALIGN static const uint8_t USB_DeviceDescriptor[] = {
+  29:usb_class_midi.c ****   ARRLEN1(
+  30:usb_class_midi.c ****   bLENGTH,     // bLength
+  31:usb_class_midi.c ****   USB_DESCR_DEVICE,   // bDescriptorType - Device descriptor
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s 			page 2
 
 
-  33:usb_class_midi.c ****   0,   // bDevice Protocol
-  34:usb_class_midi.c ****   USB_EP0_BUFSZ,   // bMaxPacketSize0
-  35:usb_class_midi.c ****   USB_U16( USB_VID ), // idVendor
-  36:usb_class_midi.c ****   USB_U16( USB_PID ), // idProduct
-  37:usb_class_midi.c ****   USB_U16( 1 ), // bcdDevice_Ver
-  38:usb_class_midi.c ****   STD_DESCR_VEND,   // iManufacturer
-  39:usb_class_midi.c ****   STD_DESCR_PROD,   // iProduct
-  40:usb_class_midi.c ****   STD_DESCR_SN,   // iSerialNumber
-  41:usb_class_midi.c ****   1    // bNumConfigurations
-  42:usb_class_midi.c ****   )
-  43:usb_class_midi.c **** };
-  44:usb_class_midi.c **** 
-  45:usb_class_midi.c **** USB_ALIGN static const uint8_t USB_DeviceQualifierDescriptor[] = {
-  46:usb_class_midi.c ****   ARRLEN1(
-  47:usb_class_midi.c ****   bLENGTH,     //bLength
-  48:usb_class_midi.c ****   USB_DESCR_QUALIFIER,   // bDescriptorType - Device qualifier
-  49:usb_class_midi.c ****   USB_U16(0x0200), // bcdUSB
-  50:usb_class_midi.c ****   0,   // bDeviceClass
-  51:usb_class_midi.c ****   0,   // bDeviceSubClass
-  52:usb_class_midi.c ****   0,   // bDeviceProtocol
-  53:usb_class_midi.c ****   USB_EP0_BUFSZ,   // bMaxPacketSize0
-  54:usb_class_midi.c ****   1,   // bNumConfigurations
-  55:usb_class_midi.c ****   0x00    // Reserved
-  56:usb_class_midi.c ****   )
-  57:usb_class_midi.c **** };
-  58:usb_class_midi.c **** 
-  59:usb_class_midi.c **** USB_ALIGN static const uint8_t USB_ConfigDescriptor[] = {
-  60:usb_class_midi.c ****   ARRLEN34(
-  61:usb_class_midi.c ****   ARRLEN1(
-  62:usb_class_midi.c ****     bLENGTH, // bLength: Configuration Descriptor size
-  63:usb_class_midi.c ****     USB_DESCR_CONFIG,    //bDescriptorType: Configuration
-  64:usb_class_midi.c ****     wTOTALLENGTH, //wTotalLength
-  65:usb_class_midi.c ****     2, // bNumInterfaces
-  66:usb_class_midi.c ****     1, // bConfigurationValue: Configuration value
-  67:usb_class_midi.c ****     0, // iConfiguration: Index of string descriptor describing the configuration
-  68:usb_class_midi.c ****     0x80, // bmAttributes: bus powered
-  69:usb_class_midi.c ****     0x32, // MaxPower 100 mA
-  70:usb_class_midi.c ****   )
-  71:usb_class_midi.c ****   ARRLEN1(//CDC control Interface
-  72:usb_class_midi.c ****     bLENGTH, // bLength
-  73:usb_class_midi.c ****     USB_DESCR_INTERFACE, // bDescriptorType
-  74:usb_class_midi.c ****     0, // bInterfaceNumber
-  75:usb_class_midi.c ****     0, // bAlternateSetting
-  76:usb_class_midi.c ****     1, // bNumEndpoints
-  77:usb_class_midi.c ****     DEVCLASS_AUDIO, // bInterfaceClass: 
-  78:usb_class_midi.c ****     DEVSUBCLASS_MIDI, // bInterfaceSubClass: 
-  79:usb_class_midi.c ****     CDCPROTOCOL_UNDEF, // bInterfaceProtocol: 
-  80:usb_class_midi.c ****     0x00, // iInterface
-  81:usb_class_midi.c ****   )
-  82:usb_class_midi.c ****     ARRLEN1(//MS Header
-  83:usb_class_midi.c ****       bLENGTH, //bLength
-  84:usb_class_midi.c ****       USB_DESCR_CS_INTERFACE, //bDescriptorType
-  85:usb_class_midi.c ****       0x01, //bDescriptorSubType
-  86:usb_class_midi.c ****       USB_U16(0x0100), //bcdMIDI
-  87:usb_class_midi.c ****       USB_U16(0x002C), //wTotalLength
-  88:usb_class_midi.c ****     )
-  89:usb_class_midi.c ****     ARRLEN1( //MIDI In Jack descriptor
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s 			page 3
+  32:usb_class_midi.c ****   USB_U16(0x0110), // bcdUSB
+  33:usb_class_midi.c ****   0,   // bDevice Class
+  34:usb_class_midi.c ****   0,   // bDevice SubClass
+  35:usb_class_midi.c ****   0,   // bDevice Protocol
+  36:usb_class_midi.c ****   USB_EP0_BUFSZ,   // bMaxPacketSize0
+  37:usb_class_midi.c ****   USB_U16( USB_VID ), // idVendor
+  38:usb_class_midi.c ****   USB_U16( USB_PID ), // idProduct
+  39:usb_class_midi.c ****   USB_U16( 1 ), // bcdDevice_Ver
+  40:usb_class_midi.c ****   STD_DESCR_VEND,   // iManufacturer
+  41:usb_class_midi.c ****   STD_DESCR_PROD,   // iProduct
+  42:usb_class_midi.c ****   STD_DESCR_SN,   // iSerialNumber
+  43:usb_class_midi.c ****   1    // bNumConfigurations
+  44:usb_class_midi.c ****   )
+  45:usb_class_midi.c **** };
+  46:usb_class_midi.c **** 
+  47:usb_class_midi.c **** USB_ALIGN static const uint8_t USB_DeviceQualifierDescriptor[] = {
+  48:usb_class_midi.c ****   ARRLEN1(
+  49:usb_class_midi.c ****   bLENGTH,     //bLength
+  50:usb_class_midi.c ****   USB_DESCR_QUALIFIER,   // bDescriptorType - Device qualifier
+  51:usb_class_midi.c ****   USB_U16(0x0200), // bcdUSB
+  52:usb_class_midi.c ****   0,   // bDeviceClass
+  53:usb_class_midi.c ****   0,   // bDeviceSubClass
+  54:usb_class_midi.c ****   0,   // bDeviceProtocol
+  55:usb_class_midi.c ****   USB_EP0_BUFSZ,   // bMaxPacketSize0
+  56:usb_class_midi.c ****   1,   // bNumConfigurations
+  57:usb_class_midi.c ****   0x00    // Reserved
+  58:usb_class_midi.c ****   )
+  59:usb_class_midi.c **** };
+  60:usb_class_midi.c **** 
+  61:usb_class_midi.c **** USB_ALIGN static const uint8_t USB_ConfigDescriptor[] = {
+  62:usb_class_midi.c ****   ARRLEN34(
+  63:usb_class_midi.c ****   ARRLEN1(
+  64:usb_class_midi.c ****     bLENGTH, // bLength: Configuration Descriptor size
+  65:usb_class_midi.c ****     USB_DESCR_CONFIG,    //bDescriptorType: Configuration
+  66:usb_class_midi.c ****     wTOTALLENGTH, //wTotalLength
+  67:usb_class_midi.c ****     2, // bNumInterfaces
+  68:usb_class_midi.c ****     1, // bConfigurationValue: Configuration value
+  69:usb_class_midi.c ****     0, // iConfiguration: Index of string descriptor describing the configuration
+  70:usb_class_midi.c ****     0x80, // bmAttributes: bus powered
+  71:usb_class_midi.c ****     0x32, // MaxPower 100 mA
+  72:usb_class_midi.c ****   )
+  73:usb_class_midi.c ****   ARRLEN1(//CDC control Interface
+  74:usb_class_midi.c ****     bLENGTH, // bLength
+  75:usb_class_midi.c ****     USB_DESCR_INTERFACE, // bDescriptorType
+  76:usb_class_midi.c ****     0, // bInterfaceNumber
+  77:usb_class_midi.c ****     0, // bAlternateSetting
+  78:usb_class_midi.c ****     1, // bNumEndpoints
+  79:usb_class_midi.c ****     DEVCLASS_AUDIO, // bInterfaceClass: 
+  80:usb_class_midi.c ****     DEVSUBCLASS_MIDI, // bInterfaceSubClass: 
+  81:usb_class_midi.c ****     CDCPROTOCOL_UNDEF, // bInterfaceProtocol: 
+  82:usb_class_midi.c ****     0x00, // iInterface
+  83:usb_class_midi.c ****   )
+  84:usb_class_midi.c ****     ARRLEN1(//MS Header
+  85:usb_class_midi.c ****       bLENGTH, //bLength
+  86:usb_class_midi.c ****       USB_DESCR_CS_INTERFACE, //bDescriptorType
+  87:usb_class_midi.c ****       0x01, //bDescriptorSubType
+  88:usb_class_midi.c ****       USB_U16(0x0100), //bcdMIDI
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s 			page 3
 
 
-  90:usb_class_midi.c ****       bLENGTH,
-  91:usb_class_midi.c ****       USB_DESCR_CS_INTERFACE,
-  92:usb_class_midi.c ****       0x02, ///bDescriptorSubType - MIDI In Jack
-  93:usb_class_midi.c ****       0x01, //bJackType
-  94:usb_class_midi.c ****       0x01, //bJackID
-  95:usb_class_midi.c ****       0, //iJack
-  96:usb_class_midi.c ****     )
-  97:usb_class_midi.c ****     ARRLEN1( //MIDI Out Jack Descriptor
-  98:usb_class_midi.c ****       bLENGTH,
-  99:usb_class_midi.c ****       USB_DESCR_CS_INTERFACE,
- 100:usb_class_midi.c ****       0x03, //bDescriptorSubType
- 101:usb_class_midi.c ****       0x01, //bJackType
- 102:usb_class_midi.c ****       0x02, //bJackID
- 103:usb_class_midi.c ****       0x01, //bNrInputPins
- 104:usb_class_midi.c ****       0x02, //BaSourceID
- 105:usb_class_midi.c ****       0x01, //BaSourcePin
- 106:usb_class_midi.c ****       0, //iJack
- 107:usb_class_midi.c ****     )
- 108:usb_class_midi.c ****     ARRLEN1(//Standard Bulk IN endpoint descriptor
- 109:usb_class_midi.c ****       bLENGTH, //bLength
- 110:usb_class_midi.c ****       USB_DESCR_ENDPOINT, //bDescriptorType
- 111:usb_class_midi.c ****       0x81,
- 112:usb_class_midi.c ****       USB_ENDP_INTR,
- 113:usb_class_midi.c ****       USB_U16(ENDP_DATA_SIZE),
- 114:usb_class_midi.c ****       0x0A, //bInterval
- 115:usb_class_midi.c ****       0, //bRefresh
- 116:usb_class_midi.c ****       0, //bSyncAddress
- 117:usb_class_midi.c ****     )
- 118:usb_class_midi.c ****     ARRLEN1(//MS Class specific endpoint descriptor
- 119:usb_class_midi.c ****       bLENGTH, //bLength
- 120:usb_class_midi.c ****       0x25,  //bDescriptorType
- 121:usb_class_midi.c ****       0x01,  //bDescriptorSubtype
- 122:usb_class_midi.c ****       0x01,  //bNumEmbMIDIJack (0)
- 123:usb_class_midi.c ****       0x01,  //baAssocJackID (0)
- 124:usb_class_midi.c ****     )
- 125:usb_class_midi.c ****     ARRLEN1(//Standard Bulk OUT endpoint descriptor
- 126:usb_class_midi.c ****       bLENGTH, //bLength
- 127:usb_class_midi.c ****       USB_DESCR_ENDPOINT, //bDescriptorType
- 128:usb_class_midi.c ****       0x01,
- 129:usb_class_midi.c ****       USB_ENDP_INTR,
- 130:usb_class_midi.c ****       USB_U16(ENDP_DATA_SIZE),
- 131:usb_class_midi.c ****       0x0A, //bInterval
- 132:usb_class_midi.c ****       0, //bRefresh
- 133:usb_class_midi.c ****       0, //bSyncAddress
- 134:usb_class_midi.c ****     )
- 135:usb_class_midi.c ****     ARRLEN1(//MS Class specific endpoint descriptor
- 136:usb_class_midi.c ****       bLENGTH, //bLength
- 137:usb_class_midi.c ****       0x25,  //bDescriptorType
- 138:usb_class_midi.c ****       0x01,  //bDescriptorSubtype
- 139:usb_class_midi.c ****       0x01,  //bNumEmbMIDIJack (0)
- 140:usb_class_midi.c ****       0x02,  //baAssocJackID (0)
- 141:usb_class_midi.c ****     )
- 142:usb_class_midi.c ****   )
- 143:usb_class_midi.c **** };
- 144:usb_class_midi.c **** 
- 145:usb_class_midi.c **** USB_STRING(USB_StringLangDescriptor, u"\x0409"); //lang US
- 146:usb_class_midi.c **** USB_STRING(USB_StringManufacturingDescriptor, u"piotrosiotr"); //Vendor
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s 			page 4
+  89:usb_class_midi.c ****       USB_U16(0x002C), //wTotalLength
+  90:usb_class_midi.c ****     )
+  91:usb_class_midi.c ****     ARRLEN1( //MIDI In Jack descriptor
+  92:usb_class_midi.c ****       bLENGTH,
+  93:usb_class_midi.c ****       USB_DESCR_CS_INTERFACE,
+  94:usb_class_midi.c ****       0x02, ///bDescriptorSubType - MIDI In Jack
+  95:usb_class_midi.c ****       0x01, //bJackType
+  96:usb_class_midi.c ****       0x01, //bJackID
+  97:usb_class_midi.c ****       0, //iJack
+  98:usb_class_midi.c ****     )
+  99:usb_class_midi.c ****     ARRLEN1( //MIDI Out Jack Descriptor
+ 100:usb_class_midi.c ****       bLENGTH,
+ 101:usb_class_midi.c ****       USB_DESCR_CS_INTERFACE,
+ 102:usb_class_midi.c ****       0x03, //bDescriptorSubType
+ 103:usb_class_midi.c ****       0x01, //bJackType
+ 104:usb_class_midi.c ****       0x02, //bJackID
+ 105:usb_class_midi.c ****       0x01, //bNrInputPins
+ 106:usb_class_midi.c ****       0x02, //BaSourceID
+ 107:usb_class_midi.c ****       0x01, //BaSourcePin
+ 108:usb_class_midi.c ****       0, //iJack
+ 109:usb_class_midi.c ****     )
+ 110:usb_class_midi.c ****     ARRLEN1(//Standard Bulk IN endpoint descriptor
+ 111:usb_class_midi.c ****       bLENGTH, //bLength
+ 112:usb_class_midi.c ****       USB_DESCR_ENDPOINT, //bDescriptorType
+ 113:usb_class_midi.c ****       0x81,
+ 114:usb_class_midi.c ****       USB_ENDP_INTR,
+ 115:usb_class_midi.c ****       USB_U16(ENDP_DATA_SIZE),
+ 116:usb_class_midi.c ****       0x0A, //bInterval
+ 117:usb_class_midi.c ****       0, //bRefresh
+ 118:usb_class_midi.c ****       0, //bSyncAddress
+ 119:usb_class_midi.c ****     )
+ 120:usb_class_midi.c ****     ARRLEN1(//MS Class specific endpoint descriptor
+ 121:usb_class_midi.c ****       bLENGTH, //bLength
+ 122:usb_class_midi.c ****       0x25,  //bDescriptorType
+ 123:usb_class_midi.c ****       0x01,  //bDescriptorSubtype
+ 124:usb_class_midi.c ****       0x01,  //bNumEmbMIDIJack (0)
+ 125:usb_class_midi.c ****       0x01,  //baAssocJackID (0)
+ 126:usb_class_midi.c ****     )
+ 127:usb_class_midi.c ****     ARRLEN1(//Standard Bulk OUT endpoint descriptor
+ 128:usb_class_midi.c ****       bLENGTH, //bLength
+ 129:usb_class_midi.c ****       USB_DESCR_ENDPOINT, //bDescriptorType
+ 130:usb_class_midi.c ****       0x01,
+ 131:usb_class_midi.c ****       USB_ENDP_INTR,
+ 132:usb_class_midi.c ****       USB_U16(ENDP_DATA_SIZE),
+ 133:usb_class_midi.c ****       0x0A, //bInterval
+ 134:usb_class_midi.c ****       0, //bRefresh
+ 135:usb_class_midi.c ****       0, //bSyncAddress
+ 136:usb_class_midi.c ****     )
+ 137:usb_class_midi.c ****     ARRLEN1(//MS Class specific endpoint descriptor
+ 138:usb_class_midi.c ****       bLENGTH, //bLength
+ 139:usb_class_midi.c ****       0x25,  //bDescriptorType
+ 140:usb_class_midi.c ****       0x01,  //bDescriptorSubtype
+ 141:usb_class_midi.c ****       0x01,  //bNumEmbMIDIJack (0)
+ 142:usb_class_midi.c ****       0x02,  //baAssocJackID (0)
+ 143:usb_class_midi.c ****     )
+ 144:usb_class_midi.c ****   )
+ 145:usb_class_midi.c **** };
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s 			page 4
 
 
- 147:usb_class_midi.c **** USB_STRING(USB_StringProdDescriptor, u"USB MIDI"); //Product
- 148:usb_class_midi.c **** USB_STRING(USB_StringSerialDescriptor, u"1"); //Serial (BCD)
- 149:usb_class_midi.c **** 
- 150:usb_class_midi.c **** void usb_class_get_std_descr(uint16_t descr, const void **data, uint16_t *size){
- 151:usb_class_midi.c ****   switch(descr & 0xFF00){
- 152:usb_class_midi.c ****     case DEVICE_DESCRIPTOR:
- 153:usb_class_midi.c ****       *data = &USB_DeviceDescriptor;
- 154:usb_class_midi.c ****       *size = sizeof(USB_DeviceDescriptor);
- 155:usb_class_midi.c ****       break;
- 156:usb_class_midi.c ****     case CONFIGURATION_DESCRIPTOR:
- 157:usb_class_midi.c ****       *data = &USB_ConfigDescriptor;
- 158:usb_class_midi.c ****       *size = sizeof(USB_ConfigDescriptor);
- 159:usb_class_midi.c ****       break;
- 160:usb_class_midi.c ****     case DEVICE_QUALIFIER_DESCRIPTOR:
- 161:usb_class_midi.c ****       *data = &USB_DeviceQualifierDescriptor;
- 162:usb_class_midi.c ****       *size = USB_DeviceQualifierDescriptor[0];
- 163:usb_class_midi.c ****       break;
- 164:usb_class_midi.c ****     case STRING_DESCRIPTOR:
- 165:usb_class_midi.c ****       switch(descr & 0xFF){
- 166:usb_class_midi.c ****         case STD_DESCR_LANG:
- 167:usb_class_midi.c ****           *data = &USB_StringLangDescriptor;
- 168:usb_class_midi.c ****           break;
- 169:usb_class_midi.c ****         case STD_DESCR_VEND:
- 170:usb_class_midi.c ****           *data = &USB_StringManufacturingDescriptor;
- 171:usb_class_midi.c ****           break;
- 172:usb_class_midi.c ****         case STD_DESCR_PROD:
- 173:usb_class_midi.c ****           *data = &USB_StringProdDescriptor;
- 174:usb_class_midi.c ****           break;
- 175:usb_class_midi.c ****         case STD_DESCR_SN:
- 176:usb_class_midi.c ****           *data = &USB_StringSerialDescriptor;
- 177:usb_class_midi.c ****           break;
- 178:usb_class_midi.c ****         default:
- 179:usb_class_midi.c ****           return;
- 180:usb_class_midi.c ****       }
- 181:usb_class_midi.c ****       *size = ((uint8_t*)*data)[0]; //data->bLength
- 182:usb_class_midi.c ****       break;
- 183:usb_class_midi.c ****     default:
+ 146:usb_class_midi.c **** 
+ 147:usb_class_midi.c **** USB_STRING(USB_StringLangDescriptor, u"\x0409"); //lang US
+ 148:usb_class_midi.c **** USB_STRING(USB_StringManufacturingDescriptor, u"piotrosiotr"); //Vendor
+ 149:usb_class_midi.c **** USB_STRING(USB_StringProdDescriptor, u"USB MIDI"); //Product
+ 150:usb_class_midi.c **** USB_STRING(USB_StringSerialDescriptor, u"1"); //Serial (BCD)
+ 151:usb_class_midi.c **** 
+ 152:usb_class_midi.c **** void usb_class_get_std_descr(uint16_t descr, const void **data, uint16_t *size){
+ 153:usb_class_midi.c ****   switch(descr & 0xFF00){
+ 154:usb_class_midi.c ****     case DEVICE_DESCRIPTOR:
+ 155:usb_class_midi.c ****       *data = &USB_DeviceDescriptor;
+ 156:usb_class_midi.c ****       *size = sizeof(USB_DeviceDescriptor);
+ 157:usb_class_midi.c ****       break;
+ 158:usb_class_midi.c ****     case CONFIGURATION_DESCRIPTOR:
+ 159:usb_class_midi.c ****       *data = &USB_ConfigDescriptor;
+ 160:usb_class_midi.c ****       *size = sizeof(USB_ConfigDescriptor);
+ 161:usb_class_midi.c ****       break;
+ 162:usb_class_midi.c ****     case DEVICE_QUALIFIER_DESCRIPTOR:
+ 163:usb_class_midi.c ****       *data = &USB_DeviceQualifierDescriptor;
+ 164:usb_class_midi.c ****       *size = USB_DeviceQualifierDescriptor[0];
+ 165:usb_class_midi.c ****       break;
+ 166:usb_class_midi.c ****     case STRING_DESCRIPTOR:
+ 167:usb_class_midi.c ****       switch(descr & 0xFF){
+ 168:usb_class_midi.c ****         case STD_DESCR_LANG:
+ 169:usb_class_midi.c ****           *data = &USB_StringLangDescriptor;
+ 170:usb_class_midi.c ****           break;
+ 171:usb_class_midi.c ****         case STD_DESCR_VEND:
+ 172:usb_class_midi.c ****           *data = &USB_StringManufacturingDescriptor;
+ 173:usb_class_midi.c ****           break;
+ 174:usb_class_midi.c ****         case STD_DESCR_PROD:
+ 175:usb_class_midi.c ****           *data = &USB_StringProdDescriptor;
+ 176:usb_class_midi.c ****           break;
+ 177:usb_class_midi.c ****         case STD_DESCR_SN:
+ 178:usb_class_midi.c ****           *data = &USB_StringSerialDescriptor;
+ 179:usb_class_midi.c ****           break;
+ 180:usb_class_midi.c ****         default:
+ 181:usb_class_midi.c ****           return;
+ 182:usb_class_midi.c ****       }
+ 183:usb_class_midi.c ****       *size = ((uint8_t*)*data)[0]; //data->bLength
  184:usb_class_midi.c ****       break;
- 185:usb_class_midi.c ****   }
- 186:usb_class_midi.c **** }
- 187:usb_class_midi.c **** 
- 188:usb_class_midi.c **** static void sleep(uint32_t time){
-  27              		.loc 1 188 33 view -0
-  28              		.cfi_startproc
-  29              		@ args = 0, pretend = 0, frame = 0
-  30              		@ frame_needed = 0, uses_anonymous_args = 0
-  31              		@ link register save eliminated.
- 189:usb_class_midi.c ****   while(time--)asm volatile("nop");
-  32              		.loc 1 189 3 view .LVU1
-  33              		.loc 1 189 8 is_stmt 0 view .LVU2
-  34 0000 01E0     		b	.L2
-  35              	.LVL1:
-  36              	.L3:
-  37              		.loc 1 189 16 is_stmt 1 discriminator 2 view .LVU3
-  38              		.syntax unified
-  39              	@ 189 "usb_class_midi.c" 1
-  40 0002 00BF     		nop
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s 			page 5
-
-
-  41              	@ 0 "" 2
-  42              		.loc 1 189 13 is_stmt 0 discriminator 2 view .LVU4
-  43              		.thumb
-  44              		.syntax unified
-  45 0004 1846     		mov	r0, r3
-  46              	.LVL2:
-  47              	.L2:
-  48              		.loc 1 189 8 is_stmt 1 discriminator 1 view .LVU5
-  49              		.loc 1 189 13 is_stmt 0 discriminator 1 view .LVU6
-  50 0006 431E     		subs	r3, r0, #1
-  51              	.LVL3:
-  52              		.loc 1 189 8 discriminator 1 view .LVU7
-  53 0008 0028     		cmp	r0, #0
-  54 000a FAD1     		bne	.L3
- 190:usb_class_midi.c **** }
-  55              		.loc 1 190 1 view .LVU8
-  56 000c 7047     		bx	lr
-  57              		.cfi_endproc
-  58              	.LFE34:
-  60              		.section	.text.ctl_callback,"ax",%progbits
-  61              		.align	1
-  62              		.global	ctl_callback
-  63              		.syntax unified
-  64              		.thumb
-  65              		.thumb_func
-  67              	ctl_callback:
-  68              	.LVL4:
-  69              	.LFB37:
- 191:usb_class_midi.c **** 
+ 185:usb_class_midi.c ****     default:
+ 186:usb_class_midi.c ****       break;
+ 187:usb_class_midi.c ****   }
+ 188:usb_class_midi.c **** }
+ 189:usb_class_midi.c **** 
+ 190:usb_class_midi.c **** uint8_t out_buf_data[4*4];
+ 191:usb_class_midi.c **** midi_msg_buffer_t out_buf;
  192:usb_class_midi.c **** 
- 193:usb_class_midi.c **** 
- 194:usb_class_midi.c **** char usb_class_ep0_in(config_pack_t *req, void **data, uint16_t *size){
- 195:usb_class_midi.c ****   if( (req->bmRequestType & 0x7F) == (USB_REQ_CLASS | USB_REQ_INTERFACE) ){
- 196:usb_class_midi.c ****     
- 197:usb_class_midi.c ****   }
- 198:usb_class_midi.c ****   return 0;
- 199:usb_class_midi.c **** }
- 200:usb_class_midi.c **** 
- 201:usb_class_midi.c **** char usb_class_ep0_out(config_pack_t *req, uint16_t offset, uint16_t rx_size){
- 202:usb_class_midi.c ****   if( (req->bmRequestType & 0x7F) == (USB_REQ_CLASS | USB_REQ_INTERFACE) ){
- 203:usb_class_midi.c ****     
- 204:usb_class_midi.c ****   }
- 205:usb_class_midi.c ****   return 0;
- 206:usb_class_midi.c **** }
- 207:usb_class_midi.c **** 
- 208:usb_class_midi.c **** void ctl_callback(uint8_t epnum){
-  70              		.loc 1 208 33 is_stmt 1 view -0
-  71              		.cfi_startproc
-  72              		@ args = 0, pretend = 0, frame = 0
-  73              		@ frame_needed = 0, uses_anonymous_args = 0
-  74              		@ link register save eliminated.
- 209:usb_class_midi.c ****   
- 210:usb_class_midi.c **** }
-  75              		.loc 1 210 1 view .LVU10
-  76 0000 7047     		bx	lr
-  77              		.cfi_endproc
-  78              	.LFE37:
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s 			page 6
+ 193:usb_class_midi.c **** char usb_class_ep0_in(config_pack_t *req, void **data, uint16_t *size){
+ 194:usb_class_midi.c ****   if( (req->bmRequestType & 0x7F) == (USB_REQ_CLASS | USB_REQ_INTERFACE) ){
+ 195:usb_class_midi.c ****     
+ 196:usb_class_midi.c ****   }
+ 197:usb_class_midi.c ****   return 0;
+ 198:usb_class_midi.c **** }
+ 199:usb_class_midi.c **** 
+ 200:usb_class_midi.c **** char usb_class_ep0_out(config_pack_t *req, uint16_t offset, uint16_t rx_size){
+ 201:usb_class_midi.c ****   if( (req->bmRequestType & 0x7F) == (USB_REQ_CLASS | USB_REQ_INTERFACE) ){
+ 202:usb_class_midi.c ****     
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s 			page 5
 
 
-  80              		.section	.text.data_in_callback,"ax",%progbits
-  81              		.align	1
-  82              		.global	data_in_callback
-  83              		.syntax unified
-  84              		.thumb
-  85              		.thumb_func
-  87              	data_in_callback:
-  88              	.LVL5:
-  89              	.LFB39:
- 211:usb_class_midi.c **** 
- 212:usb_class_midi.c **** void data_out_callback(uint8_t epnum){
- 213:usb_class_midi.c ****   USB_ALIGN uint8_t buf[ ENDP_DATA_SIZE ];
- 214:usb_class_midi.c ****   int len = usb_ep_read_double( ENDP_DATA_OUT, (uint16_t*)buf);
- 215:usb_class_midi.c ****   if(len == 0)return;
- 216:usb_class_midi.c **** }
- 217:usb_class_midi.c **** 
- 218:usb_class_midi.c **** void data_in_callback(uint8_t epnum){
-  90              		.loc 1 218 37 view -0
-  91              		.cfi_startproc
-  92              		@ args = 0, pretend = 0, frame = 0
-  93              		@ frame_needed = 0, uses_anonymous_args = 0
-  94              		@ link register save eliminated.
- 219:usb_class_midi.c ****   //USB_ALIGN uint8_t b_on_cmd[] = {0x08, 0x80, 60, 127};
- 220:usb_class_midi.c ****   //usb_ep_write_double( ENDP_DATA_IN | 0x80, (uint16_t*)b_on_cmd, sizeof(b_on_cmd));
- 221:usb_class_midi.c **** }
-  95              		.loc 1 221 1 view .LVU12
-  96 0000 7047     		bx	lr
-  97              		.cfi_endproc
-  98              	.LFE39:
- 100              		.section	.text.data_out_callback,"ax",%progbits
- 101              		.align	1
- 102              		.global	data_out_callback
- 103              		.syntax unified
- 104              		.thumb
- 105              		.thumb_func
- 107              	data_out_callback:
- 108              	.LVL6:
- 109              	.LFB38:
+ 203:usb_class_midi.c ****   }
+ 204:usb_class_midi.c ****   return 0;
+ 205:usb_class_midi.c **** }
+ 206:usb_class_midi.c **** 
+ 207:usb_class_midi.c **** void ctl_callback(uint8_t epnum){
+  28              		.loc 1 207 33 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+ 208:usb_class_midi.c ****   
+ 209:usb_class_midi.c **** }
+  33              		.loc 1 209 1 view .LVU1
+  34 0000 7047     		bx	lr
+  35              		.cfi_endproc
+  36              	.LFE36:
+  38              		.section	.text.data_in_callback,"ax",%progbits
+  39              		.align	1
+  40              		.global	data_in_callback
+  41              		.syntax unified
+  42              		.thumb
+  43              		.thumb_func
+  45              	data_in_callback:
+  46              	.LVL1:
+  47              	.LFB38:
+ 210:usb_class_midi.c **** 
+ 211:usb_class_midi.c **** void data_out_callback(uint8_t epnum){
  212:usb_class_midi.c ****   USB_ALIGN uint8_t buf[ ENDP_DATA_SIZE ];
- 110              		.loc 1 212 38 view -0
- 111              		.cfi_startproc
- 112              		@ args = 0, pretend = 0, frame = 8
- 113              		@ frame_needed = 0, uses_anonymous_args = 0
- 212:usb_class_midi.c ****   USB_ALIGN uint8_t buf[ ENDP_DATA_SIZE ];
- 114              		.loc 1 212 38 is_stmt 0 view .LVU14
- 115 0000 10B5     		push	{r4, lr}
- 116              	.LCFI0:
- 117              		.cfi_def_cfa_offset 8
- 118              		.cfi_offset 4, -8
- 119              		.cfi_offset 14, -4
- 120 0002 82B0     		sub	sp, sp, #8
- 121              	.LCFI1:
- 122              		.cfi_def_cfa_offset 16
  213:usb_class_midi.c ****   int len = usb_ep_read_double( ENDP_DATA_OUT, (uint16_t*)buf);
- 123              		.loc 1 213 3 is_stmt 1 view .LVU15
  214:usb_class_midi.c ****   if(len == 0)return;
- 124              		.loc 1 214 3 view .LVU16
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s 			page 7
+ 215:usb_class_midi.c ****   if(buf[0]!= SYSEX_HEADER) return;
+ 216:usb_class_midi.c ****   if(buf[1]!= SYSEX_MY_ID) return;
+ 217:usb_class_midi.c ****   if(buf[ENDP_DATA_SIZE-1]!= SYSEX_EOM) return;
+ 218:usb_class_midi.c **** }
+ 219:usb_class_midi.c **** 
+ 220:usb_class_midi.c **** void data_in_callback(uint8_t epnum){
+  48              		.loc 1 220 37 view -0
+  49              		.cfi_startproc
+  50              		@ args = 0, pretend = 0, frame = 0
+  51              		@ frame_needed = 0, uses_anonymous_args = 0
+  52              		@ link register save eliminated.
+ 221:usb_class_midi.c ****   //USB_ALIGN uint8_t b_on_cmd[] = {0x08, 0x80, 60, 127};
+ 222:usb_class_midi.c ****   //usb_ep_write_double( ENDP_DATA_IN | 0x80, (uint16_t*)b_on_cmd, sizeof(b_on_cmd));
+ 223:usb_class_midi.c **** }
+  53              		.loc 1 223 1 view .LVU3
+  54 0000 7047     		bx	lr
+  55              		.cfi_endproc
+  56              	.LFE38:
+  58              		.section	.text.data_out_callback,"ax",%progbits
+  59              		.align	1
+  60              		.global	data_out_callback
+  61              		.syntax unified
+  62              		.thumb
+  63              		.thumb_func
+  65              	data_out_callback:
+  66              	.LVL2:
+  67              	.LFB37:
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s 			page 6
 
 
- 125              	.LVL7:
- 126              	.LBB4:
- 127              	.LBI4:
- 128              		.file 2 "usb_lib.h"
+ 211:usb_class_midi.c ****   USB_ALIGN uint8_t buf[ ENDP_DATA_SIZE ];
+  68              		.loc 1 211 38 view -0
+  69              		.cfi_startproc
+  70              		@ args = 0, pretend = 0, frame = 16
+  71              		@ frame_needed = 0, uses_anonymous_args = 0
+ 211:usb_class_midi.c ****   USB_ALIGN uint8_t buf[ ENDP_DATA_SIZE ];
+  72              		.loc 1 211 38 is_stmt 0 view .LVU5
+  73 0000 10B5     		push	{r4, lr}
+  74              	.LCFI0:
+  75              		.cfi_def_cfa_offset 8
+  76              		.cfi_offset 4, -8
+  77              		.cfi_offset 14, -4
+  78 0002 84B0     		sub	sp, sp, #16
+  79              	.LCFI1:
+  80              		.cfi_def_cfa_offset 24
+ 212:usb_class_midi.c ****   int len = usb_ep_read_double( ENDP_DATA_OUT, (uint16_t*)buf);
+  81              		.loc 1 212 3 is_stmt 1 view .LVU6
+ 213:usb_class_midi.c ****   if(len == 0)return;
+  82              		.loc 1 213 3 view .LVU7
+  83              	.LVL3:
+  84              	.LBB4:
+  85              	.LBI4:
+  86              		.file 2 "usb_lib.h"
    1:usb_lib.h     **** //24.07.2022
    2:usb_lib.h     **** #ifndef __USB_LIB_H__
    3:usb_lib.h     **** #define __USB_LIB_H__
@@ -399,6 +358,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s 			page 1
   32:usb_lib.h     ****   uint8_t bRequest;
   33:usb_lib.h     ****   uint16_t wValue;
   34:usb_lib.h     ****   uint16_t wIndex;
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s 			page 7
+
+
   35:usb_lib.h     ****   uint16_t wLength;
   36:usb_lib.h     **** }config_pack_t;
   37:usb_lib.h     **** 
@@ -418,9 +380,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s 			page 1
   51:usb_lib.h     ****  ****  REQUIRED FUNCTIONS  ***********************************************************
   52:usb_lib.h     ****  *************************************************************************************
   53:usb_lib.h     ****  *************************************************************************************
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s 			page 8
-
-
   54:usb_lib.h     ****  */
   55:usb_lib.h     **** 
   56:usb_lib.h     **** //usb_class_get_std_descr (required!)
@@ -459,6 +418,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s 			page 1
   89:usb_lib.h     **** char usb_class_ep0_out(config_pack_t *req, uint16_t offset, uint16_t rx_size);
   90:usb_lib.h     **** 
   91:usb_lib.h     **** /*************************************************************************************
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s 			page 8
+
+
   92:usb_lib.h     ****  *************************************************************************************
   93:usb_lib.h     ****  ****  AUXILIARY FUNTIONS AND CONSTANTS   ********************************************
   94:usb_lib.h     ****  *************************************************************************************
@@ -478,9 +440,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s 			page 1
  108:usb_lib.h     **** #define USB_DESCR_CS_INTERFACE 0x24
  109:usb_lib.h     **** #define USB_DESCR_ENDP_ISO  0x25
  110:usb_lib.h     **** 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s 			page 9
-
-
  111:usb_lib.h     **** #define USB_STRING(name, str)                    \
  112:usb_lib.h     **** USB_ALIGN static const struct name{                        \
  113:usb_lib.h     ****         uint8_t  bLength;                        \
@@ -519,6 +478,9 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s 			page 1
  146:usb_lib.h     **** #define VENDOR_REQUEST                  0x01
  147:usb_lib.h     **** 
  148:usb_lib.h     **** // standard descriptors (wValue = DESCR_TYPE<<8 | DESCR_INDEX)
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s 			page 9
+
+
  149:usb_lib.h     **** #define DEVICE_DESCRIPTOR               0x0100
  150:usb_lib.h     **** #define CONFIGURATION_DESCRIPTOR        0x0200
  151:usb_lib.h     **** #define STRING_DESCRIPTOR               0x0300
@@ -538,9 +500,6 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s 			page 1
  165:usb_lib.h     **** #define _ARRLEN1(ign, x...) (1+sizeof((uint8_t[]){x})), x
  166:usb_lib.h     **** #define __ARRLEN34(x1, x2, i3, i4, x...) x1, x2, USB_U16(4+sizeof((uint8_t[]){x})), x
  167:usb_lib.h     **** #define _ARRLEN34(x1, x2, i3, i4, x...) __ARRLEN34(x1, x2, i3, i4, x)
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s 			page 10
-
-
  168:usb_lib.h     **** #define __ARRLEN67(x1, x2, x3, x4, x5, i6, i7, x...) x1, x2, x3, x4, x5, USB_U16(7+sizeof((uint8_t[
  169:usb_lib.h     **** #define _ARRLEN67(x1, x2, x3, x4, x5, i6, i7, x...) __ARRLEN67(x1, x2, x3, x4, x5, i6, i7, x)
  170:usb_lib.h     **** #define ARRLEN1(ign, x...) _ARRLEN1(ign, x)
@@ -570,658 +529,656 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s 			page 1
  194:usb_lib.h     ****   return _usb_ep_read((epnum & 0x0F)*2 + 1, buf);
  195:usb_lib.h     **** }
  196:usb_lib.h     **** static inline int usb_ep_read_double(uint8_t epnum, uint16_t *buf){
- 129              		.loc 2 196 19 view .LVU17
- 130              	.LBB5:
+  87              		.loc 2 196 19 view .LVU8
+  88              	.LBB5:
  197:usb_lib.h     ****   uint8_t idx = !(USB_EPx(epnum) & USB_EP_DTOG_RX);
- 131              		.loc 2 197 3 view .LVU18
- 132              		.loc 2 197 19 is_stmt 0 view .LVU19
- 133 0004 0B4C     		ldr	r4, .L10
- 134 0006 2089     		ldrh	r0, [r4, #8]
- 135              	.LVL8:
- 136              		.loc 2 197 17 view .LVU20
- 137 0008 C0F38130 		ubfx	r0, r0, #14, #2
- 138 000c 80F00100 		eor	r0, r0, #1
- 139 0010 00F00100 		and	r0, r0, #1
- 140              	.LVL9:
+  89              		.loc 2 197 3 view .LVU9
+  90              		.loc 2 197 19 is_stmt 0 view .LVU10
+  91 0004 0B4C     		ldr	r4, .L7
+  92 0006 2089     		ldrh	r0, [r4, #8]
+  93              	.LVL4:
+  94              		.loc 2 197 17 view .LVU11
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s 			page 10
+
+
+  95 0008 C0F38130 		ubfx	r0, r0, #14, #2
+  96 000c 80F00100 		eor	r0, r0, #1
+  97 0010 00F00100 		and	r0, r0, #1
+  98              	.LVL5:
  198:usb_lib.h     ****   int res = _usb_ep_read((epnum & 0x0F)*2 + idx, buf);
- 141              		.loc 2 198 3 is_stmt 1 view .LVU21
- 142              		.loc 2 198 13 is_stmt 0 view .LVU22
- 143 0014 6946     		mov	r1, sp
- 144 0016 0430     		adds	r0, r0, #4
- 145              	.LVL10:
- 146              		.loc 2 198 13 view .LVU23
- 147 0018 FFF7FEFF 		bl	_usb_ep_read
- 148              	.LVL11:
+  99              		.loc 2 198 3 is_stmt 1 view .LVU12
+ 100              		.loc 2 198 13 is_stmt 0 view .LVU13
+ 101 0014 6946     		mov	r1, sp
+ 102 0016 0430     		adds	r0, r0, #4
+ 103              	.LVL6:
+ 104              		.loc 2 198 13 view .LVU14
+ 105 0018 FFF7FEFF 		bl	_usb_ep_read
+ 106              	.LVL7:
  199:usb_lib.h     ****   ENDP_TOG( (epnum & 0x0F), USB_EP_DTOG_TX );
- 149              		.loc 2 199 3 is_stmt 1 view .LVU24
- 150              		.loc 2 199 3 view .LVU25
- 151 001c 2389     		ldrh	r3, [r4, #8]
- 152 001e 23F0F003 		bic	r3, r3, #240
- 153 0022 1B05     		lsls	r3, r3, #20
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s 			page 11
-
-
- 154 0024 1B0D     		lsrs	r3, r3, #20
- 155 0026 43F40043 		orr	r3, r3, #32768
- 156 002a 43F0C003 		orr	r3, r3, #192
- 157 002e 2381     		strh	r3, [r4, #8]	@ movhi
- 158              		.loc 2 199 3 view .LVU26
+ 107              		.loc 2 199 3 is_stmt 1 view .LVU15
+ 108              		.loc 2 199 3 view .LVU16
+ 109 001c 2389     		ldrh	r3, [r4, #8]
+ 110 001e 23F0F003 		bic	r3, r3, #240
+ 111 0022 1B05     		lsls	r3, r3, #20
+ 112 0024 1B0D     		lsrs	r3, r3, #20
+ 113 0026 43F40043 		orr	r3, r3, #32768
+ 114 002a 43F0C003 		orr	r3, r3, #192
+ 115 002e 2381     		strh	r3, [r4, #8]	@ movhi
+ 116              		.loc 2 199 3 view .LVU17
  200:usb_lib.h     ****   return res;
- 159              		.loc 2 200 3 view .LVU27
- 160              	.LVL12:
- 161              		.loc 2 200 3 is_stmt 0 view .LVU28
- 162              	.LBE5:
- 163              	.LBE4:
- 215:usb_class_midi.c **** }
- 164              		.loc 1 215 3 is_stmt 1 view .LVU29
- 216:usb_class_midi.c **** 
- 165              		.loc 1 216 1 is_stmt 0 view .LVU30
- 166 0030 02B0     		add	sp, sp, #8
- 167              	.LCFI2:
- 168              		.cfi_def_cfa_offset 8
- 169              		@ sp needed
- 170 0032 10BD     		pop	{r4, pc}
- 171              	.L11:
- 172              		.align	2
- 173              	.L10:
- 174 0034 005C0040 		.word	1073765376
- 175              		.cfi_endproc
- 176              	.LFE38:
- 178              		.section	.text.usb_class_get_std_descr,"ax",%progbits
- 179              		.align	1
- 180              		.global	usb_class_get_std_descr
- 181              		.syntax unified
- 182              		.thumb
- 183              		.thumb_func
- 185              	usb_class_get_std_descr:
- 186              	.LVL13:
- 187              	.LFB33:
- 150:usb_class_midi.c ****   switch(descr & 0xFF00){
- 188              		.loc 1 150 80 is_stmt 1 view -0
- 189              		.cfi_startproc
- 190              		@ args = 0, pretend = 0, frame = 0
- 191              		@ frame_needed = 0, uses_anonymous_args = 0
- 192              		@ link register save eliminated.
- 151:usb_class_midi.c ****     case DEVICE_DESCRIPTOR:
- 193              		.loc 1 151 3 view .LVU32
- 194 0000 00F47F43 		and	r3, r0, #65280
- 195 0004 B3F5407F 		cmp	r3, #768
- 196 0008 1AD0     		beq	.L13
- 197 000a 0BD8     		bhi	.L14
- 198 000c B3F5807F 		cmp	r3, #256
- 199 0010 11D0     		beq	.L15
- 200 0012 B3F5007F 		cmp	r3, #512
- 201 0016 04D1     		bne	.L25
- 157:usb_class_midi.c ****       *size = sizeof(USB_ConfigDescriptor);
- 202              		.loc 1 157 7 view .LVU33
- 157:usb_class_midi.c ****       *size = sizeof(USB_ConfigDescriptor);
- 203              		.loc 1 157 13 is_stmt 0 view .LVU34
- 204 0018 144B     		ldr	r3, .L27
- 205 001a 0B60     		str	r3, [r1]
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s 			page 12
+ 117              		.loc 2 200 3 view .LVU18
+ 118              	.LVL8:
+ 119              		.loc 2 200 3 is_stmt 0 view .LVU19
+ 120              	.LBE5:
+ 121              	.LBE4:
+ 214:usb_class_midi.c ****   if(buf[0]!= SYSEX_HEADER) return;
+ 122              		.loc 1 214 3 is_stmt 1 view .LVU20
+ 218:usb_class_midi.c **** 
+ 123              		.loc 1 218 1 is_stmt 0 view .LVU21
+ 124 0030 04B0     		add	sp, sp, #16
+ 125              	.LCFI2:
+ 126              		.cfi_def_cfa_offset 8
+ 127              		@ sp needed
+ 128 0032 10BD     		pop	{r4, pc}
+ 129              	.L8:
+ 130              		.align	2
+ 131              	.L7:
+ 132 0034 005C0040 		.word	1073765376
+ 133              		.cfi_endproc
+ 134              	.LFE37:
+ 136              		.section	.text.usb_class_get_std_descr,"ax",%progbits
+ 137              		.align	1
+ 138              		.global	usb_class_get_std_descr
+ 139              		.syntax unified
+ 140              		.thumb
+ 141              		.thumb_func
+ 143              	usb_class_get_std_descr:
+ 144              	.LVL9:
+ 145              	.LFB33:
+ 152:usb_class_midi.c ****   switch(descr & 0xFF00){
+ 146              		.loc 1 152 80 is_stmt 1 view -0
+ 147              		.cfi_startproc
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s 			page 11
 
 
- 158:usb_class_midi.c ****       break;
- 206              		.loc 1 158 7 is_stmt 1 view .LVU35
- 158:usb_class_midi.c ****       break;
- 207              		.loc 1 158 13 is_stmt 0 view .LVU36
- 208 001c 4423     		movs	r3, #68
- 209 001e 1380     		strh	r3, [r2]	@ movhi
- 159:usb_class_midi.c ****     case DEVICE_QUALIFIER_DESCRIPTOR:
- 210              		.loc 1 159 7 is_stmt 1 view .LVU37
- 211 0020 7047     		bx	lr
- 212              	.L25:
- 213 0022 7047     		bx	lr
- 214              	.L14:
- 151:usb_class_midi.c ****     case DEVICE_DESCRIPTOR:
- 215              		.loc 1 151 3 is_stmt 0 view .LVU38
- 216 0024 B3F5C06F 		cmp	r3, #1536
- 217 0028 04D1     		bne	.L26
- 161:usb_class_midi.c ****       *size = USB_DeviceQualifierDescriptor[0];
- 218              		.loc 1 161 7 is_stmt 1 view .LVU39
- 161:usb_class_midi.c ****       *size = USB_DeviceQualifierDescriptor[0];
- 219              		.loc 1 161 13 is_stmt 0 view .LVU40
- 220 002a 114B     		ldr	r3, .L27+4
- 221 002c 0B60     		str	r3, [r1]
- 162:usb_class_midi.c ****       break;
- 222              		.loc 1 162 7 is_stmt 1 view .LVU41
- 162:usb_class_midi.c ****       break;
- 223              		.loc 1 162 13 is_stmt 0 view .LVU42
- 224 002e 0A23     		movs	r3, #10
- 225 0030 1380     		strh	r3, [r2]	@ movhi
- 163:usb_class_midi.c ****     case STRING_DESCRIPTOR:
- 226              		.loc 1 163 7 is_stmt 1 view .LVU43
- 227 0032 7047     		bx	lr
- 228              	.L26:
- 163:usb_class_midi.c ****     case STRING_DESCRIPTOR:
- 229              		.loc 1 163 7 is_stmt 0 view .LVU44
- 230 0034 7047     		bx	lr
- 231              	.L15:
- 153:usb_class_midi.c ****       *size = sizeof(USB_DeviceDescriptor);
- 232              		.loc 1 153 7 is_stmt 1 view .LVU45
- 153:usb_class_midi.c ****       *size = sizeof(USB_DeviceDescriptor);
- 233              		.loc 1 153 13 is_stmt 0 view .LVU46
- 234 0036 0F4B     		ldr	r3, .L27+8
- 235 0038 0B60     		str	r3, [r1]
- 154:usb_class_midi.c ****       break;
- 236              		.loc 1 154 7 is_stmt 1 view .LVU47
- 154:usb_class_midi.c ****       break;
- 237              		.loc 1 154 13 is_stmt 0 view .LVU48
- 238 003a 1223     		movs	r3, #18
- 239 003c 1380     		strh	r3, [r2]	@ movhi
- 155:usb_class_midi.c ****     case CONFIGURATION_DESCRIPTOR:
- 240              		.loc 1 155 7 is_stmt 1 view .LVU49
- 241 003e 7047     		bx	lr
- 242              	.L13:
- 165:usb_class_midi.c ****         case STD_DESCR_LANG:
- 243              		.loc 1 165 7 view .LVU50
- 244 0040 C0B2     		uxtb	r0, r0
- 245              	.LVL14:
- 165:usb_class_midi.c ****         case STD_DESCR_LANG:
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s 			page 13
+ 148              		@ args = 0, pretend = 0, frame = 0
+ 149              		@ frame_needed = 0, uses_anonymous_args = 0
+ 150              		@ link register save eliminated.
+ 153:usb_class_midi.c ****     case DEVICE_DESCRIPTOR:
+ 151              		.loc 1 153 3 view .LVU23
+ 152 0000 00F47F43 		and	r3, r0, #65280
+ 153 0004 B3F5407F 		cmp	r3, #768
+ 154 0008 1AD0     		beq	.L10
+ 155 000a 0BD8     		bhi	.L11
+ 156 000c B3F5807F 		cmp	r3, #256
+ 157 0010 11D0     		beq	.L12
+ 158 0012 B3F5007F 		cmp	r3, #512
+ 159 0016 04D1     		bne	.L22
+ 159:usb_class_midi.c ****       *size = sizeof(USB_ConfigDescriptor);
+ 160              		.loc 1 159 7 view .LVU24
+ 159:usb_class_midi.c ****       *size = sizeof(USB_ConfigDescriptor);
+ 161              		.loc 1 159 13 is_stmt 0 view .LVU25
+ 162 0018 144B     		ldr	r3, .L24
+ 163 001a 0B60     		str	r3, [r1]
+ 160:usb_class_midi.c ****       break;
+ 164              		.loc 1 160 7 is_stmt 1 view .LVU26
+ 160:usb_class_midi.c ****       break;
+ 165              		.loc 1 160 13 is_stmt 0 view .LVU27
+ 166 001c 4423     		movs	r3, #68
+ 167 001e 1380     		strh	r3, [r2]	@ movhi
+ 161:usb_class_midi.c ****     case DEVICE_QUALIFIER_DESCRIPTOR:
+ 168              		.loc 1 161 7 is_stmt 1 view .LVU28
+ 169 0020 7047     		bx	lr
+ 170              	.L22:
+ 171 0022 7047     		bx	lr
+ 172              	.L11:
+ 153:usb_class_midi.c ****     case DEVICE_DESCRIPTOR:
+ 173              		.loc 1 153 3 is_stmt 0 view .LVU29
+ 174 0024 B3F5C06F 		cmp	r3, #1536
+ 175 0028 04D1     		bne	.L23
+ 163:usb_class_midi.c ****       *size = USB_DeviceQualifierDescriptor[0];
+ 176              		.loc 1 163 7 is_stmt 1 view .LVU30
+ 163:usb_class_midi.c ****       *size = USB_DeviceQualifierDescriptor[0];
+ 177              		.loc 1 163 13 is_stmt 0 view .LVU31
+ 178 002a 114B     		ldr	r3, .L24+4
+ 179 002c 0B60     		str	r3, [r1]
+ 164:usb_class_midi.c ****       break;
+ 180              		.loc 1 164 7 is_stmt 1 view .LVU32
+ 164:usb_class_midi.c ****       break;
+ 181              		.loc 1 164 13 is_stmt 0 view .LVU33
+ 182 002e 0A23     		movs	r3, #10
+ 183 0030 1380     		strh	r3, [r2]	@ movhi
+ 165:usb_class_midi.c ****     case STRING_DESCRIPTOR:
+ 184              		.loc 1 165 7 is_stmt 1 view .LVU34
+ 185 0032 7047     		bx	lr
+ 186              	.L23:
+ 165:usb_class_midi.c ****     case STRING_DESCRIPTOR:
+ 187              		.loc 1 165 7 is_stmt 0 view .LVU35
+ 188 0034 7047     		bx	lr
+ 189              	.L12:
+ 155:usb_class_midi.c ****       *size = sizeof(USB_DeviceDescriptor);
+ 190              		.loc 1 155 7 is_stmt 1 view .LVU36
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s 			page 12
 
 
- 246              		.loc 1 165 7 is_stmt 0 view .LVU51
- 247 0042 0328     		cmp	r0, #3
- 248 0044 08D8     		bhi	.L12
- 249 0046 DFE800F0 		tbb	[pc, r0]
- 250              	.L20:
- 251 004a 02       		.byte	(.L23-.L20)/2
- 252 004b 08       		.byte	(.L22-.L20)/2
- 253 004c 0B       		.byte	(.L21-.L20)/2
- 254 004d 0E       		.byte	(.L19-.L20)/2
- 255              		.p2align 1
- 256              	.L23:
- 167:usb_class_midi.c ****           break;
- 257              		.loc 1 167 11 is_stmt 1 view .LVU52
- 167:usb_class_midi.c ****           break;
- 258              		.loc 1 167 17 is_stmt 0 view .LVU53
- 259 004e 0A4B     		ldr	r3, .L27+12
- 260 0050 0B60     		str	r3, [r1]
- 168:usb_class_midi.c ****         case STD_DESCR_VEND:
- 261              		.loc 1 168 11 is_stmt 1 view .LVU54
- 262              	.L24:
- 181:usb_class_midi.c ****       break;
- 263              		.loc 1 181 7 view .LVU55
- 181:usb_class_midi.c ****       break;
- 264              		.loc 1 181 32 is_stmt 0 view .LVU56
- 265 0052 0B68     		ldr	r3, [r1]
- 266 0054 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 181:usb_class_midi.c ****       break;
- 267              		.loc 1 181 13 view .LVU57
- 268 0056 1380     		strh	r3, [r2]	@ movhi
- 182:usb_class_midi.c ****     default:
- 269              		.loc 1 182 7 is_stmt 1 view .LVU58
- 270              	.L12:
- 186:usb_class_midi.c **** 
- 271              		.loc 1 186 1 is_stmt 0 view .LVU59
- 272 0058 7047     		bx	lr
- 273              	.L22:
- 170:usb_class_midi.c ****           break;
- 274              		.loc 1 170 11 is_stmt 1 view .LVU60
- 170:usb_class_midi.c ****           break;
- 275              		.loc 1 170 17 is_stmt 0 view .LVU61
- 276 005a 084B     		ldr	r3, .L27+16
- 277 005c 0B60     		str	r3, [r1]
- 171:usb_class_midi.c ****         case STD_DESCR_PROD:
- 278              		.loc 1 171 11 is_stmt 1 view .LVU62
- 279 005e F8E7     		b	.L24
- 280              	.L21:
- 173:usb_class_midi.c ****           break;
- 281              		.loc 1 173 11 view .LVU63
- 173:usb_class_midi.c ****           break;
- 282              		.loc 1 173 17 is_stmt 0 view .LVU64
- 283 0060 074B     		ldr	r3, .L27+20
- 284 0062 0B60     		str	r3, [r1]
- 174:usb_class_midi.c ****         case STD_DESCR_SN:
- 285              		.loc 1 174 11 is_stmt 1 view .LVU65
- 286 0064 F5E7     		b	.L24
- 287              	.L19:
- 176:usb_class_midi.c ****           break;
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s 			page 14
+ 155:usb_class_midi.c ****       *size = sizeof(USB_DeviceDescriptor);
+ 191              		.loc 1 155 13 is_stmt 0 view .LVU37
+ 192 0036 0F4B     		ldr	r3, .L24+8
+ 193 0038 0B60     		str	r3, [r1]
+ 156:usb_class_midi.c ****       break;
+ 194              		.loc 1 156 7 is_stmt 1 view .LVU38
+ 156:usb_class_midi.c ****       break;
+ 195              		.loc 1 156 13 is_stmt 0 view .LVU39
+ 196 003a 1223     		movs	r3, #18
+ 197 003c 1380     		strh	r3, [r2]	@ movhi
+ 157:usb_class_midi.c ****     case CONFIGURATION_DESCRIPTOR:
+ 198              		.loc 1 157 7 is_stmt 1 view .LVU40
+ 199 003e 7047     		bx	lr
+ 200              	.L10:
+ 167:usb_class_midi.c ****         case STD_DESCR_LANG:
+ 201              		.loc 1 167 7 view .LVU41
+ 202 0040 C0B2     		uxtb	r0, r0
+ 203              	.LVL10:
+ 167:usb_class_midi.c ****         case STD_DESCR_LANG:
+ 204              		.loc 1 167 7 is_stmt 0 view .LVU42
+ 205 0042 0328     		cmp	r0, #3
+ 206 0044 08D8     		bhi	.L9
+ 207 0046 DFE800F0 		tbb	[pc, r0]
+ 208              	.L17:
+ 209 004a 02       		.byte	(.L20-.L17)/2
+ 210 004b 08       		.byte	(.L19-.L17)/2
+ 211 004c 0B       		.byte	(.L18-.L17)/2
+ 212 004d 0E       		.byte	(.L16-.L17)/2
+ 213              		.p2align 1
+ 214              	.L20:
+ 169:usb_class_midi.c ****           break;
+ 215              		.loc 1 169 11 is_stmt 1 view .LVU43
+ 169:usb_class_midi.c ****           break;
+ 216              		.loc 1 169 17 is_stmt 0 view .LVU44
+ 217 004e 0A4B     		ldr	r3, .L24+12
+ 218 0050 0B60     		str	r3, [r1]
+ 170:usb_class_midi.c ****         case STD_DESCR_VEND:
+ 219              		.loc 1 170 11 is_stmt 1 view .LVU45
+ 220              	.L21:
+ 183:usb_class_midi.c ****       break;
+ 221              		.loc 1 183 7 view .LVU46
+ 183:usb_class_midi.c ****       break;
+ 222              		.loc 1 183 32 is_stmt 0 view .LVU47
+ 223 0052 0B68     		ldr	r3, [r1]
+ 224 0054 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 183:usb_class_midi.c ****       break;
+ 225              		.loc 1 183 13 view .LVU48
+ 226 0056 1380     		strh	r3, [r2]	@ movhi
+ 184:usb_class_midi.c ****     default:
+ 227              		.loc 1 184 7 is_stmt 1 view .LVU49
+ 228              	.L9:
+ 188:usb_class_midi.c **** 
+ 229              		.loc 1 188 1 is_stmt 0 view .LVU50
+ 230 0058 7047     		bx	lr
+ 231              	.L19:
+ 172:usb_class_midi.c ****           break;
+ 232              		.loc 1 172 11 is_stmt 1 view .LVU51
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s 			page 13
 
 
- 288              		.loc 1 176 11 view .LVU66
- 176:usb_class_midi.c ****           break;
- 289              		.loc 1 176 17 is_stmt 0 view .LVU67
- 290 0066 074B     		ldr	r3, .L27+24
- 291 0068 0B60     		str	r3, [r1]
- 177:usb_class_midi.c ****         default:
- 292              		.loc 1 177 11 is_stmt 1 view .LVU68
- 293 006a F2E7     		b	.L24
- 294              	.L28:
- 295              		.align	2
- 296              	.L27:
- 297 006c 00000000 		.word	.LANCHOR1
- 298 0070 00000000 		.word	.LANCHOR2
- 299 0074 00000000 		.word	.LANCHOR0
- 300 0078 00000000 		.word	.LANCHOR3
- 301 007c 00000000 		.word	.LANCHOR4
- 302 0080 00000000 		.word	.LANCHOR5
- 303 0084 00000000 		.word	.LANCHOR6
- 304              		.cfi_endproc
- 305              	.LFE33:
- 307              		.section	.text.usb_class_ep0_in,"ax",%progbits
- 308              		.align	1
- 309              		.global	usb_class_ep0_in
- 310              		.syntax unified
- 311              		.thumb
- 312              		.thumb_func
- 314              	usb_class_ep0_in:
- 315              	.LVL15:
- 316              	.LFB35:
- 194:usb_class_midi.c ****   if( (req->bmRequestType & 0x7F) == (USB_REQ_CLASS | USB_REQ_INTERFACE) ){
- 317              		.loc 1 194 71 view -0
- 318              		.cfi_startproc
- 319              		@ args = 0, pretend = 0, frame = 0
- 320              		@ frame_needed = 0, uses_anonymous_args = 0
- 321              		@ link register save eliminated.
- 195:usb_class_midi.c ****     
- 322              		.loc 1 195 3 view .LVU70
- 197:usb_class_midi.c ****   return 0;
- 323              		.loc 1 197 3 view .LVU71
- 198:usb_class_midi.c **** }
- 324              		.loc 1 198 3 view .LVU72
- 199:usb_class_midi.c **** 
- 325              		.loc 1 199 1 is_stmt 0 view .LVU73
- 326 0000 0020     		movs	r0, #0
- 327              	.LVL16:
- 199:usb_class_midi.c **** 
- 328              		.loc 1 199 1 view .LVU74
- 329 0002 7047     		bx	lr
- 330              		.cfi_endproc
- 331              	.LFE35:
- 333              		.section	.text.usb_class_ep0_out,"ax",%progbits
- 334              		.align	1
- 335              		.global	usb_class_ep0_out
- 336              		.syntax unified
- 337              		.thumb
- 338              		.thumb_func
- 340              	usb_class_ep0_out:
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s 			page 15
+ 172:usb_class_midi.c ****           break;
+ 233              		.loc 1 172 17 is_stmt 0 view .LVU52
+ 234 005a 084B     		ldr	r3, .L24+16
+ 235 005c 0B60     		str	r3, [r1]
+ 173:usb_class_midi.c ****         case STD_DESCR_PROD:
+ 236              		.loc 1 173 11 is_stmt 1 view .LVU53
+ 237 005e F8E7     		b	.L21
+ 238              	.L18:
+ 175:usb_class_midi.c ****           break;
+ 239              		.loc 1 175 11 view .LVU54
+ 175:usb_class_midi.c ****           break;
+ 240              		.loc 1 175 17 is_stmt 0 view .LVU55
+ 241 0060 074B     		ldr	r3, .L24+20
+ 242 0062 0B60     		str	r3, [r1]
+ 176:usb_class_midi.c ****         case STD_DESCR_SN:
+ 243              		.loc 1 176 11 is_stmt 1 view .LVU56
+ 244 0064 F5E7     		b	.L21
+ 245              	.L16:
+ 178:usb_class_midi.c ****           break;
+ 246              		.loc 1 178 11 view .LVU57
+ 178:usb_class_midi.c ****           break;
+ 247              		.loc 1 178 17 is_stmt 0 view .LVU58
+ 248 0066 074B     		ldr	r3, .L24+24
+ 249 0068 0B60     		str	r3, [r1]
+ 179:usb_class_midi.c ****         default:
+ 250              		.loc 1 179 11 is_stmt 1 view .LVU59
+ 251 006a F2E7     		b	.L21
+ 252              	.L25:
+ 253              		.align	2
+ 254              	.L24:
+ 255 006c 00000000 		.word	.LANCHOR1
+ 256 0070 00000000 		.word	.LANCHOR2
+ 257 0074 00000000 		.word	.LANCHOR0
+ 258 0078 00000000 		.word	.LANCHOR3
+ 259 007c 00000000 		.word	.LANCHOR4
+ 260 0080 00000000 		.word	.LANCHOR5
+ 261 0084 00000000 		.word	.LANCHOR6
+ 262              		.cfi_endproc
+ 263              	.LFE33:
+ 265              		.section	.text.usb_class_ep0_in,"ax",%progbits
+ 266              		.align	1
+ 267              		.global	usb_class_ep0_in
+ 268              		.syntax unified
+ 269              		.thumb
+ 270              		.thumb_func
+ 272              	usb_class_ep0_in:
+ 273              	.LVL11:
+ 274              	.LFB34:
+ 193:usb_class_midi.c ****   if( (req->bmRequestType & 0x7F) == (USB_REQ_CLASS | USB_REQ_INTERFACE) ){
+ 275              		.loc 1 193 71 view -0
+ 276              		.cfi_startproc
+ 277              		@ args = 0, pretend = 0, frame = 0
+ 278              		@ frame_needed = 0, uses_anonymous_args = 0
+ 279              		@ link register save eliminated.
+ 194:usb_class_midi.c ****     
+ 280              		.loc 1 194 3 view .LVU61
+ 196:usb_class_midi.c ****   return 0;
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s 			page 14
 
 
- 341              	.LVL17:
- 342              	.LFB36:
- 201:usb_class_midi.c ****   if( (req->bmRequestType & 0x7F) == (USB_REQ_CLASS | USB_REQ_INTERFACE) ){
- 343              		.loc 1 201 78 is_stmt 1 view -0
- 344              		.cfi_startproc
- 345              		@ args = 0, pretend = 0, frame = 0
- 346              		@ frame_needed = 0, uses_anonymous_args = 0
- 347              		@ link register save eliminated.
- 202:usb_class_midi.c ****     
- 348              		.loc 1 202 3 view .LVU76
- 204:usb_class_midi.c ****   return 0;
- 349              		.loc 1 204 3 view .LVU77
- 205:usb_class_midi.c **** }
- 350              		.loc 1 205 3 view .LVU78
- 206:usb_class_midi.c **** 
- 351              		.loc 1 206 1 is_stmt 0 view .LVU79
- 352 0000 0020     		movs	r0, #0
- 353              	.LVL18:
- 206:usb_class_midi.c **** 
- 354              		.loc 1 206 1 view .LVU80
- 355 0002 7047     		bx	lr
- 356              		.cfi_endproc
- 357              	.LFE36:
- 359              		.section	.text.usb_class_init,"ax",%progbits
- 360              		.align	1
- 361              		.global	usb_class_init
- 362              		.syntax unified
- 363              		.thumb
- 364              		.thumb_func
- 366              	usb_class_init:
- 367              	.LFB40:
- 222:usb_class_midi.c **** 
- 223:usb_class_midi.c **** void usb_class_init(){
- 368              		.loc 1 223 22 is_stmt 1 view -0
- 369              		.cfi_startproc
- 370              		@ args = 0, pretend = 0, frame = 0
- 371              		@ frame_needed = 0, uses_anonymous_args = 0
- 372 0000 08B5     		push	{r3, lr}
- 373              	.LCFI3:
- 374              		.cfi_def_cfa_offset 8
- 375              		.cfi_offset 3, -8
- 376              		.cfi_offset 14, -4
- 224:usb_class_midi.c ****   usb_ep_init( ENDP_CTL_NUM | 0x80, USB_ENDP_INTR, ENDP_CTL_SIZE, ctl_callback );
- 377              		.loc 1 224 3 view .LVU82
- 378 0002 094B     		ldr	r3, .L33
- 379 0004 0822     		movs	r2, #8
- 380 0006 0321     		movs	r1, #3
- 381 0008 8320     		movs	r0, #131
- 382 000a FFF7FEFF 		bl	usb_ep_init
- 383              	.LVL19:
- 225:usb_class_midi.c ****   
- 226:usb_class_midi.c ****   usb_ep_init_double( ENDP_DATA_IN | 0x80, USB_ENDP_BULK, ENDP_DATA_SIZE, data_in_callback );
- 384              		.loc 1 226 3 view .LVU83
- 385 000e 074B     		ldr	r3, .L33+4
- 386 0010 0822     		movs	r2, #8
- 387 0012 0221     		movs	r1, #2
- 388 0014 8120     		movs	r0, #129
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s 			page 16
+ 281              		.loc 1 196 3 view .LVU62
+ 197:usb_class_midi.c **** }
+ 282              		.loc 1 197 3 view .LVU63
+ 198:usb_class_midi.c **** 
+ 283              		.loc 1 198 1 is_stmt 0 view .LVU64
+ 284 0000 0020     		movs	r0, #0
+ 285              	.LVL12:
+ 198:usb_class_midi.c **** 
+ 286              		.loc 1 198 1 view .LVU65
+ 287 0002 7047     		bx	lr
+ 288              		.cfi_endproc
+ 289              	.LFE34:
+ 291              		.section	.text.usb_class_ep0_out,"ax",%progbits
+ 292              		.align	1
+ 293              		.global	usb_class_ep0_out
+ 294              		.syntax unified
+ 295              		.thumb
+ 296              		.thumb_func
+ 298              	usb_class_ep0_out:
+ 299              	.LVL13:
+ 300              	.LFB35:
+ 200:usb_class_midi.c ****   if( (req->bmRequestType & 0x7F) == (USB_REQ_CLASS | USB_REQ_INTERFACE) ){
+ 301              		.loc 1 200 78 is_stmt 1 view -0
+ 302              		.cfi_startproc
+ 303              		@ args = 0, pretend = 0, frame = 0
+ 304              		@ frame_needed = 0, uses_anonymous_args = 0
+ 305              		@ link register save eliminated.
+ 201:usb_class_midi.c ****     
+ 306              		.loc 1 201 3 view .LVU67
+ 203:usb_class_midi.c ****   return 0;
+ 307              		.loc 1 203 3 view .LVU68
+ 204:usb_class_midi.c **** }
+ 308              		.loc 1 204 3 view .LVU69
+ 205:usb_class_midi.c **** 
+ 309              		.loc 1 205 1 is_stmt 0 view .LVU70
+ 310 0000 0020     		movs	r0, #0
+ 311              	.LVL14:
+ 205:usb_class_midi.c **** 
+ 312              		.loc 1 205 1 view .LVU71
+ 313 0002 7047     		bx	lr
+ 314              		.cfi_endproc
+ 315              	.LFE35:
+ 317              		.section	.text.usb_class_init,"ax",%progbits
+ 318              		.align	1
+ 319              		.global	usb_class_init
+ 320              		.syntax unified
+ 321              		.thumb
+ 322              		.thumb_func
+ 324              	usb_class_init:
+ 325              	.LFB39:
+ 224:usb_class_midi.c **** 
+ 225:usb_class_midi.c **** void usb_class_init(){
+ 326              		.loc 1 225 22 is_stmt 1 view -0
+ 327              		.cfi_startproc
+ 328              		@ args = 0, pretend = 0, frame = 0
+ 329              		@ frame_needed = 0, uses_anonymous_args = 0
+ 330 0000 08B5     		push	{r3, lr}
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s 			page 15
 
 
- 389 0016 FFF7FEFF 		bl	usb_ep_init_double
- 390              	.LVL20:
- 227:usb_class_midi.c ****   usb_ep_init_double( ENDP_DATA_OUT, USB_ENDP_BULK, ENDP_DATA_SIZE, data_out_callback );
- 391              		.loc 1 227 3 view .LVU84
- 392 001a 054B     		ldr	r3, .L33+8
- 393 001c 0822     		movs	r2, #8
- 394 001e 0221     		movs	r1, #2
- 395 0020 0846     		mov	r0, r1
- 396 0022 FFF7FEFF 		bl	usb_ep_init_double
- 397              	.LVL21:
- 228:usb_class_midi.c ****   
- 229:usb_class_midi.c **** }
- 398              		.loc 1 229 1 is_stmt 0 view .LVU85
- 399 0026 08BD     		pop	{r3, pc}
- 400              	.L34:
- 401              		.align	2
- 402              	.L33:
- 403 0028 00000000 		.word	ctl_callback
- 404 002c 00000000 		.word	data_in_callback
- 405 0030 00000000 		.word	data_out_callback
- 406              		.cfi_endproc
- 407              	.LFE40:
- 409              		.section	.text.usb_class_poll,"ax",%progbits
- 410              		.align	1
- 411              		.global	usb_class_poll
- 412              		.syntax unified
- 413              		.thumb
- 414              		.thumb_func
- 416              	usb_class_poll:
- 417              	.LFB41:
- 230:usb_class_midi.c **** 
- 231:usb_class_midi.c **** void usb_class_poll(){
- 418              		.loc 1 231 22 is_stmt 1 view -0
- 419              		.cfi_startproc
- 420              		@ args = 0, pretend = 0, frame = 8
- 421              		@ frame_needed = 0, uses_anonymous_args = 0
- 422 0000 F0B5     		push	{r4, r5, r6, r7, lr}
- 423              	.LCFI4:
- 424              		.cfi_def_cfa_offset 20
- 425              		.cfi_offset 4, -20
- 426              		.cfi_offset 5, -16
- 427              		.cfi_offset 6, -12
- 428              		.cfi_offset 7, -8
- 429              		.cfi_offset 14, -4
- 430 0002 83B0     		sub	sp, sp, #12
- 431              	.LCFI5:
- 432              		.cfi_def_cfa_offset 32
+ 331              	.LCFI3:
+ 332              		.cfi_def_cfa_offset 8
+ 333              		.cfi_offset 3, -8
+ 334              		.cfi_offset 14, -4
+ 226:usb_class_midi.c ****   usb_ep_init( ENDP_CTL_NUM | 0x80, USB_ENDP_INTR, ENDP_CTL_SIZE, ctl_callback );
+ 335              		.loc 1 226 3 view .LVU73
+ 336 0002 0C4B     		ldr	r3, .L30
+ 337 0004 0822     		movs	r2, #8
+ 338 0006 0321     		movs	r1, #3
+ 339 0008 8320     		movs	r0, #131
+ 340 000a FFF7FEFF 		bl	usb_ep_init
+ 341              	.LVL15:
+ 227:usb_class_midi.c ****   
+ 228:usb_class_midi.c ****   usb_ep_init_double( ENDP_DATA_IN | 0x80, USB_ENDP_BULK, ENDP_DATA_SIZE, data_in_callback );
+ 342              		.loc 1 228 3 view .LVU74
+ 343 000e 0A4B     		ldr	r3, .L30+4
+ 344 0010 1022     		movs	r2, #16
+ 345 0012 0221     		movs	r1, #2
+ 346 0014 8120     		movs	r0, #129
+ 347 0016 FFF7FEFF 		bl	usb_ep_init_double
+ 348              	.LVL16:
+ 229:usb_class_midi.c ****   usb_ep_init_double( ENDP_DATA_OUT, USB_ENDP_BULK, ENDP_DATA_SIZE, data_out_callback );
+ 349              		.loc 1 229 3 view .LVU75
+ 350 001a 084B     		ldr	r3, .L30+8
+ 351 001c 1022     		movs	r2, #16
+ 352 001e 0221     		movs	r1, #2
+ 353 0020 0846     		mov	r0, r1
+ 354 0022 FFF7FEFF 		bl	usb_ep_init_double
+ 355              	.LVL17:
+ 230:usb_class_midi.c ****   init_message_buff(&out_buf, out_buf_data, 16);
+ 356              		.loc 1 230 3 view .LVU76
+ 357 0026 1022     		movs	r2, #16
+ 358 0028 0549     		ldr	r1, .L30+12
+ 359 002a 0648     		ldr	r0, .L30+16
+ 360 002c FFF7FEFF 		bl	init_message_buff
+ 361              	.LVL18:
+ 231:usb_class_midi.c **** }
+ 362              		.loc 1 231 1 is_stmt 0 view .LVU77
+ 363 0030 08BD     		pop	{r3, pc}
+ 364              	.L31:
+ 365 0032 00BF     		.align	2
+ 366              	.L30:
+ 367 0034 00000000 		.word	ctl_callback
+ 368 0038 00000000 		.word	data_in_callback
+ 369 003c 00000000 		.word	data_out_callback
+ 370 0040 00000000 		.word	.LANCHOR7
+ 371 0044 00000000 		.word	.LANCHOR8
+ 372              		.cfi_endproc
+ 373              	.LFE39:
+ 375              		.section	.text.usb_class_poll,"ax",%progbits
+ 376              		.align	1
+ 377              		.global	usb_class_poll
+ 378              		.syntax unified
+ 379              		.thumb
+ 380              		.thumb_func
+ 382              	usb_class_poll:
+ 383              	.LFB40:
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s 			page 16
+
+
  232:usb_class_midi.c **** 
- 233:usb_class_midi.c ****   USB_ALIGN uint8_t b_on_cmd[] = {0x08, 0x80, 60, 127};
- 433              		.loc 1 233 3 view .LVU87
- 434              		.loc 1 233 21 is_stmt 0 view .LVU88
- 435 0004 174B     		ldr	r3, .L37
- 436 0006 0193     		str	r3, [sp, #4]
- 234:usb_class_midi.c ****   usb_ep_write_double( ENDP_DATA_IN | 0x80, (uint16_t*)b_on_cmd, sizeof(b_on_cmd));
- 437              		.loc 1 234 3 is_stmt 1 view .LVU89
- 438              	.LVL22:
- 439              	.LBB10:
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s 			page 17
-
-
- 440              	.LBI10:
+ 233:usb_class_midi.c **** void usb_class_poll(){
+ 384              		.loc 1 233 22 is_stmt 1 view -0
+ 385              		.cfi_startproc
+ 386              		@ args = 0, pretend = 0, frame = 8
+ 387              		@ frame_needed = 0, uses_anonymous_args = 0
+ 234:usb_class_midi.c ****     while(out_buf.bytes_avail>0) {
+ 388              		.loc 1 234 5 view .LVU79
+ 389              		.loc 1 234 10 view .LVU80
+ 390              		.loc 1 234 18 is_stmt 0 view .LVU81
+ 391 0000 154B     		ldr	r3, .L41
+ 392 0002 9B7A     		ldrb	r3, [r3, #10]	@ zero_extendqisi2
+ 393              		.loc 1 234 10 view .LVU82
+ 394 0004 3BB3     		cbz	r3, .L39
+ 233:usb_class_midi.c ****     while(out_buf.bytes_avail>0) {
+ 395              		.loc 1 233 22 view .LVU83
+ 396 0006 00B5     		push	{lr}
+ 397              	.LCFI4:
+ 398              		.cfi_def_cfa_offset 4
+ 399              		.cfi_offset 14, -4
+ 400 0008 83B0     		sub	sp, sp, #12
+ 401              	.LCFI5:
+ 402              		.cfi_def_cfa_offset 16
+ 403 000a 02E0     		b	.L35
+ 404              	.L33:
+ 405              		.loc 1 234 10 is_stmt 1 view .LVU84
+ 406              		.loc 1 234 18 is_stmt 0 view .LVU85
+ 407 000c 124B     		ldr	r3, .L41
+ 408 000e 9B7A     		ldrb	r3, [r3, #10]	@ zero_extendqisi2
+ 409              		.loc 1 234 10 view .LVU86
+ 410 0010 F3B1     		cbz	r3, .L40
+ 411              	.L35:
+ 412              	.LBB9:
+ 235:usb_class_midi.c ****         USB_ALIGN uint8_t msg[4];
+ 413              		.loc 1 235 9 is_stmt 1 view .LVU87
+ 236:usb_class_midi.c ****         get_next_message(&out_buf, msg, 4);
+ 414              		.loc 1 236 9 view .LVU88
+ 415 0012 0422     		movs	r2, #4
+ 416 0014 0DEB0201 		add	r1, sp, r2
+ 417 0018 0F48     		ldr	r0, .L41
+ 418 001a FFF7FEFF 		bl	get_next_message
+ 419              	.LVL19:
+ 237:usb_class_midi.c ****         if(msg[0] != 0x00) usb_ep_write_double( ENDP_DATA_IN | 0x80, (uint16_t*)msg, sizeof(msg));
+ 420              		.loc 1 237 9 view .LVU89
+ 421              		.loc 1 237 15 is_stmt 0 view .LVU90
+ 422 001e 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 423              		.loc 1 237 11 view .LVU91
+ 424 0022 002B     		cmp	r3, #0
+ 425 0024 F2D0     		beq	.L33
+ 426              		.loc 1 237 28 is_stmt 1 view .LVU92
+ 427              	.LVL20:
+ 428              	.LBB10:
+ 429              	.LBI10:
  184:usb_lib.h     ****   epnum &= 0x0F;
- 441              		.loc 2 184 20 view .LVU90
- 442              	.LBB11:
+ 430              		.loc 2 184 20 view .LVU93
+ 431              	.LBB11:
  185:usb_lib.h     ****   uint8_t idx = !!( USB_EPx(epnum) & USB_EP_DTOG_RX );
- 443              		.loc 2 185 3 view .LVU91
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s 			page 17
+
+
+ 432              		.loc 2 185 3 view .LVU94
  186:usb_lib.h     ****   idx += 2*epnum;
- 444              		.loc 2 186 3 view .LVU92
+ 433              		.loc 2 186 3 view .LVU95
  186:usb_lib.h     ****   idx += 2*epnum;
- 445              		.loc 2 186 21 is_stmt 0 view .LVU93
- 446 0008 174C     		ldr	r4, .L37+4
- 447 000a A088     		ldrh	r0, [r4, #4]
+ 434              		.loc 2 186 21 is_stmt 0 view .LVU96
+ 435 0026 0D4A     		ldr	r2, .L41+4
+ 436 0028 9088     		ldrh	r0, [r2, #4]
  186:usb_lib.h     ****   idx += 2*epnum;
- 448              		.loc 2 186 17 view .LVU94
- 449 000c C0F38030 		ubfx	r0, r0, #14, #1
- 450              	.LVL23:
+ 437              		.loc 2 186 17 view .LVU97
+ 438 002a C0F38030 		ubfx	r0, r0, #14, #1
+ 439              	.LVL21:
  187:usb_lib.h     ****   ENDP_TOG( epnum, USB_EP_DTOG_RX );
- 451              		.loc 2 187 3 is_stmt 1 view .LVU95
+ 440              		.loc 2 187 3 is_stmt 1 view .LVU98
  188:usb_lib.h     ****   _usb_ep_write(idx, buf, size);
- 452              		.loc 2 188 3 view .LVU96
+ 441              		.loc 2 188 3 view .LVU99
  188:usb_lib.h     ****   _usb_ep_write(idx, buf, size);
- 453              		.loc 2 188 3 view .LVU97
- 454 0010 A388     		ldrh	r3, [r4, #4]
- 455 0012 40F60F75 		movw	r5, #3855
- 456 0016 2B40     		ands	r3, r3, r5
- 457 0018 4CF28006 		movw	r6, #49280
- 458 001c 3343     		orrs	r3, r3, r6
- 459 001e A380     		strh	r3, [r4, #4]	@ movhi
+ 442              		.loc 2 188 3 view .LVU100
+ 443 002e 9388     		ldrh	r3, [r2, #4]
+ 444 0030 23F0F003 		bic	r3, r3, #240
+ 445 0034 1B05     		lsls	r3, r3, #20
+ 446 0036 1B0D     		lsrs	r3, r3, #20
+ 447 0038 43F44043 		orr	r3, r3, #49152
+ 448 003c 43F08003 		orr	r3, r3, #128
+ 449 0040 9380     		strh	r3, [r2, #4]	@ movhi
  188:usb_lib.h     ****   _usb_ep_write(idx, buf, size);
- 460              		.loc 2 188 3 view .LVU98
+ 450              		.loc 2 188 3 view .LVU101
  189:usb_lib.h     **** }
- 461              		.loc 2 189 3 view .LVU99
- 462 0020 0422     		movs	r2, #4
- 463 0022 0DEB0201 		add	r1, sp, r2
- 464 0026 0230     		adds	r0, r0, #2
- 465              	.LVL24:
+ 451              		.loc 2 189 3 view .LVU102
+ 452 0042 0422     		movs	r2, #4
+ 453 0044 0DEB0201 		add	r1, sp, r2
+ 454 0048 0230     		adds	r0, r0, #2
+ 455              	.LVL22:
  189:usb_lib.h     **** }
- 466              		.loc 2 189 3 is_stmt 0 view .LVU100
- 467 0028 FFF7FEFF 		bl	_usb_ep_write
- 468              	.LVL25:
- 189:usb_lib.h     **** }
- 469              		.loc 2 189 3 view .LVU101
- 470              	.LBE11:
- 471              	.LBE10:
- 235:usb_class_midi.c ****   sleep(7200000);
- 472              		.loc 1 235 3 is_stmt 1 view .LVU102
- 473 002c 0F4F     		ldr	r7, .L37+8
- 474 002e 3846     		mov	r0, r7
- 475 0030 FFF7FEFF 		bl	sleep
- 476              	.LVL26:
- 236:usb_class_midi.c ****   b_on_cmd[0] = 0x09;
- 477              		.loc 1 236 3 view .LVU103
- 478              		.loc 1 236 15 is_stmt 0 view .LVU104
- 479 0034 0923     		movs	r3, #9
- 480 0036 8DF80430 		strb	r3, [sp, #4]
- 237:usb_class_midi.c ****   b_on_cmd[1] = 0x90;
- 481              		.loc 1 237 3 is_stmt 1 view .LVU105
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s 			page 18
+ 456              		.loc 2 189 3 is_stmt 0 view .LVU103
+ 457 004a FFF7FEFF 		bl	_usb_ep_write
+ 458              	.LVL23:
+ 190:usb_lib.h     **** 
+ 459              		.loc 2 190 1 view .LVU104
+ 460 004e DDE7     		b	.L33
+ 461              	.L40:
+ 462              	.LBE11:
+ 463              	.LBE10:
+ 464              	.LBE9:
+ 238:usb_class_midi.c ****     }
+ 239:usb_class_midi.c **** }
+ 465              		.loc 1 239 1 view .LVU105
+ 466 0050 03B0     		add	sp, sp, #12
+ 467              	.LCFI6:
+ 468              		.cfi_def_cfa_offset 4
+ 469              		@ sp needed
+ 470 0052 5DF804FB 		ldr	pc, [sp], #4
+ 471              	.L39:
+ 472              	.LCFI7:
+ 473              		.cfi_def_cfa_offset 0
+ 474              		.cfi_restore 14
+ 475 0056 7047     		bx	lr
+ 476              	.L42:
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s 			page 18
 
 
- 482              		.loc 1 237 15 is_stmt 0 view .LVU106
- 483 003a 9023     		movs	r3, #144
- 484 003c 8DF80530 		strb	r3, [sp, #5]
- 238:usb_class_midi.c ****   usb_ep_write_double( ENDP_DATA_IN | 0x80, (uint16_t*)b_on_cmd, sizeof(b_on_cmd));
- 485              		.loc 1 238 3 is_stmt 1 view .LVU107
- 486              	.LVL27:
- 487              	.LBB12:
- 488              	.LBI12:
- 184:usb_lib.h     ****   epnum &= 0x0F;
- 489              		.loc 2 184 20 view .LVU108
- 490              	.LBB13:
- 185:usb_lib.h     ****   uint8_t idx = !!( USB_EPx(epnum) & USB_EP_DTOG_RX );
- 491              		.loc 2 185 3 view .LVU109
- 186:usb_lib.h     ****   idx += 2*epnum;
- 492              		.loc 2 186 3 view .LVU110
- 186:usb_lib.h     ****   idx += 2*epnum;
- 493              		.loc 2 186 21 is_stmt 0 view .LVU111
- 494 0040 A088     		ldrh	r0, [r4, #4]
- 186:usb_lib.h     ****   idx += 2*epnum;
- 495              		.loc 2 186 17 view .LVU112
- 496 0042 C0F38030 		ubfx	r0, r0, #14, #1
- 497              	.LVL28:
- 187:usb_lib.h     ****   ENDP_TOG( epnum, USB_EP_DTOG_RX );
- 498              		.loc 2 187 3 is_stmt 1 view .LVU113
- 188:usb_lib.h     ****   _usb_ep_write(idx, buf, size);
- 499              		.loc 2 188 3 view .LVU114
- 188:usb_lib.h     ****   _usb_ep_write(idx, buf, size);
- 500              		.loc 2 188 3 view .LVU115
- 501 0046 A388     		ldrh	r3, [r4, #4]
- 502 0048 1D40     		ands	r5, r5, r3
- 503 004a 3543     		orrs	r5, r5, r6
- 504 004c A580     		strh	r5, [r4, #4]	@ movhi
- 188:usb_lib.h     ****   _usb_ep_write(idx, buf, size);
- 505              		.loc 2 188 3 view .LVU116
- 189:usb_lib.h     **** }
- 506              		.loc 2 189 3 view .LVU117
- 507 004e 0422     		movs	r2, #4
- 508 0050 0DEB0201 		add	r1, sp, r2
- 509 0054 0230     		adds	r0, r0, #2
- 510              	.LVL29:
- 189:usb_lib.h     **** }
- 511              		.loc 2 189 3 is_stmt 0 view .LVU118
- 512 0056 FFF7FEFF 		bl	_usb_ep_write
- 513              	.LVL30:
- 189:usb_lib.h     **** }
- 514              		.loc 2 189 3 view .LVU119
- 515              	.LBE13:
- 516              	.LBE12:
- 239:usb_class_midi.c ****   sleep(7200000);
- 517              		.loc 1 239 3 is_stmt 1 view .LVU120
- 518 005a 3846     		mov	r0, r7
- 519 005c FFF7FEFF 		bl	sleep
- 520              	.LVL31:
- 240:usb_class_midi.c **** }
- 521              		.loc 1 240 1 is_stmt 0 view .LVU121
- 522 0060 03B0     		add	sp, sp, #12
- 523              	.LCFI6:
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s 			page 19
+ 477              		.align	2
+ 478              	.L41:
+ 479 0058 00000000 		.word	.LANCHOR8
+ 480 005c 005C0040 		.word	1073765376
+ 481              		.cfi_endproc
+ 482              	.LFE40:
+ 484              		.global	out_buf
+ 485              		.global	out_buf_data
+ 486              		.section	.bss.out_buf,"aw",%nobits
+ 487              		.align	2
+ 488              		.set	.LANCHOR8,. + 0
+ 491              	out_buf:
+ 492 0000 00000000 		.space	12
+ 492      00000000 
+ 492      00000000 
+ 493              		.section	.bss.out_buf_data,"aw",%nobits
+ 494              		.align	2
+ 495              		.set	.LANCHOR7,. + 0
+ 498              	out_buf_data:
+ 499 0000 00000000 		.space	16
+ 499      00000000 
+ 499      00000000 
+ 499      00000000 
+ 500              		.section	.rodata.USB_ConfigDescriptor,"a"
+ 501              		.align	1
+ 502              		.set	.LANCHOR1,. + 0
+ 505              	USB_ConfigDescriptor:
+ 506 0000 09024400 		.ascii	"\011\002D\000\002\001\000\2002\011\004\000\000\001\001"
+ 506      02010080 
+ 506      32090400 
+ 506      000101
+ 507 000f 03000007 		.ascii	"\003\000\000\007$\001\000\001,\000\006$\002\001\001"
+ 507      24010001 
+ 507      2C000624 
+ 507      020101
+ 508 001e 00092403 		.ascii	"\000\011$\003\001\002\001\002\001\000\011\005\201\003"
+ 508      01020102 
+ 508      01000905 
+ 508      8103
+ 509 002c 10000A00 		.ascii	"\020\000\012\000\000\005%\001\001\001\011\005\001\003"
+ 509      00052501 
+ 509      01010905 
+ 509      0103
+ 510 003a 10000A00 		.ascii	"\020\000\012\000\000\005%\001\001\002"
+ 510      00052501 
+ 510      0102
+ 511              		.section	.rodata.USB_DeviceDescriptor,"a"
+ 512              		.align	1
+ 513              		.set	.LANCHOR0,. + 0
+ 516              	USB_DeviceDescriptor:
+ 517 0000 12011001 		.ascii	"\022\001\020\001\000\000\000\010\300\026\337\005\001"
+ 517      00000008 
+ 517      C016DF05 
+ 517      01
+ 518 000d 00010203 		.ascii	"\000\001\002\003\001"
+ 518      01
+ 519              		.section	.rodata.USB_DeviceQualifierDescriptor,"a"
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s 			page 19
 
 
- 524              		.cfi_def_cfa_offset 20
- 525              		@ sp needed
- 526 0062 F0BD     		pop	{r4, r5, r6, r7, pc}
- 527              	.L38:
- 528              		.align	2
- 529              	.L37:
- 530 0064 08803C7F 		.word	2134671368
- 531 0068 005C0040 		.word	1073765376
- 532 006c 00DD6D00 		.word	7200000
- 533              		.cfi_endproc
- 534              	.LFE41:
- 536              		.section	.rodata.USB_ConfigDescriptor,"a"
- 537              		.align	1
- 538              		.set	.LANCHOR1,. + 0
- 541              	USB_ConfigDescriptor:
- 542 0000 09024400 		.ascii	"\011\002D\000\002\001\000\2002\011\004\000\000\001\001"
- 542      02010080 
- 542      32090400 
- 542      000101
- 543 000f 03000007 		.ascii	"\003\000\000\007$\001\000\001,\000\006$\002\001\001"
- 543      24010001 
- 543      2C000624 
- 543      020101
- 544 001e 00092403 		.ascii	"\000\011$\003\001\002\001\002\001\000\011\005\201\003"
- 544      01020102 
- 544      01000905 
- 544      8103
- 545 002c 08000A00 		.ascii	"\010\000\012\000\000\005%\001\001\001\011\005\001\003"
- 545      00052501 
- 545      01010905 
- 545      0103
- 546 003a 08000A00 		.ascii	"\010\000\012\000\000\005%\001\001\002"
- 546      00052501 
- 546      0102
- 547              		.section	.rodata.USB_DeviceDescriptor,"a"
- 548              		.align	1
- 549              		.set	.LANCHOR0,. + 0
- 552              	USB_DeviceDescriptor:
- 553 0000 12011001 		.ascii	"\022\001\020\001\000\000\000\010\300\026\337\005\001"
- 553      00000008 
- 553      C016DF05 
- 553      01
- 554 000d 00010203 		.ascii	"\000\001\002\003\001"
- 554      01
- 555              		.section	.rodata.USB_DeviceQualifierDescriptor,"a"
- 556              		.align	1
- 557              		.set	.LANCHOR2,. + 0
- 560              	USB_DeviceQualifierDescriptor:
- 561 0000 0A060002 		.ascii	"\012\006\000\002\000\000\000\010\001\000"
- 561      00000008 
- 561      0100
- 562              		.section	.rodata.USB_StringLangDescriptor,"a"
- 563              		.align	1
- 564              		.set	.LANCHOR3,. + 0
- 567              	USB_StringLangDescriptor:
- 568 0000 04       		.byte	4
- 569 0001 03       		.byte	3
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s 			page 20
-
-
- 570 0002 0904     		.ascii	"\011\004"
- 571              		.section	.rodata.USB_StringManufacturingDescriptor,"a"
- 572              		.align	1
- 573              		.set	.LANCHOR4,. + 0
- 576              	USB_StringManufacturingDescriptor:
- 577 0000 18       		.byte	24
- 578 0001 03       		.byte	3
- 579 0002 70006900 		.ascii	"p\000i\000o\000t\000r\000o\000s\000i\000o\000t\000r"
- 579      6F007400 
- 579      72006F00 
- 579      73006900 
- 579      6F007400 
- 580 0017 00       		.ascii	"\000"
- 581              		.section	.rodata.USB_StringProdDescriptor,"a"
- 582              		.align	1
- 583              		.set	.LANCHOR5,. + 0
- 586              	USB_StringProdDescriptor:
- 587 0000 12       		.byte	18
- 588 0001 03       		.byte	3
- 589 0002 55005300 		.ascii	"U\000S\000B\000 \000M\000I\000D\000I\000"
- 589      42002000 
- 589      4D004900 
- 589      44004900 
- 590              		.section	.rodata.USB_StringSerialDescriptor,"a"
- 591              		.align	1
- 592              		.set	.LANCHOR6,. + 0
- 595              	USB_StringSerialDescriptor:
- 596 0000 04       		.byte	4
- 597 0001 03       		.byte	3
- 598 0002 3100     		.ascii	"1\000"
- 599              		.text
- 600              	.Letext0:
- 601              		.file 3 "/usr/local/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_default_
- 602              		.file 4 "/usr/local/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint.h"
- 603              		.file 5 "CMSIS/Inc/stm32f103xb.h"
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s 			page 21
+ 520              		.align	1
+ 521              		.set	.LANCHOR2,. + 0
+ 524              	USB_DeviceQualifierDescriptor:
+ 525 0000 0A060002 		.ascii	"\012\006\000\002\000\000\000\010\001\000"
+ 525      00000008 
+ 525      0100
+ 526              		.section	.rodata.USB_StringLangDescriptor,"a"
+ 527              		.align	1
+ 528              		.set	.LANCHOR3,. + 0
+ 531              	USB_StringLangDescriptor:
+ 532 0000 04       		.byte	4
+ 533 0001 03       		.byte	3
+ 534 0002 0904     		.ascii	"\011\004"
+ 535              		.section	.rodata.USB_StringManufacturingDescriptor,"a"
+ 536              		.align	1
+ 537              		.set	.LANCHOR4,. + 0
+ 540              	USB_StringManufacturingDescriptor:
+ 541 0000 18       		.byte	24
+ 542 0001 03       		.byte	3
+ 543 0002 70006900 		.ascii	"p\000i\000o\000t\000r\000o\000s\000i\000o\000t\000r"
+ 543      6F007400 
+ 543      72006F00 
+ 543      73006900 
+ 543      6F007400 
+ 544 0017 00       		.ascii	"\000"
+ 545              		.section	.rodata.USB_StringProdDescriptor,"a"
+ 546              		.align	1
+ 547              		.set	.LANCHOR5,. + 0
+ 550              	USB_StringProdDescriptor:
+ 551 0000 12       		.byte	18
+ 552 0001 03       		.byte	3
+ 553 0002 55005300 		.ascii	"U\000S\000B\000 \000M\000I\000D\000I\000"
+ 553      42002000 
+ 553      4D004900 
+ 553      44004900 
+ 554              		.section	.rodata.USB_StringSerialDescriptor,"a"
+ 555              		.align	1
+ 556              		.set	.LANCHOR6,. + 0
+ 559              	USB_StringSerialDescriptor:
+ 560 0000 04       		.byte	4
+ 561 0001 03       		.byte	3
+ 562 0002 3100     		.ascii	"1\000"
+ 563              		.text
+ 564              	.Letext0:
+ 565              		.file 3 "/usr/local/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_default_
+ 566              		.file 4 "/usr/local/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint.h"
+ 567              		.file 5 "CMSIS/Inc/stm32f103xb.h"
+ 568              		.file 6 "midi/midi_message_buffer.h"
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s 			page 20
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 usb_class_midi.c
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:18     .text.sleep:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:23     .text.sleep:0000000000000000 sleep
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:61     .text.ctl_callback:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:67     .text.ctl_callback:0000000000000000 ctl_callback
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:81     .text.data_in_callback:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:87     .text.data_in_callback:0000000000000000 data_in_callback
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:101    .text.data_out_callback:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:107    .text.data_out_callback:0000000000000000 data_out_callback
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:174    .text.data_out_callback:0000000000000034 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:179    .text.usb_class_get_std_descr:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:185    .text.usb_class_get_std_descr:0000000000000000 usb_class_get_std_descr
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:251    .text.usb_class_get_std_descr:000000000000004a $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:255    .text.usb_class_get_std_descr:000000000000004e $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:297    .text.usb_class_get_std_descr:000000000000006c $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:308    .text.usb_class_ep0_in:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:314    .text.usb_class_ep0_in:0000000000000000 usb_class_ep0_in
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:334    .text.usb_class_ep0_out:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:340    .text.usb_class_ep0_out:0000000000000000 usb_class_ep0_out
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:360    .text.usb_class_init:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:366    .text.usb_class_init:0000000000000000 usb_class_init
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:403    .text.usb_class_init:0000000000000028 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:410    .text.usb_class_poll:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:416    .text.usb_class_poll:0000000000000000 usb_class_poll
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:530    .text.usb_class_poll:0000000000000064 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:537    .rodata.USB_ConfigDescriptor:0000000000000000 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:541    .rodata.USB_ConfigDescriptor:0000000000000000 USB_ConfigDescriptor
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:548    .rodata.USB_DeviceDescriptor:0000000000000000 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:552    .rodata.USB_DeviceDescriptor:0000000000000000 USB_DeviceDescriptor
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:556    .rodata.USB_DeviceQualifierDescriptor:0000000000000000 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:560    .rodata.USB_DeviceQualifierDescriptor:0000000000000000 USB_DeviceQualifierDescriptor
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:563    .rodata.USB_StringLangDescriptor:0000000000000000 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:567    .rodata.USB_StringLangDescriptor:0000000000000000 USB_StringLangDescriptor
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:572    .rodata.USB_StringManufacturingDescriptor:0000000000000000 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:576    .rodata.USB_StringManufacturingDescriptor:0000000000000000 USB_StringManufacturingDescriptor
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:582    .rodata.USB_StringProdDescriptor:0000000000000000 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:586    .rodata.USB_StringProdDescriptor:0000000000000000 USB_StringProdDescriptor
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:591    .rodata.USB_StringSerialDescriptor:0000000000000000 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc10QVTy.s:595    .rodata.USB_StringSerialDescriptor:0000000000000000 USB_StringSerialDescriptor
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:18     .text.ctl_callback:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:24     .text.ctl_callback:0000000000000000 ctl_callback
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:39     .text.data_in_callback:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:45     .text.data_in_callback:0000000000000000 data_in_callback
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:59     .text.data_out_callback:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:65     .text.data_out_callback:0000000000000000 data_out_callback
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:132    .text.data_out_callback:0000000000000034 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:137    .text.usb_class_get_std_descr:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:143    .text.usb_class_get_std_descr:0000000000000000 usb_class_get_std_descr
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:209    .text.usb_class_get_std_descr:000000000000004a $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:213    .text.usb_class_get_std_descr:000000000000004e $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:255    .text.usb_class_get_std_descr:000000000000006c $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:266    .text.usb_class_ep0_in:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:272    .text.usb_class_ep0_in:0000000000000000 usb_class_ep0_in
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:292    .text.usb_class_ep0_out:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:298    .text.usb_class_ep0_out:0000000000000000 usb_class_ep0_out
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:318    .text.usb_class_init:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:324    .text.usb_class_init:0000000000000000 usb_class_init
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:367    .text.usb_class_init:0000000000000034 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:376    .text.usb_class_poll:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:382    .text.usb_class_poll:0000000000000000 usb_class_poll
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:479    .text.usb_class_poll:0000000000000058 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:491    .bss.out_buf:0000000000000000 out_buf
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:498    .bss.out_buf_data:0000000000000000 out_buf_data
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:487    .bss.out_buf:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:494    .bss.out_buf_data:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:501    .rodata.USB_ConfigDescriptor:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:505    .rodata.USB_ConfigDescriptor:0000000000000000 USB_ConfigDescriptor
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:512    .rodata.USB_DeviceDescriptor:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:516    .rodata.USB_DeviceDescriptor:0000000000000000 USB_DeviceDescriptor
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:520    .rodata.USB_DeviceQualifierDescriptor:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:524    .rodata.USB_DeviceQualifierDescriptor:0000000000000000 USB_DeviceQualifierDescriptor
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:527    .rodata.USB_StringLangDescriptor:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:531    .rodata.USB_StringLangDescriptor:0000000000000000 USB_StringLangDescriptor
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:536    .rodata.USB_StringManufacturingDescriptor:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:540    .rodata.USB_StringManufacturingDescriptor:0000000000000000 USB_StringManufacturingDescriptor
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:546    .rodata.USB_StringProdDescriptor:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:550    .rodata.USB_StringProdDescriptor:0000000000000000 USB_StringProdDescriptor
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:555    .rodata.USB_StringSerialDescriptor:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccHf1JEp.s:559    .rodata.USB_StringSerialDescriptor:0000000000000000 USB_StringSerialDescriptor
 
 UNDEFINED SYMBOLS
 _usb_ep_read
 usb_ep_init
 usb_ep_init_double
+init_message_buff
+get_next_message
 _usb_ep_write

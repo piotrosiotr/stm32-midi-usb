@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
   30:usb_lib.c     **** __attribute__((weak))void usb_class_poll(){}
   31:usb_lib.c     **** __attribute__((weak))void usb_class_sof(){}
   32:usb_lib.c     **** __attribute__((weak))char usb_class_ep0_in(config_pack_t *req, void **data, uint16_t *size){return 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 2
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 2
 
 
   33:usb_lib.c     **** __attribute__((weak))char usb_class_ep0_out(config_pack_t *req, uint16_t offset, uint16_t rx_size){
@@ -118,7 +118,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
   79              		.thumb
   80              		.thumb_func
   82              	usb_class_poll:
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 3
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 3
 
 
   83              	.LFB35:
@@ -178,7 +178,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  133 0002 7047     		bx	lr
  134              		.cfi_endproc
  135              	.LFE37:
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 4
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 4
 
 
  137              		.section	.text.usb_class_ep0_out,"ax",%progbits
@@ -238,7 +238,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
   56:usb_lib.c     **** }usb_epdata_t;
   57:usb_lib.c     **** 
   58:usb_lib.c     **** epfunc_t epfunc_in[STM32ENDPOINTS];
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 5
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 5
 
 
   59:usb_lib.c     **** epfunc_t epfunc_out[STM32ENDPOINTS];
@@ -298,7 +298,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  204              	.LVL7:
  205              		.loc 1 78 3 view .LVU32
  206 0024 5360     		str	r3, [r2, #4]
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 6
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 6
 
 
  207              	.LBE32:
@@ -358,7 +358,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  258              		.loc 1 81 3 discriminator 2 view .LVU55
  259 0042 43F48023 		orr	r3, r3, #262144
  260              	.LVL14:
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 7
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 7
 
 
  261              		.loc 1 81 3 discriminator 2 view .LVU56
@@ -418,7 +418,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  308              	.LBB36:
   89:usb_lib.c     ****   for(uint32_t ctr = 0; ctr < 100000; ++ctr) asm volatile("nop"); // wait >1ms
  309              		.loc 1 89 16 view .LVU77
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 8
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 8
 
 
  310 006a 0023     		movs	r3, #0
@@ -478,7 +478,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
    1:CMSIS/Inc/core_cm3.h **** /**************************************************************************//**
    2:CMSIS/Inc/core_cm3.h ****  * @file     core_cm3.h
    3:CMSIS/Inc/core_cm3.h ****  * @brief    CMSIS Cortex-M3 Core Peripheral Access Layer Header File
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 9
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 9
 
 
    4:CMSIS/Inc/core_cm3.h ****  * @version  V1.30
@@ -538,7 +538,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
   58:CMSIS/Inc/core_cm3.h ****  * Note:  To re-enable a Message, insert a space before 'lint' *
   59:CMSIS/Inc/core_cm3.h ****  *
   60:CMSIS/Inc/core_cm3.h ****  */
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 10
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 10
 
 
   61:CMSIS/Inc/core_cm3.h **** 
@@ -598,7 +598,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  115:CMSIS/Inc/core_cm3.h **** #define     __O     volatile                  /*!< defines 'write only' permissions     */
  116:CMSIS/Inc/core_cm3.h **** #define     __IO    volatile                  /*!< defines 'read / write' permissions   */
  117:CMSIS/Inc/core_cm3.h **** 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 11
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 11
 
 
  118:CMSIS/Inc/core_cm3.h **** 
@@ -658,7 +658,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  172:CMSIS/Inc/core_cm3.h ****   __I  uint32_t DFR;                          /*!< Offset: 0x48  Debug Feature Register            
  173:CMSIS/Inc/core_cm3.h ****   __I  uint32_t ADR;                          /*!< Offset: 0x4C  Auxiliary Feature Register        
  174:CMSIS/Inc/core_cm3.h ****   __I  uint32_t MMFR[4];                      /*!< Offset: 0x50  Memory Model Feature Register     
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 12
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 12
 
 
  175:CMSIS/Inc/core_cm3.h ****   __I  uint32_t ISAR[5];                      /*!< Offset: 0x60  ISA Feature Register              
@@ -718,7 +718,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  229:CMSIS/Inc/core_cm3.h **** /* SCB Application Interrupt and Reset Control Register Definitions */
  230:CMSIS/Inc/core_cm3.h **** #define SCB_AIRCR_VECTKEY_Pos              16                                             /*!< SCB 
  231:CMSIS/Inc/core_cm3.h **** #define SCB_AIRCR_VECTKEY_Msk              (0xFFFFul << SCB_AIRCR_VECTKEY_Pos)            /*!< SCB 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 13
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 13
 
 
  232:CMSIS/Inc/core_cm3.h **** 
@@ -778,7 +778,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  286:CMSIS/Inc/core_cm3.h **** 
  287:CMSIS/Inc/core_cm3.h **** #define SCB_SHCSR_MEMFAULTENA_Pos          16                                             /*!< SCB 
  288:CMSIS/Inc/core_cm3.h **** #define SCB_SHCSR_MEMFAULTENA_Msk          (1ul << SCB_SHCSR_MEMFAULTENA_Pos)             /*!< SCB 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 14
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 14
 
 
  289:CMSIS/Inc/core_cm3.h **** 
@@ -838,7 +838,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  343:CMSIS/Inc/core_cm3.h **** /* SCB Debug Fault Status Register Definitions */
  344:CMSIS/Inc/core_cm3.h **** #define SCB_DFSR_EXTERNAL_Pos               4                                             /*!< SCB 
  345:CMSIS/Inc/core_cm3.h **** #define SCB_DFSR_EXTERNAL_Msk              (1ul << SCB_DFSR_EXTERNAL_Pos)                 /*!< SCB 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 15
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 15
 
 
  346:CMSIS/Inc/core_cm3.h **** 
@@ -898,7 +898,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  400:CMSIS/Inc/core_cm3.h **** 
  401:CMSIS/Inc/core_cm3.h **** #define SysTick_CALIB_TENMS_Pos             0                                             /*!< SysT
  402:CMSIS/Inc/core_cm3.h **** #define SysTick_CALIB_TENMS_Msk            (0xFFFFFFul << SysTick_VAL_CURRENT_Pos)        /*!< SysT
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 16
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 16
 
 
  403:CMSIS/Inc/core_cm3.h **** /*@}*/ /* end of group CMSIS_CM3_SysTick */
@@ -958,7 +958,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  457:CMSIS/Inc/core_cm3.h **** #define ITM_TCR_TSPrescale_Pos              8                                             /*!< ITM 
  458:CMSIS/Inc/core_cm3.h **** #define ITM_TCR_TSPrescale_Msk             (3ul << ITM_TCR_TSPrescale_Pos)                /*!< ITM 
  459:CMSIS/Inc/core_cm3.h **** 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 17
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 17
 
 
  460:CMSIS/Inc/core_cm3.h **** #define ITM_TCR_SWOENA_Pos                  4                                             /*!< ITM 
@@ -1018,7 +1018,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  514:CMSIS/Inc/core_cm3.h **** /* Interrupt Controller Type Register Definitions */
  515:CMSIS/Inc/core_cm3.h **** #define InterruptType_ICTR_INTLINESNUM_Pos  0                                             /*!< Inte
  516:CMSIS/Inc/core_cm3.h **** #define InterruptType_ICTR_INTLINESNUM_Msk (0x1Ful << InterruptType_ICTR_INTLINESNUM_Pos) /*!< Inte
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 18
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 18
 
 
  517:CMSIS/Inc/core_cm3.h **** 
@@ -1078,7 +1078,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  571:CMSIS/Inc/core_cm3.h **** #define MPU_RNR_REGION_Pos                  0                                             /*!< MPU 
  572:CMSIS/Inc/core_cm3.h **** #define MPU_RNR_REGION_Msk                 (0xFFul << MPU_RNR_REGION_Pos)                 /*!< MPU 
  573:CMSIS/Inc/core_cm3.h **** 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 19
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 19
 
 
  574:CMSIS/Inc/core_cm3.h **** /* MPU Region Base Address Register */
@@ -1138,7 +1138,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  628:CMSIS/Inc/core_cm3.h **** /* Debug Halting Control and Status Register */
  629:CMSIS/Inc/core_cm3.h **** #define CoreDebug_DHCSR_DBGKEY_Pos         16                                             /*!< Core
  630:CMSIS/Inc/core_cm3.h **** #define CoreDebug_DHCSR_DBGKEY_Msk         (0xFFFFul << CoreDebug_DHCSR_DBGKEY_Pos)       /*!< Core
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 20
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 20
 
 
  631:CMSIS/Inc/core_cm3.h **** 
@@ -1198,7 +1198,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  685:CMSIS/Inc/core_cm3.h **** #define CoreDebug_DEMCR_MON_EN_Pos         16                                             /*!< Core
  686:CMSIS/Inc/core_cm3.h **** #define CoreDebug_DEMCR_MON_EN_Msk         (1ul << CoreDebug_DEMCR_MON_EN_Pos)            /*!< Core
  687:CMSIS/Inc/core_cm3.h **** 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 21
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 21
 
 
  688:CMSIS/Inc/core_cm3.h **** #define CoreDebug_DEMCR_VC_HARDERR_Pos     10                                             /*!< Core
@@ -1258,7 +1258,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  742:CMSIS/Inc/core_cm3.h ****   #define __ASM            __asm                                      /*!< asm keyword for ARM Comp
  743:CMSIS/Inc/core_cm3.h ****   #define __INLINE         __inline                                   /*!< inline keyword for ARM C
  744:CMSIS/Inc/core_cm3.h **** 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 22
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 22
 
 
  745:CMSIS/Inc/core_cm3.h **** #elif defined ( __ICCARM__ )
@@ -1318,7 +1318,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  799:CMSIS/Inc/core_cm3.h **** 
  800:CMSIS/Inc/core_cm3.h **** /**
  801:CMSIS/Inc/core_cm3.h ****  * @brief  Set the Process Stack Pointer
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 23
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 23
 
 
  802:CMSIS/Inc/core_cm3.h ****  *
@@ -1378,7 +1378,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  856:CMSIS/Inc/core_cm3.h ****  * Removes the exclusive lock which is created by ldrex.
  857:CMSIS/Inc/core_cm3.h ****  */
  858:CMSIS/Inc/core_cm3.h **** extern void __CLREX(void);
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 24
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 24
 
 
  859:CMSIS/Inc/core_cm3.h **** 
@@ -1438,7 +1438,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  913:CMSIS/Inc/core_cm3.h **** 
  914:CMSIS/Inc/core_cm3.h **** /**
  915:CMSIS/Inc/core_cm3.h ****  * @brief  Return the Control Register value
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 25
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 25
 
 
  916:CMSIS/Inc/core_cm3.h ****  * 
@@ -1498,7 +1498,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  970:CMSIS/Inc/core_cm3.h ****  * @return PriMask
  971:CMSIS/Inc/core_cm3.h ****  *
  972:CMSIS/Inc/core_cm3.h ****  * Return state of the priority mask bit from the priority mask register
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 26
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 26
 
 
  973:CMSIS/Inc/core_cm3.h ****  */
@@ -1558,7 +1558,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
 1027:CMSIS/Inc/core_cm3.h **** {
 1028:CMSIS/Inc/core_cm3.h ****   register uint32_t __regControl         __ASM("control");
 1029:CMSIS/Inc/core_cm3.h ****   return(__regControl);
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 27
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 27
 
 
 1030:CMSIS/Inc/core_cm3.h **** }
@@ -1618,7 +1618,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
 1084:CMSIS/Inc/core_cm3.h **** extern uint32_t __get_PSP(void);
 1085:CMSIS/Inc/core_cm3.h **** 
 1086:CMSIS/Inc/core_cm3.h **** /**
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 28
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 28
 
 
 1087:CMSIS/Inc/core_cm3.h ****  * @brief  Set the Process Stack Pointer
@@ -1678,7 +1678,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
 1141:CMSIS/Inc/core_cm3.h ****  *
 1142:CMSIS/Inc/core_cm3.h ****  * Exclusive LDR command for 8 bit values)
 1143:CMSIS/Inc/core_cm3.h ****  */
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 29
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 29
 
 
 1144:CMSIS/Inc/core_cm3.h **** extern uint8_t __LDREXB(uint8_t *addr);
@@ -1738,7 +1738,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
 1198:CMSIS/Inc/core_cm3.h **** 
 1199:CMSIS/Inc/core_cm3.h **** 
 1200:CMSIS/Inc/core_cm3.h **** 
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 30
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 30
 
 
 1201:CMSIS/Inc/core_cm3.h **** #elif (defined (__GNUC__)) /*------------------ GNU Compiler ---------------------*/
@@ -1798,7 +1798,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
 1255:CMSIS/Inc/core_cm3.h ****  * (main stack pointer) Cortex processor register
 1256:CMSIS/Inc/core_cm3.h ****  */
 1257:CMSIS/Inc/core_cm3.h **** extern void __set_MSP(uint32_t topOfMainStack);
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 31
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 31
 
 
 1258:CMSIS/Inc/core_cm3.h **** 
@@ -1858,7 +1858,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
 1312:CMSIS/Inc/core_cm3.h **** 
 1313:CMSIS/Inc/core_cm3.h **** /**
 1314:CMSIS/Inc/core_cm3.h ****  * @brief  Return the Control Register value
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 32
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 32
 
 
 1315:CMSIS/Inc/core_cm3.h **** * 
@@ -1918,7 +1918,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
 1369:CMSIS/Inc/core_cm3.h **** extern uint32_t __RBIT(uint32_t value);
 1370:CMSIS/Inc/core_cm3.h **** 
 1371:CMSIS/Inc/core_cm3.h **** /**
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 33
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 33
 
 
 1372:CMSIS/Inc/core_cm3.h ****  * @brief  LDR Exclusive (8 bit)
@@ -1978,7 +1978,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
 1426:CMSIS/Inc/core_cm3.h ****  * @param  value  value to store
 1427:CMSIS/Inc/core_cm3.h ****  * @param  *addr  address pointer
 1428:CMSIS/Inc/core_cm3.h ****  * @return        successful / failed
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 34
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 34
 
 
 1429:CMSIS/Inc/core_cm3.h ****  *
@@ -2038,7 +2038,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
 1483:CMSIS/Inc/core_cm3.h ****  *
 1484:CMSIS/Inc/core_cm3.h ****  * @return priority grouping field 
 1485:CMSIS/Inc/core_cm3.h ****  *
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 35
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 35
 
 
 1486:CMSIS/Inc/core_cm3.h ****  * Get the priority grouping from NVIC Interrupt Controller.
@@ -2098,7 +2098,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  386              		.align	1
  387              		.global	usb_ep_init
  388              		.syntax unified
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 36
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 36
 
 
  389              		.thumb
@@ -2158,7 +2158,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  153:usb_lib.c     ****     if( !setup )return; //какой-то костыль. Иначе вызывается два р
  154:usb_lib.c     ****     if(req == (USB_REQ_STANDARD | USB_REQ_DEVICE)){
  155:usb_lib.c     ****       switch(setup_packet.bRequest){
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 37
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 37
 
 
  156:usb_lib.c     ****         case GET_DESCRIPTOR:{
@@ -2218,7 +2218,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  403              		.cfi_offset 4, -12
  404              		.cfi_offset 5, -8
  405              		.cfi_offset 14, -4
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 38
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 38
 
 
  202:usb_lib.c     ****   if(func == NULL)func = endp_callback_default;
@@ -2278,7 +2278,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  447              		.loc 1 214 3 discriminator 1 view .LVU117
  448              		.loc 1 214 14 is_stmt 0 discriminator 1 view .LVU118
  449 0042 03F47063 		and	r3, r3, #3840
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 39
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 39
 
 
  450              	.LVL32:
@@ -2338,7 +2338,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  493 007e 1B05     		lsls	r3, r3, #20
  494 0080 1B0D     		lsrs	r3, r3, #20
  495 0082 43F40043 		orr	r3, r3, #32768
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 40
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 40
 
 
  496 0086 43F08003 		orr	r3, r3, #128
@@ -2398,7 +2398,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  532 00ae 4CD8     		bhi	.L27
  236:usb_lib.c     ****       usb_epdata[epnum].rx_blocksize = 0;
  533              		.loc 1 236 7 is_stmt 1 view .LVU148
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 41
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 41
 
 
  534              		.loc 1 236 38 is_stmt 0 view .LVU149
@@ -2458,7 +2458,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  576              		.loc 1 220 25 is_stmt 1 view .LVU163
  220:usb_lib.c     ****     default: buf |= USB_EP_ISOCHRONOUS; //в дескрипторах изохронные точк
  577              		.loc 1 220 29 is_stmt 0 view .LVU164
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 42
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 42
 
 
  578 00f0 43F4C063 		orr	r3, r3, #1536
@@ -2518,7 +2518,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  229:usb_lib.c     ****     }else{
  619              		.loc 1 229 7 view .LVU178
  229:usb_lib.c     ****     }else{
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 43
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 43
 
 
  620              		.loc 1 229 7 view .LVU179
@@ -2578,7 +2578,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  666              		.global	usb_ep_init_double
  667              		.syntax unified
  668              		.thumb
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 44
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 44
 
 
  669              		.thumb_func
@@ -2638,7 +2638,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  716 0038 1C80     		strh	r4, [r3]	@ movhi
  717              		.loc 1 255 3 view .LVU201
  256:usb_lib.c     ****   
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 45
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 45
 
 
  257:usb_lib.c     ****   uint16_t buf = USB_EPx(epnum);
@@ -2698,7 +2698,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  759              		.loc 1 263 29 is_stmt 0 view .LVU218
  760 0064 4CF40071 		orr	r1, ip, #512
  761              	.LVL64:
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 46
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 46
 
 
  263:usb_lib.c     ****     case USB_ENDP_CTRL: buf |= USB_EP_CONTROL; break;
@@ -2758,7 +2758,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  797 008c 6FF3CF30 		bfc	r0, #15, #1
  798 0090 8880     		strh	r0, [r1, #4]	@ movhi
  799              		.loc 1 284 38 view .LVU236
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 47
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 47
 
 
  800 0092 8889     		ldrh	r0, [r1, #12]
@@ -2818,7 +2818,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  843 00dc 214B     		ldr	r3, .L57+12
  844 00de 43F82E50 		str	r5, [r3, lr, lsl #2]
  296:usb_lib.c     ****     
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 48
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 48
 
 
  297:usb_lib.c     ****   lastaddr += 2*size;
@@ -2878,7 +2878,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  273:usb_lib.c     ****     usb_epdata[epnum].usb_tx_count = 0;
  885              		.loc 1 273 35 view .LVU267
  886 010a 0860     		str	r0, [r1]
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 49
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 49
 
 
  887              	.LVL75:
@@ -2938,7 +2938,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  924 0130 8889     		ldrh	r0, [r1, #12]
  925 0132 40F40040 		orr	r0, r0, #32768
  926 0136 8881     		strh	r0, [r1, #12]	@ movhi
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 50
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 50
 
 
  288:usb_lib.c     ****       usb_epdata[epnum].rx_num_blocks = usb_epdata[epnum].tx_num_blocks = size / 32 - 1;
@@ -2998,7 +2998,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  972 0000 38B5     		push	{r3, r4, r5, lr}
  973              	.LCFI2:
  974              		.cfi_def_cfa_offset 16
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 51
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 51
 
 
  975              		.cfi_offset 3, -16
@@ -3058,7 +3058,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  331:usb_lib.c     ****     lastaddr = LASTADDR_DEFAULT;
  332:usb_lib.c     ****     USB->DADDR = USB_DADDR_EF;
  333:usb_lib.c     ****     for(uint8_t i=0; i<STM32ENDPOINTS; i++)epfunc_in[i] = epfunc_out[i] = endp_callback_default;
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 52
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 52
 
 
  334:usb_lib.c     ****     
@@ -3118,7 +3118,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  1034              		.loc 1 307 9 is_stmt 1 view .LVU313
  307:usb_lib.c     ****         ENDP_CTR_RX_CLR(epnum);
  1035              		.loc 1 307 19 is_stmt 0 view .LVU314
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 53
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 53
 
 
  1036 005c 3F4B     		ldr	r3, .L76+4
@@ -3178,7 +3178,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  1078              	.LVL83:
  1079              	.L63:
  304:usb_lib.c     ****       uint8_t epnum = USB->ISTR & USB_ISTR_EP_ID;
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 54
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 54
 
 
  1080              		.loc 1 304 5 is_stmt 1 view .LVU327
@@ -3238,7 +3238,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  1119              		.loc 1 321 5 is_stmt 1 view .LVU342
  1120 00d4 C1E7     		b	.L59
  1121              	.L72:
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 55
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 55
 
 
  325:usb_lib.c     ****     #ifdef USBLIB_SOF_ENABLE
@@ -3298,7 +3298,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  1160              	.LVL90:
  333:usb_lib.c     ****     
  1161              		.loc 1 333 41 discriminator 3 view .LVU359
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 56
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 56
 
 
  1162 0104 DBB2     		uxtb	r3, r3
@@ -3358,7 +3358,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  1204              		.loc 1 345 5 view .LVU371
  345:usb_lib.c     ****     USB->ISTR = (uint16_t)~USB_ISTR_SUSP;
  1205              		.loc 1 345 15 is_stmt 0 view .LVU372
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 57
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 57
 
 
  1206 013c 064A     		ldr	r2, .L76
@@ -3418,7 +3418,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  1245 0000 30B5     		push	{r4, r5, lr}
  1246              	.LCFI3:
  1247              		.cfi_def_cfa_offset 12
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 58
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 58
 
 
  1248              		.cfi_offset 4, -12
@@ -3478,7 +3478,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  1293              	.LVL104:
  1294              	.L79:
  374:usb_lib.c     ****   for(uint16_t i = 0; i < N2; ++i, ++out){
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 59
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 59
 
 
  1295              		.loc 1 374 23 is_stmt 1 discriminator 1 view .LVU396
@@ -3538,7 +3538,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  1342              		.loc 1 109 3 view .LVU409
  109:usb_lib.c     ****   uint16_t left = ep0_count;
  1343              		.loc 1 109 14 is_stmt 0 view .LVU410
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 60
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 60
 
 
  1344 0000 0D4B     		ldr	r3, .L90
@@ -3598,7 +3598,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
   20:usb_lib.h     ****  *************************************************************************************
   21:usb_lib.h     ****  */
   22:usb_lib.h     **** #include <stdint.h>
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 61
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 61
 
 
   23:usb_lib.h     **** #define USB_ENDP_CTRL 0x00
@@ -3658,7 +3658,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
   77:usb_lib.h     **** //  data - requrn data
   78:usb_lib.h     **** //  size - size of return data
   79:usb_lib.h     **** //return value: 0 - request not processed
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 62
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 62
 
 
   80:usb_lib.h     **** //              1 - request processed
@@ -3718,7 +3718,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  134:usb_lib.h     **** #define SET_IDLE_REQUEST                0x0a
  135:usb_lib.h     **** 
  136:usb_lib.h     **** // for bmRequestType == 0
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 63
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 63
 
 
  137:usb_lib.h     **** #define CLEAR_FEATURE                   0x01
@@ -3778,7 +3778,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  1380              		.loc 3 181 3 view .LVU422
  1381              	.LBE44:
  1382              	.LBE43:
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 64
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 64
 
 
  114:usb_lib.c     ****   ep0_buf += left;
@@ -3838,7 +3838,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  1428              		.thumb_func
  1430              	_usb_ep_read:
  1431              	.LVL113:
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 65
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 65
 
 
  1432              	.LFB48:
@@ -3898,7 +3898,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  1478              		.loc 1 388 11 is_stmt 0 view .LVU451
  1479 0026 0023     		movs	r3, #0
  1480              	.LVL119:
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 66
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 66
 
 
  1481              		.loc 1 388 3 view .LVU452
@@ -3958,7 +3958,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  1526              	.LFE48:
  1528              		.section	.text.ep0_out,"ax",%progbits
  1529              		.align	1
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 67
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 67
 
 
  1530              		.syntax unified
@@ -4018,7 +4018,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  136:usb_lib.c     ****       usb_ep_read(0, (uint16_t*)&setup_packet);
  1573              		.loc 1 136 7 view .LVU479
  1574 001e 002B     		cmp	r3, #0
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 68
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 68
 
 
  1575 0020 35DB     		blt	.L114
@@ -4078,7 +4078,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  1613              	.L109:
  192:usb_lib.c     ****       ENDP_STAT_RX(0, USB_EP_RX_VALID);
  1614              		.loc 1 192 5 is_stmt 1 view .LVU496
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 69
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 69
 
 
  192:usb_lib.c     ****       ENDP_STAT_RX(0, USB_EP_RX_VALID);
@@ -4138,7 +4138,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  1656              		.loc 1 198 1 view .LVU509
  1657 008a 03B0     		add	sp, sp, #12
  1658              	.LCFI9:
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 70
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 70
 
 
  1659              		.cfi_remember_state
@@ -4198,7 +4198,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  1694              		.loc 1 142 9 is_stmt 1 view .LVU520
  1695              	.LBB48:
  1696              	.LBI48:
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 71
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 71
 
 
  193:usb_lib.h     ****   return _usb_ep_read((epnum & 0x0F)*2 + 1, buf);
@@ -4258,7 +4258,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  1739 00c2 3BD0     		beq	.L120
  1740              	.L102:
  172:usb_lib.c     ****     uint16_t size = 0;
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 72
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 72
 
 
  1741              		.loc 1 172 5 is_stmt 1 view .LVU537
@@ -4318,7 +4318,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  123:usb_lib.c     ****   ep0_buf = (uint8_t*)buf;
  1780              		.loc 1 123 13 is_stmt 0 view .LVU553
  1781 00ee 2E4B     		ldr	r3, .L121+16
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 73
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 73
 
 
  1782 00f0 1A80     		strh	r2, [r3]	@ movhi
@@ -4378,7 +4378,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  160:usb_lib.c     ****           ep0_send(data, size);
  1823              		.loc 1 160 11 is_stmt 1 view .LVU567
  160:usb_lib.c     ****           ep0_send(data, size);
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 74
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 74
 
 
  1824              		.loc 1 160 26 is_stmt 0 view .LVU568
@@ -4438,7 +4438,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  1863              	.LVL157:
  1864              	.L120:
  162:usb_lib.c     ****         }
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 75
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 75
 
 
  1865              		.loc 1 162 11 is_stmt 0 view .LVU584
@@ -4498,7 +4498,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  169:usb_lib.c     ****       }
  1907              		.loc 1 169 11 is_stmt 0 view .LVU597
  1908              	.LBE60:
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 76
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 76
 
 
  1909              	.LBB61:
@@ -4558,7 +4558,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  185:usb_lib.c     ****       }else if(setup_packet.bRequest == SET_CONFIGURATION){
  1949              		.loc 1 185 9 is_stmt 0 view .LVU612
  1950              	.LBE61:
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 77
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 77
 
 
  187:usb_lib.c     ****         usb_ep_write(0, NULL, 0);
@@ -4618,7 +4618,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  1993              	.L121:
  1994 0198 00600040 		.word	1073766400
  1995 019c 00000000 		.word	.LANCHOR5
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 78
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 78
 
 
  1996 01a0 00000000 		.word	.LANCHOR6
@@ -4678,7 +4678,7 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  2055              		.section	.bss.setup_packet,"aw",%nobits
  2056              		.align	2
  2057              		.set	.LANCHOR5,. + 0
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 79
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 79
 
 
  2060              	setup_packet:
@@ -4694,67 +4694,67 @@ ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 1
  2071              		.file 4 "/usr/local/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_default_
  2072              		.file 5 "/usr/local/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint.h"
  2073              		.file 6 "CMSIS/Inc/stm32f103xb.h"
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 80
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 80
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 usb_lib.c
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:18     .text.endp_callback_default:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:23     .text.endp_callback_default:0000000000000000 endp_callback_default
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:38     .text.usb_class_init:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:44     .text.usb_class_init:0000000000000000 usb_class_init
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:57     .text.usb_class_disconnect:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:63     .text.usb_class_disconnect:0000000000000000 usb_class_disconnect
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:76     .text.usb_class_poll:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:82     .text.usb_class_poll:0000000000000000 usb_class_poll
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:95     .text.usb_class_sof:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:101    .text.usb_class_sof:0000000000000000 usb_class_sof
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:114    .text.usb_class_ep0_in:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:120    .text.usb_class_ep0_in:0000000000000000 usb_class_ep0_in
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:138    .text.usb_class_ep0_out:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:144    .text.usb_class_ep0_out:0000000000000000 usb_class_ep0_out
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:162    .text.USB_setup:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:168    .text.USB_setup:0000000000000000 USB_setup
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:374    .text.USB_setup:00000000000000a0 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:386    .text.usb_ep_init:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:392    .text.usb_ep_init:0000000000000000 usb_ep_init
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:657    .text.usb_ep_init:000000000000016c $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:665    .text.usb_ep_init_double:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:671    .text.usb_ep_init_double:0000000000000000 usb_ep_init_double
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:952    .text.usb_ep_init_double:0000000000000158 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:960    .text.USB_LP_CAN1_RX0_IRQHandler:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:966    .text.USB_LP_CAN1_RX0_IRQHandler:0000000000000000 USB_LP_CAN1_RX0_IRQHandler
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:1219   .text.USB_LP_CAN1_RX0_IRQHandler:0000000000000158 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:1534   .text.ep0_out:0000000000000000 ep0_out
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:1335   .text.ep0_in:0000000000000000 ep0_in
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:1231   .text._usb_ep_write:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:1237   .text._usb_ep_write:0000000000000000 _usb_ep_write
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:1330   .text.ep0_in:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:1418   .text.ep0_in:0000000000000038 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:1424   .text._usb_ep_read:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:1430   .text._usb_ep_read:0000000000000000 _usb_ep_read
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:1529   .text.ep0_out:0000000000000000 $t
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:1994   .text.ep0_out:0000000000000198 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:2053   .bss.epfunc_out:0000000000000000 epfunc_out
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:2046   .bss.epfunc_in:0000000000000000 epfunc_in
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:2010   .rodata:0000000000000000 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:2015   .bss.bytesread.0:0000000000000000 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:2019   .bss.bytesread.0:0000000000000000 bytesread.0
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:2025   .bss.configuration:0000000000000000 configuration
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:2026   .bss.configuration:0000000000000000 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:2028   .bss.ep0_buf:0000000000000000 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:2032   .bss.ep0_buf:0000000000000000 ep0_buf
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:2035   .bss.ep0_count:0000000000000000 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:2039   .bss.ep0_count:0000000000000000 ep0_count
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:2042   .bss.epfunc_in:0000000000000000 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:2049   .bss.epfunc_out:0000000000000000 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:2056   .bss.setup_packet:0000000000000000 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:2060   .bss.setup_packet:0000000000000000 setup_packet
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:2063   .data.lastaddr:0000000000000000 $d
-/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s:2067   .data.lastaddr:0000000000000000 lastaddr
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:18     .text.endp_callback_default:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:23     .text.endp_callback_default:0000000000000000 endp_callback_default
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:38     .text.usb_class_init:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:44     .text.usb_class_init:0000000000000000 usb_class_init
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:57     .text.usb_class_disconnect:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:63     .text.usb_class_disconnect:0000000000000000 usb_class_disconnect
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:76     .text.usb_class_poll:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:82     .text.usb_class_poll:0000000000000000 usb_class_poll
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:95     .text.usb_class_sof:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:101    .text.usb_class_sof:0000000000000000 usb_class_sof
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:114    .text.usb_class_ep0_in:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:120    .text.usb_class_ep0_in:0000000000000000 usb_class_ep0_in
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:138    .text.usb_class_ep0_out:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:144    .text.usb_class_ep0_out:0000000000000000 usb_class_ep0_out
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:162    .text.USB_setup:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:168    .text.USB_setup:0000000000000000 USB_setup
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:374    .text.USB_setup:00000000000000a0 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:386    .text.usb_ep_init:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:392    .text.usb_ep_init:0000000000000000 usb_ep_init
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:657    .text.usb_ep_init:000000000000016c $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:665    .text.usb_ep_init_double:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:671    .text.usb_ep_init_double:0000000000000000 usb_ep_init_double
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:952    .text.usb_ep_init_double:0000000000000158 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:960    .text.USB_LP_CAN1_RX0_IRQHandler:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:966    .text.USB_LP_CAN1_RX0_IRQHandler:0000000000000000 USB_LP_CAN1_RX0_IRQHandler
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:1219   .text.USB_LP_CAN1_RX0_IRQHandler:0000000000000158 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:1534   .text.ep0_out:0000000000000000 ep0_out
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:1335   .text.ep0_in:0000000000000000 ep0_in
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:1231   .text._usb_ep_write:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:1237   .text._usb_ep_write:0000000000000000 _usb_ep_write
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:1330   .text.ep0_in:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:1418   .text.ep0_in:0000000000000038 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:1424   .text._usb_ep_read:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:1430   .text._usb_ep_read:0000000000000000 _usb_ep_read
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:1529   .text.ep0_out:0000000000000000 $t
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:1994   .text.ep0_out:0000000000000198 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:2053   .bss.epfunc_out:0000000000000000 epfunc_out
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:2046   .bss.epfunc_in:0000000000000000 epfunc_in
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:2010   .rodata:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:2015   .bss.bytesread.0:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:2019   .bss.bytesread.0:0000000000000000 bytesread.0
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:2025   .bss.configuration:0000000000000000 configuration
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:2026   .bss.configuration:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:2028   .bss.ep0_buf:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:2032   .bss.ep0_buf:0000000000000000 ep0_buf
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:2035   .bss.ep0_count:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:2039   .bss.ep0_count:0000000000000000 ep0_count
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:2042   .bss.epfunc_in:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:2049   .bss.epfunc_out:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:2056   .bss.setup_packet:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:2060   .bss.setup_packet:0000000000000000 setup_packet
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:2063   .data.lastaddr:0000000000000000 $d
+/var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s:2067   .data.lastaddr:0000000000000000 lastaddr
 
 UNDEFINED SYMBOLS
-ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//ccLL1adA.s 			page 81
+ARM GAS  /var/folders/9x/7nl7qcbn3r12rp7phz107hx40000gp/T//cc2jD79a.s 			page 81
 
 
 usb_class_get_std_descr
